@@ -42,6 +42,15 @@ for( $i=0 ; $i < $total ; $i++ ) {
     $stmt->execute() or die ($stmt->error);
     move_uploaded_file($tmpFilePath, $newFilePath);
   }		
+
+  $query="delete from jiier_video where subject_id=$subject_id"; 
+  mysqli_query($conn,$query) or die(mysqli_error($conn));
+  foreach($_POST['video'] as  $v ){
+    if(trim($v)!=""){
+      $query="insert into jiier_video (subject_id,video) values (".$subject_id.",'".$v."')"; 
+      mysqli_query($conn,$query) or die(mysqli_error($conn));
+    }
+  }
 } 
 		 
 header("location: subject.php");
@@ -110,11 +119,11 @@ $subject_name = $row2['subject_name'];
               <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-remove"></i></button>
             </div>
           </div>
-          <!-- /.card-header -->
+          <form method="post" action="" enctype="multipart/form-data">
+          
           <div class="card-body">
             <div class="row">
               <div class="col-md-12">
-                        <form method="post" action="" enctype="multipart/form-data">
                 <div class="card-body">
 
  <div class="form-group">
@@ -161,9 +170,43 @@ $subject_name = $row2['subject_name'];
                     <label for="library">Library PDF</label>
                     <input accept="application/pdf" multiple="multiple" type="file" class="form-control" id="library" name="library[]" />
                 </div>
-                <div class="card-footer">
-                  <button type="submit" name="submit" class="btn btn-primary text-center">Submit</button>
+
+                <div class="form-group">
+                    <label for="library">Library PDF</label>
+                    <input accept="application/pdf" multiple="multiple" type="file" class="form-control" id="library" name="library[]" />
                 </div>
+  <div class="form-group" id="videoDiv">
+  <label>Youtube video URL</label><br>
+<?php
+$sql = "select * from jiier_video where subject_id=$subject_id";
+$result = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_array($result)) {
+?>
+<input value="<?php echo $row['video']; ?>" type="text" name="video[]" maxlength="100" size="80"><br/><br/>
+<?php
+}
+?>
+  <input type="text" name="video[]" maxlength="100" size="80"><br/><br/>
+  <input type="text" name="video[]" maxlength="100" size="80"><br/><br/>
+  <input type="text" name="video[]" maxlength="100" size="80"><br/><br/>
+  <input type="text" name="video[]" maxlength="100" size="80"><br/><br/>
+  <input type="text" name="video[]" maxlength="100" size="80">
+  </div>
+  
+  <div class="card-body">
+    <a class="btn btn-success" href="javascript:add_lesson();" >Add More Video</a>
+  </div>
+
+  <div class="card-body"b style="text-align: center">
+    <button type="submit" name="submit" class="btn btn-primary text-center">Submit</button>
+  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+
+
               </form>
 <div class="row">
   <div class="col-md-4">
@@ -230,7 +273,21 @@ while($row3 = mysqli_fetch_assoc($result3)){
 <script src="dist/js/pages/dashboard2.js"></script>
 <!-- Select2 -->
 <script src="plugins/select2/js/select2.full.min.js"></script>
-
+<script language="javascript">
+  function add_lesson() {
+    var container = document.getElementById('videoDiv');
+    input=document.createElement("br");
+    container.appendChild(input);
+    input=document.createElement("br");
+    container.appendChild(input);
+    input = document.createElement('input');
+    input.type="text";
+    input.name="lesson[]";
+    input.size="80";
+    input.maxlength="100";
+    container.appendChild(input);
+  }
+</script>
 <script>
   $(function () {
     //Initialize Select2 Elements

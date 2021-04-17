@@ -6,6 +6,6 @@
     // $mysql_password = "Galaxy123$";
     $mysql_user = "root";
     $mysql_password = "";
-    $mysql_database = "stjoseph";
+    $mysql_database = "stjoseph2";
     
     $conn = new mysqli($mysql_hostname, $mysql_user, $mysql_password, $mysql_database);
