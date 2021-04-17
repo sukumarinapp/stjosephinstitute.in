@@ -45,10 +45,11 @@ for( $i=0 ; $i < $total ; $i++ ) {
 
   $query="delete from jiier_video where subject_id=$subject_id"; 
   mysqli_query($conn,$query) or die(mysqli_error($conn));
-  foreach($_POST['video'] as  $v ){
-    if(trim($v)!=""){
-      $query="insert into jiier_video (subject_id,video) values (".$subject_id.",'".$v."')"; 
-      mysqli_query($conn,$query) or die(mysqli_error($conn));
+  foreach($_POST['video'] as  $video ){
+    if(trim($video)!=""){
+      $stmt = $conn->prepare("INSERT INTO jiier_video (subject_id,video) VALUES (?,?)");
+      $stmt->bind_param("ss", $subject_id,$video);
+      $stmt->execute() or die ($stmt->error);
     }
   }
 } 
@@ -171,10 +172,6 @@ $subject_name = $row2['subject_name'];
                     <input accept="application/pdf" multiple="multiple" type="file" class="form-control" id="library" name="library[]" />
                 </div>
 
-                <div class="form-group">
-                    <label for="library">Library PDF</label>
-                    <input accept="application/pdf" multiple="multiple" type="file" class="form-control" id="library" name="library[]" />
-                </div>
   <div class="form-group" id="videoDiv">
   <label>Youtube video URL</label><br>
 <?php
@@ -208,8 +205,9 @@ while ($row = mysqli_fetch_array($result)) {
 
 
               </form>
+              <div class="card-body">
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-12">
     <table class="table table-bordered table-striped">
       <thead>
       <tr><th>Library</th><th>View</th><th>Delete</th></tr>
@@ -228,7 +226,8 @@ while($row3 = mysqli_fetch_assoc($result3)){
 </tbody>
     </table>
   </div>
-</div>   
+</div>  
+</div> 
             </div>
 
     
@@ -240,7 +239,8 @@ while($row3 = mysqli_fetch_assoc($result3)){
     </section>
     <!-- /.content -->
   </div>
-
+ 
+          </div>
   <!-- /.control-sidebar -->
  <?php include("footer.php"); ?>
 
