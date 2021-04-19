@@ -164,7 +164,7 @@ while ($row2 = mysqli_fetch_assoc($result2)) {
       <tr>
         <td><?php echo $row2['subject_code']; ?></td>
         <td><?php echo $row2['subject_name']; ?></td>
-                <td><a onclick="showbook(event,<?php echo $row2['id']; ?>)"><i class="material-icons">library_books</i></a></td>
+                <td><a href="#" onclick="showbook(event,<?php echo $row2['id']; ?>)"><i class="material-icons">library_books</i></a></td>
 
       </tr>
 <?php
