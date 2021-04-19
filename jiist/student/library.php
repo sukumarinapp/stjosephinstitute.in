@@ -164,7 +164,7 @@ while ($row2 = mysqli_fetch_assoc($result2)) {
       <tr>
         <td><?php echo $row2['subject_code']; ?></td>
         <td><?php echo $row2['subject_name']; ?></td>
-                <td><a href="book.php?id=<?php echo $row2['id']; ?>"><i class="material-icons">library_books</i></a></td>
+                <td><a onclick="showbook(event,<?php echo $row2['id']; ?>)"><i class="material-icons">library_books</i></a></td>
 
       </tr>
 <?php
@@ -186,244 +186,7 @@ while ($row2 = mysqli_fetch_assoc($result2)) {
             </div>
 <?php } ?>
 
-<!--
-            <div class="col-lg-2 col-md-3 col-sm-6">
-              <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
-                <div class="card-header card-header-success card-header-icon">
-                 <div style="width: -webkit-fill-available;margin-right: unset;" class="card-icon" data-toggle="dropdown">
-                   <h1 style="text-align: center;
-    
-    color: white;" class="card-category " data-toggle="dropdown">SEMESTER<span class="caret"></span>  II </h1 >
-   
-      <table class="dropdown-menu table table-striped " style="margin-top: 20px;margin-left: -15px;" >
-    <thead>
-      <tr>
-        <th style="background: #9c27b0;
-    color: white;">Subject Name</th>
-         <th style="background: #9c27b0;
-    color: white;">Code</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Maths 3</td>
-        <td>7902</td>
-      </tr>
-      <tr>
-        
-        <td>Fluid mechanics</td><td>7589</td>
-      </tr>
-      <tr>
-        
-        <td>Thermodynamic</td><td>2256</td>
-      </tr>
-      <tr>
-        
-        <td>Automobile</td><td>2569</td>
-      </tr>
-    </tbody>
-  </table>
-                  </div>
-                  
-                </div>
-                <div class="card-footer" style="margin-top: unset!important;">
-                  <div class="stats">
-                    
-                    <a href="http://www.stjosephinstitute.in/"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-6">
-              <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div style="width: -webkit-fill-available;margin-right: unset;" class="card-icon" data-toggle="dropdown">
-                   <h1 style="text-align: center;
-    
-    color: white;" class="card-category " data-toggle="dropdown">SEMESTER<span class="caret"></span>  III </h1 >
-   
-      <table class="dropdown-menu table table-striped " style="margin-top: 20px;margin-left: -15px;" >
-    <thead>
-      <tr>
-        <th style="background: #9c27b0;
-    color: white;">Subject Name</th>
-         <th style="background: #9c27b0;
-    color: white;">Code</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Maths 3</td>
-        <td>7902</td>
-      </tr>
-      <tr>
-        
-        <td>Fluid mechanics</td><td>7589</td>
-      </tr>
-      <tr>
-        
-        <td>Thermodynamic</td><td>2256</td>
-      </tr>
-      <tr>
-        
-        <td>Automobile</td><td>2569</td>
-      </tr>
-    </tbody>
-  </table>
-                  </div>
-                  
-                </div>
-                <div class="card-footer" style="margin-top: unset!important;">
-                  <div class="stats">
-                    
-                    <a href="http://www.stjosephinstitute.in/"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-6">
-             <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
-                <div class="card-header card-header-info card-header-icon">
-                 <div style="width: -webkit-fill-available;margin-right: unset;" class="card-icon" data-toggle="dropdown">
-                    <h1 style="text-align: center;
-    
-    color: white;" class="card-category " data-toggle="dropdown">SEMESTER<span class="caret"></span> IV </h1 >
-   
-      <table class="dropdown-menu table table-striped " style="margin-top: 20px; margin-left: -15px;" >
-    <thead>
-      <tr>
-        <th style="background: #9c27b0;
-    color: white;">Subject Name</th>
-         <th style="background: #9c27b0;
-    color: white;">Code</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Maths 3</td>
-        <td>7902</td>
-      </tr>
-      <tr>
-        
-        <td>Fluid mechanics</td><td>7589</td>
-      </tr>
-      <tr>
-        
-        <td>Thermodynamic</td><td>2256</td>
-      </tr>
-      <tr>
-        
-        <td>Automobile</td><td>2569</td>
-      </tr>
-    </tbody>
-  </table>
-                  </div>
-                  
-                </div>
-               <div class="card-footer" style="margin-top: unset!important;">
-                  <div class="stats">
-                    
-                    <a href="http://www.stjosephinstitute.in/"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
           
-            <div class="col-lg-2 col-md-3 col-sm-6">
-              <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
-                <div class="card-header card-header-warning card-header-icon">
-                 <div style="width: -webkit-fill-available;margin-right: unset;" class="card-icon" data-toggle="dropdown">
-                   <h1 style="text-align: center;
-    
-    color: white;" class="card-category " data-toggle="dropdown">SEMESTER<span class="caret"></span>  V </h1 >
-   
-      <table class="dropdown-menu table table-striped " style="margin-top: 20px;margin-left: -15px;" >
-    <thead>
-      <tr>
-        <th style="background: #9c27b0;
-    color: white;">Subject Name</th>
-         <th style="background: #9c27b0;
-    color: white;">Code</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Maths 3</td>
-        <td>7902</td>
-      </tr>
-      <tr>
-        
-        <td>Fluid mechanics</td><td>7589</td>
-      </tr>
-      <tr>
-        
-        <td>Thermodynamic</td><td>2256</td>
-      </tr>
-      <tr>
-        
-        <td>Automobile</td><td>2569</td>
-      </tr>
-    </tbody>
-  </table>
-                  </div>
-                  
-                </div>
-                <div class="card-footer" style="margin-top: unset!important;">
-                  <div class="stats">
-                    
-                    <a href="http://www.stjosephinstitute.in/"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-6">
-              <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
-                <div class="card-header card-header-success card-header-icon">
-                  <div style="width: -webkit-fill-available;margin-right: unset;" class="card-icon" data-toggle="dropdown">
-                    <h1 style="text-align: center;
-    
-    color: white;" class="card-category" data-toggle="dropdown">SEMESTER<span class="caret"></span>  VI </h1 >
-   
-      <table class="dropdown-menu table table-striped " style="    margin-top: 20px;margin-left: -15px;" >
-    <thead>
-      <tr>
-        <th style="background: #9c27b0;
-    color: white;">Subject Name</th>
-         <th style="background: #9c27b0;
-    color: white;">Code</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Maths 3</td>
-        <td>7902</td>
-      </tr>
-      <tr>
-        
-        <td>Fluid mechanics</td><td>7589</td>
-      </tr>
-      <tr>
-        
-        <td>Thermodynamic</td><td>2256</td>
-      </tr>
-      <tr>
-        
-        <td>Automobile</td><td>2569</td>
-      </tr>
-    </tbody>
-  </table>
-                  </div>
-                  
-                </div>
-               <div class="card-footer" style="margin-top: unset!important;">
-                  <div class="stats">
-                    
-                    <a href="http://www.stjosephinstitute.in/"></a>
-                  </div>
-                </div>
-              </div>
-            </div>-->
-           
           </div> 
 
         </div>
@@ -506,6 +269,10 @@ while ($row2 = mysqli_fetch_assoc($result2)) {
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="assetss/demo/demo.js"></script>
   <script>
+    function showbook(ev,subject_id){
+      ev.preventDefault();
+      window.location.href="book.php?id="+subject_id;
+    }
     $(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');
