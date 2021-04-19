@@ -106,6 +106,29 @@
               </li>
             </ul>
           </li>   
+          <li class="nav-item has-treeview  <?php if($page=="Project") echo "menu-open"; ?>">
+            <a href="" class="nav-link <?php if($page=="Project") echo "active"; ?>">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Manage Project
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="add-project.php" class="nav-link <?php if($page1=="Add Project") echo "active"; ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Project</p>
+                </a>
+              </li>
+              <li class="nav-item">
+          <a href="project.php" class="nav-link <?php if($page1=="View Project") echo "active"; ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Project</p>
+                </a>
+              </li>
+            </ul>
+          </li>    
 
 		  <li class="nav-item has-treeview  <?php if($page=="Follow") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Follow") echo "active"; ?>">
