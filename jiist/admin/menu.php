@@ -90,8 +90,22 @@
                   <p>View Subject</p>
                 </a>
               </li>
+           
+          <li class="nav-item">
+          <a href="add-assignment.php" class="nav-link <?php if($page1=="Add Assignment") echo "active"; ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Assignment</p>
+                </a>
+              </li>
+           
+          <li class="nav-item">
+          <a href="assignment.php" class="nav-link <?php if($page1=="View Assignment") echo "active"; ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Assignment</p>
+                </a>
+              </li>
             </ul>
-          </li>          
+          </li>   
 
 		  <li class="nav-item has-treeview  <?php if($page=="Follow") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Follow") echo "active"; ?>">

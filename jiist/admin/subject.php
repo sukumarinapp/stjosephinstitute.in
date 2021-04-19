@@ -129,7 +129,6 @@ $centre_id=$_SESSION['centre_id'];
 }
 </style>	
 		
-  <!-- /.control-sidebar -->
  <?php include("footer.php"); ?>
 
 </div>
