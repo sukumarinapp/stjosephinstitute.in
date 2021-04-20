@@ -35,6 +35,18 @@
               <i class="material-icons">developer_board</i>
               <p>Virtual Class</p>
             </a>
+            </li><hr class="hrr">
+           <li class="nav-item <?php if($page=="Assignment") echo "active"; ?>  ">
+            <a class="nav-link" href="assignment.php">
+              <i class="material-icons">assignment</i>
+              <p>Assignment</p>
+            </a>
+          </li><hr class="hrr">
+           <li class="nav-item <?php if($page=="Project") echo "active"; ?>  ">
+            <a class="nav-link" href="project.php">
+              <i class="material-icons">build_circle</i>
+              <p>Project</p>
+            </a>
           </li><hr class="hrr">
            <li class="nav-item <?php if($page=="Virtual Laboratory") echo "active"; ?>  ">
             <a class="nav-link" href="lab.php">
@@ -47,18 +59,7 @@
               <i class="material-icons">live_tv</i>
               <p>Live IIT</p>
             </a>
-          </li><hr class="hrr">
-           <li class="nav-item <?php if($page=="Assignment") echo "active"; ?>  ">
-            <a class="nav-link" href="assignment.php">
-              <i class="material-icons">assignment</i>
-              <p>Assignment</p>
-            </a>
-          </li><hr class="hrr">
-           <li class="nav-item <?php if($page=="Project") echo "active"; ?>  ">
-            <a class="nav-link" href="project.php">
-              <i class="material-icons">build_circle</i>
-              <p>Project</p>
-            </a>
+          
           </li><hr class="hrr">
            <li class="nav-item <?php if($page=="Time Table") echo "active"; ?>  ">
             <a class="nav-link" href="timetable.php">
