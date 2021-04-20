@@ -1,6 +1,6 @@
 <?php
 session_start();
-$page = "Assignment";
+$page = "Project";
 include "../admin/timeout.php";
 include "../admin/config.php";
 $user_id=$_SESSION['user_id'];                           
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Assignment</a>
+            <a class="navbar-brand" href="javascript:;">Project</a>
             <button type="button"  class="btn btn-primary btn-link btn-sm">
                                 <i class="btnz" >Go To Website</i>
                               </button>
@@ -155,19 +155,17 @@ if (isset($_POST['submit'])) {
             <div class="col-lg-12 col-md-12">
               <div class="card">
                 <div class="card-header card-header-warning">
-                  <h4 class="card-title">Assignment</h4>
+                  <h4 class="card-title">Project</h4>
                   <p class="card-category"></p>
                 </div>
                 <div class="card-body table-responsive">
                   <table class="table table-hover">
                     <thead class="text-warning" style="font-weight: bold !important">
                       <th>S.No</th>
-                      <th>Assignment Title</th>
-                      <th>Semester</th>
-                      <th>Last Date</th>
-                      <th >Questions</th>
+                      <th>Title</th>
+                      <th >Project Template</th>
                       <th >&nbsp;</th>
-                      <th >Answer</th>
+                      <th >Upload</th>
                       <th >View</th>
                     </thead>
                     <tbody>
@@ -175,33 +173,25 @@ if (isset($_POST['submit'])) {
 
                       function get_answer($user_id,$ass_id){
                         $ans="";                  
-                        global $conn;
-                        $sql = "select answer from jiier_stud_assignment where student_id=$user_id and assignment_id=$ass_id";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                          $ans=$row['answer'];
-                        }
+                        // global $conn;
+                        // $sql = "select answer from jiier_stud_assignment where student_id=$user_id and assignment_id=$ass_id";
+                        // $result = mysqli_query($conn, $sql);
+                        // while ($row = mysqli_fetch_assoc($result)) {
+                        //   $ans=$row['answer'];
+                        // }
                         return $ans;
                       }
 
-                      $sql = "select a.*,b.years,b.semester_list from jiier_assignment a,jiier_semester b where a.semester_id=b.id order by years,semester_list";
+                      $sql = "select * from jiier_project";
                       $result = mysqli_query($conn, $sql);
                       $i=0;
                       while ($row = mysqli_fetch_assoc($result)) {
                         $i++;
-                        $last_date=$row['last_date'];
-                        $ldate2=explode("T",$last_date);
-                        $ldate=$ldate2[0];
-                        $ltime=$ldate2[1];
-                        $ldate=explode("-", $ldate);
-                        $last_date=$ldate[2]."-".$ldate[1]."-".$ldate[0]." ".$ltime;
                       ?>
                       <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['title']; ?></td>
-                        <td><?php echo $row['semester_list']; ?></td>
-                        <td><?php echo $last_date; ?></td>
-                        <td class="btnn"><a class="btnn" download="<?php echo $row['title']; ?>" href="../admin/assignment/<?php echo $row['question']; ?>" >Question</a></td>
+                        <td class="btnn"><a class="btnn" download="<?php echo $row['title']; ?>" href="../admin/project/<?php echo $row['project']; ?>" >Template</a></td>
                         <td>&nbsp;</td>
                         <td><input name="answer_<?php echo $row['id']; ?>" type="file" accept="application/pdf" /></td>
                         <td>
