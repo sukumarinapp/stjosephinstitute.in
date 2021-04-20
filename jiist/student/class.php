@@ -164,7 +164,7 @@ while ($row2 = mysqli_fetch_assoc($result2)) {
       <tr>
         <td><?php echo $row2['subject_code']; ?></td>
         <td><?php echo $row2['subject_name']; ?></td>
-                <td><a href="video.php?id=<?php echo $row2['id']; ?>"><i class="material-icons">library_books</i></a></td>
+                <td><a href="#" onclick="showvideo(event,<?php echo $row2['id']; ?>)"><i class="material-icons">library_books</i></a></td>
 
       </tr>
 <?php
@@ -270,6 +270,12 @@ while ($row2 = mysqli_fetch_assoc($result2)) {
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="assetss/demo/demo.js"></script>
   <script>
+
+    function showvideo(ev,subject_id){
+      ev.preventDefault();
+      window.location.href="video.php?id="+subject_id;
+    }
+    
     $(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');

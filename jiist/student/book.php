@@ -56,7 +56,7 @@ $course_id=$_SESSION['course_id'];
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Subject</a>
+            <a class="navbar-brand" href="javascript:;">Virtual Library</a>
             <button type="button"  class="btn btn-primary btn-link btn-sm">
                                 <i class="btnz" >Go To Website</i>
                               </button>
@@ -135,9 +135,7 @@ $course_id=$_SESSION['course_id'];
               <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
                 <div class="card-header card-header-warning card-header-icon">
                   <div style="width: -webkit-fill-available; margin-right: unset;" class="card-icon " >
-                   <h1 style="text-align: center;
-    
-    color: white;" class="card-category " ><span class="caret"></span><a href="../admin/library/<?php echo $row['library']; ?>" target="_blank"><img width="70" height="70" src="book.jpg" /></a></h1 >
+                   <h1 style="text-align: center;color: white;" class="card-category " ><span class="caret"></span><a href="../admin/library/<?php echo $row['library']; ?>" target="_blank"><img width="70" height="70" src="book.jpg" /></a></h1 >
 
       
 
