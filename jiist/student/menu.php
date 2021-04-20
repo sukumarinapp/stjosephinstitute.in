@@ -48,7 +48,7 @@
               <p>Project</p>
             </a>
           </li><hr class="hrr">
-           <li class="nav-item <?php if($page=="Virtual Laboratory") echo "active"; ?>  ">
+           <!-- <li class="nav-item <?php if($page=="Virtual Laboratory") echo "active"; ?>  ">
             <a class="nav-link" href="lab.php">
               <i class="material-icons">science</i>
               <p>Virtual Laboratory</p>
@@ -58,7 +58,7 @@
             <a class="nav-link" href="live.php">
               <i class="material-icons">live_tv</i>
               <p>Live IIT</p>
-            </a>
+            </a> -->
           
           </li><hr class="hrr">
            <li class="nav-item <?php if($page=="Time Table") echo "active"; ?>  ">

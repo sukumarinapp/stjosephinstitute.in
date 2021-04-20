@@ -4,7 +4,32 @@ $page = "Assignment";
 include "../admin/timeout.php";
 include "../admin/config.php";
 $user_id=$_SESSION['user_id'];                           
-$full_name=$_SESSION['full_name'];                           
+$full_name=$_SESSION['full_name'];   
+if (isset($_POST['submit'])) {
+  foreach ($_FILES as $key => $file) {
+    $name = $file["name"];
+    if (trim($name) != "") {
+        $ext = pathinfo($_FILES[$key]['name'], PATHINFO_EXTENSION);
+        $assignment_id=explode("_", $key);
+        $assignment_id=$assignment_id[1];        
+
+        $query = "delete from jiier_stud_assignment where student_id=$user_id and assignment_id=$assignment_id";
+        mysqli_query($conn, $query) or die(mysqli_error($conn));
+
+        $query = "insert into jiier_stud_assignment (student_id,assignment_id) values ($user_id,$assignment_id)";
+        mysqli_query($conn, $query) or die(mysqli_error($conn));
+        $id=mysqli_insert_id($conn);
+        $file_name = $id . "." . $ext;
+
+        $query = "update jiier_stud_assignment set answer = '" . $file_name . "' where id=$id";
+        mysqli_query($conn, $query) or die(mysqli_error($conn));
+
+        $target_path = "../admin/assignment/answer/";
+        $target_path = $target_path . $file_name;
+        move_uploaded_file($_FILES[$key]['tmp_name'], $target_path);
+    }
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,65 +150,86 @@ $full_name=$_SESSION['full_name'];
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-         
-          <div class="row">
-            
+          <form method="post" action="" enctype="multipart/form-data">
+          <div class="row">            
             <div class="col-lg-12 col-md-12">
               <div class="card">
                 <div class="card-header card-header-warning">
-                  <h4 class="card-title">Assignment Questions
-
-
-
-
-                  </h4>
+                  <h4 class="card-title">Assignment</h4>
                   <p class="card-category"></p>
                 </div>
                 <div class="card-body table-responsive">
                   <table class="table table-hover">
-                    <thead class="text-warning">
+                    <thead class="text-warning" style="font-weight: bold">
                       <th>S.No</th>
                       <th>Assignment Title</th>
                       <th>Semester</th>
                       <th>Last Date</th>
                       <th >Questions</th>
-                      
+                      <th >&nbsp;</th>
+                      <th >Answer</th>
+                      <th >View</th>
                     </thead>
                     <tbody>
+                      <?php
+
+                      function get_answer($user_id,$ass_id){
+                        $ans="";                  
+                        global $conn;
+                        $sql = "select answer from jiier_stud_assignment where student_id=$user_id and assignment_id=$ass_id";
+                        $result = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                          $ans=$row['answer'];
+                        }
+                        return $ans;
+                      }
+
+                      $sql = "select a.*,b.years,b.semester_list from jiier_assignment a,jiier_semester b where a.semester_id=b.id order by years,semester_list";
+                      $result = mysqli_query($conn, $sql);
+                      $i=0;
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        $i++;
+                        $last_date=$row['last_date'];
+                        $ldate2=explode("T",$last_date);
+                        $ldate=$ldate2[0];
+                        $ltime=$ldate2[1];
+                        $ldate=explode("-", $ldate);
+                        $last_date=$ldate[2]."-".$ldate[1]."-".$ldate[0]." ".$ltime;
+                      ?>
                       <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>II</td>
-                        <td>02/06/2020</td>
-                        <th class="btnn">Assignment Question</th>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $row['title']; ?></td>
+                        <td><?php echo $row['semester_list']; ?></td>
+                        <td><?php echo $last_date; ?></td>
+                        <td class="btnn"><a class="btnn" download="<?php echo $row['title']; ?>" href="../admin/assignment/<?php echo $row['question']; ?>" >Question</a></td>
+                        <td>&nbsp;</td>
+                        <td class="btnn"><input name="answer_<?php echo $row['id']; ?>" type="file" accept="application/pdf" /></td>
+                        <td>
+                          <?php
+                            $ans=get_answer($user_id,$row['id']);
+                            if(trim($ans<>"")){
+                          ?>
+                          <a target="_blank" href="../admin/assignment/answer/<?php echo $ans; ?>" >View</a>
+                          <?php
+                            }
+                          ?>
+                        </td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>II</td>
-                        <td>06/07/2020</td>
-                        <th class="btnn">Assignment Question</th>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>II</td>
-                        <td>02/09/2020</td>
-                        <th class="btnn">Assignment Question</th>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>II</td>
-                        <td>07/10/2020</td>
-                        <th class="btnn">Assignment Question</th>
-                      </tr>
+                      <?php
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>
-              </div>
+                <div class="col-lg-12 col-md-12" style="text-align: center">
+              <input type="submit" name="submit" class="btn btn-primary" value="Submit" />
             </div>
+              </div>
+
+            </div>
+
           </div>
+        </form>
         </div>
       </div>
      <footer class="footer">
