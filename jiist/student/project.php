@@ -4,27 +4,28 @@ $page = "Project";
 include "../admin/timeout.php";
 include "../admin/config.php";
 $user_id=$_SESSION['user_id'];                           
+$course_id=$_SESSION['course_id'];                           
 $full_name=$_SESSION['full_name'];   
 if (isset($_POST['submit'])) {
   foreach ($_FILES as $key => $file) {
     $name = $file["name"];
     if (trim($name) != "") {
         $ext = pathinfo($_FILES[$key]['name'], PATHINFO_EXTENSION);
-        $assignment_id=explode("_", $key);
-        $assignment_id=$assignment_id[1];        
+        $project_id=explode("_", $key);
+        $project_id=$project_id[1];        
 
-        $query = "delete from jiier_stud_assignment where student_id=$user_id and assignment_id=$assignment_id";
+        $query = "delete from jiier_stud_project where student_id=$user_id and project_id=$project_id";
         mysqli_query($conn, $query) or die(mysqli_error($conn));
 
-        $query = "insert into jiier_stud_assignment (student_id,assignment_id) values ($user_id,$assignment_id)";
+        $query = "insert into jiier_stud_project (student_id,project_id) values ($user_id,$project_id)";
         mysqli_query($conn, $query) or die(mysqli_error($conn));
         $id=mysqli_insert_id($conn);
         $file_name = $id . "." . $ext;
 
-        $query = "update jiier_stud_assignment set answer = '" . $file_name . "' where id=$id";
+        $query = "update jiier_stud_project set project = '" . $file_name . "' where id=$id";
         mysqli_query($conn, $query) or die(mysqli_error($conn));
 
-        $target_path = "../admin/assignment/answer/";
+        $target_path = "../admin/project/submit/";
         $target_path = $target_path . $file_name;
         move_uploaded_file($_FILES[$key]['tmp_name'], $target_path);
     }
@@ -171,18 +172,18 @@ if (isset($_POST['submit'])) {
                     <tbody>
                       <?php
 
-                      function get_answer($user_id,$ass_id){
-                        $ans="";                  
-                        // global $conn;
-                        // $sql = "select answer from jiier_stud_assignment where student_id=$user_id and assignment_id=$ass_id";
-                        // $result = mysqli_query($conn, $sql);
-                        // while ($row = mysqli_fetch_assoc($result)) {
-                        //   $ans=$row['answer'];
-                        // }
-                        return $ans;
+                      function get_project($user_id,$project_id){
+                        $project="";                  
+                        global $conn;
+                        $sql = "select project from jiier_stud_project where student_id=$user_id and project_id=$project_id";
+                        $result = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                          $project=$row['project'];
+                        }
+                        return $project;
                       }
 
-                      $sql = "select * from jiier_project";
+                      $sql = "select * from jiier_project where course_id=$course_id";
                       $result = mysqli_query($conn, $sql);
                       $i=0;
                       while ($row = mysqli_fetch_assoc($result)) {
@@ -193,13 +194,13 @@ if (isset($_POST['submit'])) {
                         <td><?php echo $row['title']; ?></td>
                         <td class="btnn"><a class="btnn" download="<?php echo $row['title']; ?>" href="../admin/project/<?php echo $row['project']; ?>" >Template</a></td>
                         <td>&nbsp;</td>
-                        <td><input name="answer_<?php echo $row['id']; ?>" type="file" accept="application/pdf" /></td>
+                        <td><input name="project_<?php echo $row['id']; ?>" type="file" accept="application/pdf" /></td>
                         <td>
                           <?php
-                            $ans=get_answer($user_id,$row['id']);
-                            if(trim($ans<>"")){
+                            $project=get_project($user_id,$row['id']);
+                            if(trim($project<>"")){
                           ?>
-                          <a target="_blank" href="../admin/assignment/answer/<?php echo $ans; ?>" >View</a>
+                          <a target="_blank" href="../admin/project/submit/<?php echo $project; ?>" >View</a>
                           <?php
                             }
                           ?>

@@ -90,7 +90,7 @@ $centre_id=$_SESSION['centre_id'];
                                     
 				  <td>
 								<a class="btn btn-info fa fa-edit" href="edit-project.php?id=<?php echo $row['id']; ?>" title="Edit Project"></a>
-				
+				<a class="btn btn-info fa fa-eye" target="_blank" href="project/<?php echo $row['project']; ?>" title="View Project"></a>
 								<a class="btn btn-info fa fa-trash"   href="delete-project.php?id=<?php echo $row['id']; ?>" title="Delete Project" style="font-weight:600px;"></a>
                                </td>
                 </tr>

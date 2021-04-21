@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 $page = "Subject";
 $page1 = "Add Subject";
@@ -23,10 +27,11 @@ if (isset($_POST['submit'])) {
     $tmpFilePath = $_FILES['library']['tmp_name'][$i];
     if ($tmpFilePath != ""){
       $ext = pathinfo($_FILES['library']['name'][$i], PATHINFO_EXTENSION);
-      $stmt = $conn->prepare("INSERT INTO jiier_library (subject_id) VALUES (?)");
-      $stmt->bind_param("s", $subject_id);
-      $stmt->execute() or die ($stmt->error);
-      $library_id=$stmt->insert_id;
+
+      $sql = "INSERT INTO jiier_library (subject_id) VALUES ($subject_id)";
+      mysqli_query($conn, $sql) or die(mysqli_error($conn));
+      $library_id = mysqli_insert_id($conn);
+
       $library = $library_id . "." . $ext;
       $newFilePath = "library/" . $library;
       $stmt = $conn->prepare("UPDATE jiier_library set library=? where id=?");

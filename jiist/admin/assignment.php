@@ -102,7 +102,7 @@ $centre_id=$_SESSION['centre_id'];
                                     
 				  <td>
 								<a class="btn btn-info fa fa-edit" href="edit-assignment.php?id=<?php echo $row['id']; ?>" title="Edit Assignment"></a>
-				
+				<a class="btn btn-info fa fa-eye" target="_blank" href="assignment/<?php echo $row['question']; ?>" title="View Assignment"></a>
 								<a class="btn btn-info fa fa-trash"   href="delete-assignment.php?id=<?php echo $row['id']; ?>" title="Delete Assignment" style="font-weight:600px;"></a>
                                </td>
                 </tr>
