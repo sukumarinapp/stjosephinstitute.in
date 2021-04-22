@@ -171,7 +171,7 @@ ob_start();
    <div class="id-card-holder" id="html-content-holder2">
 		<div class="id-card">
 
-				<img height="50" width="200" src="img/id.png">
+				<img height="50" width="200" src="img/id2.png">
 				</br>
 				<img height="90" src="../admin/uploads/<?php echo $photo; ?>">
 			<h2><?php echo $full_name; ?></h2>
@@ -179,10 +179,10 @@ ob_start();
 			<h5>Register No : <?php echo $register_number; ?></h5>
 			<h5>Course&nbsp;: <?php echo $paper_name; ?></h5>
 			<h5>Duration&nbsp;: <?php echo $enrolment_year; ?></h5>
-			<h3>Centre : <?php echo $name_of_the_organization; ?></h3>
+			<h3>Centre Code : JIIST001</h3>
 
 			<hr>
-			<p><h4><strong>www.jiier.org</strong></h4>
+			<p><h5><strong>www.stjosephinstitute.in</strong></h5>
 </p>
 	</div>
 </td></tr>

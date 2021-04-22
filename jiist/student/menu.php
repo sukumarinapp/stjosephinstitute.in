@@ -1,7 +1,7 @@
   <div class="sidebar" data-color="purple" data-background-color="white" data-image="assetss/img/sidebar-1.jpg">
 
-      <div class="logo"><a href="http://www.stjosephinstitute.in/jiist/" class="simple-text logo-normal">
-          <img src="assetss/img/jiist-fav.jpg" style="width: 20%"><br><?php echo $full_name; ?>
+      <div class="logo"><a href="user.php" class="simple-text logo-normal">
+          <img src="../admin/uploads/<?php echo $_SESSION['photo']; ?>?<?php echo rand(); ?>" style="width: 20%"><br><?php echo $full_name; ?>
         </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">

@@ -129,7 +129,7 @@ if (isset($_POST['submit'])) {
   while ($row = mysqli_fetch_array($result)) {
 
 ?>
-                                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['years']; ?> Year, <?php echo $row['semester_list']; ?> Semester</option>
+                                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['semester_list']; ?></option>
                            <?php } ?>
                                                 </select>
                                             </div>  

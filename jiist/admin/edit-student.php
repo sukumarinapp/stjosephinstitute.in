@@ -63,7 +63,7 @@ $status = trim($_POST['status']);
             $file_name = $id . "." . $ext;
             $query = "update jiier_student set photo = '" . $file_name . "' where id=$id";
             mysqli_query($conn, $query);
-            $target_path = "uploads";
+            $target_path = "uploads/";
             $target_path = $target_path . $file_name;
             move_uploaded_file($_FILES['photo']['tmp_name'], $target_path);
         }

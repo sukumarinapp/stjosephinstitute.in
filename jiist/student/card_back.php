@@ -207,10 +207,11 @@ ob_start();
 			<h3><strong>Address </strong><br> <?php echo nl2br($address); ?></h3>
 
 <hr>
-			<p>Kanyakumari Dist,
-Tamilnadu, India-629809</p>
-<p>jiiercouncil@gmail.com
- , 9884020301</p>
+<p>Karankadu PO,Kanyakumari Dt,</p>
+<p>Tamilnadu, India-629809</p>
+<p>Email: stjoesephinstitute01@gmail.com
+<p>Phone: 999 420 7721</p>
+<p>Phone: 988 435 7721</p>
 
 		</div>
 	</div>
