@@ -76,7 +76,7 @@ $centre_id=$_SESSION['centre_id'];
                   <th>Mobile</th>
                   <th>Course</th>
                   <th>Status</th>
-				  <th width="220px" style="text-align:right">Action</th>
+				  <th style="text-align:right">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -108,6 +108,8 @@ $centre_id=$_SESSION['centre_id'];
 								<a class="btn btn-info fa fa-sms fa-2x" href="send-student-sms.php?id=<?php echo $row['id']; ?>&m=<?php echo $row['phone_number']; ?>" title="Send Student SMS"></a>
 								<a class="btn btn-info fa fa-graduation-cap " href="result_grade.php?id=<?php echo $row['id']; ?>" title="Add Student Result"></a>
 								<a class="btn btn-info fa fa-trash"   href="delete-student.php?id=<?php echo $row['id']; ?>" title="Delete Student" style="font-weight:600px;"></a>
+
+                <a class="btn btn-info fa fa-eye"   href="vassignproj.php?id=<?php echo $row['id']; ?>" title="View Assignment & Project" style="font-weight:600px;"></a>
                                </td>
                 </tr>
 						<?php } ?>
