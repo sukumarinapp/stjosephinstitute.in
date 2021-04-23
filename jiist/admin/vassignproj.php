@@ -72,10 +72,10 @@ $id=$_GET['id'];
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                <tr>
-                  <th style="text-align: center" colspan="2">Assignment</th>
+                <tr style="font-weight:bold;background: darkgreen;color: white;">
+                  <th style="text-align: left" colspan="2">Assignment</th>
                 </tr>  
-                <tr>
+                <tr style="font-weight:bold;background: darkgreen;color: white;">
                   <th>Title</th>
                   <th>Assignment</th>
                 </tr>
@@ -89,7 +89,7 @@ $id=$_GET['id'];
                   while ($row = mysqli_fetch_assoc($result)) {
               ?>
 
-                <tr>
+                <tr  style="font-weight: bold">
                   <td><?php echo $row['title']; ?></td>
                   <td><a target="_blank" href="../admin/assignment/answer/<?php echo $row['answer']; ?>" >Assignment</a></td>
                 </tr>
@@ -102,10 +102,10 @@ $id=$_GET['id'];
 <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                <tr>
-                  <th style="text-align: center" colspan="2">Project</th>
+                <tr style="font-weight:bold;background: darkgreen;color: white;">
+                  <th style="text-align: left" colspan="2">Project</th>
                 </tr>  
-                <tr>
+                <tr style="font-weight:bold;background: darkgreen;color: white;">
                   <th>Title</th>
                   <th>Project</th>
                 </tr>
@@ -119,7 +119,7 @@ $id=$_GET['id'];
                   while ($row = mysqli_fetch_assoc($result)) {
               ?>
 
-                <tr>
+                <tr style="font-weight: bold">
                   <td><?php echo $row['title']; ?></td>
                   <td><a target="_blank" href="../admin/project/submit/<?php echo $row['project']; ?>" >Project Report</a></td>
                 </tr>

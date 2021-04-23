@@ -156,18 +156,20 @@ if (isset($_POST['submit'])) {
             <div class="col-lg-12 col-md-12">
               <div class="card">
                 <div class="card-header card-header-warning">
-                  <h4 class="card-title">Project</h4>
+                  <h4 class="card-title">Project Details</h4>
                   <p class="card-category"></p>
                 </div>
                 <div class="card-body table-responsive">
                   <table class="table table-hover">
                     <thead class="text-warning" style="font-weight: bold !important">
+                      <tr style="font-weight:bold;background: darkgreen;color: white;">
                       <th>S.No</th>
                       <th>Title</th>
                       <th >Project Template</th>
                       <th >&nbsp;</th>
                       <th >Upload</th>
                       <th >View</th>
+                    </tr>
                     </thead>
                     <tbody>
                       <?php
@@ -189,7 +191,7 @@ if (isset($_POST['submit'])) {
                       while ($row = mysqli_fetch_assoc($result)) {
                         $i++;
                       ?>
-                      <tr>
+                      <tr style="font-weight: bold">
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['title']; ?></td>
                         <td class="btnn"><a class="btnn" download="<?php echo $row['title']; ?>" href="../admin/project/<?php echo $row['project']; ?>" >Template</a></td>

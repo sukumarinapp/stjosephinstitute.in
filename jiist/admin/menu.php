@@ -128,7 +128,31 @@
                 </a>
               </li>
             </ul>
-          </li>    
+          </li>  
+
+          <li class="nav-item has-treeview  <?php if($page=="Timetable") echo "menu-open"; ?>">
+            <a href="" class="nav-link <?php if($page=="Timetable") echo "active"; ?>">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Manage Timetable
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="add-timetable.php" class="nav-link <?php if($page1=="Add Timetable") echo "active"; ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Timetable</p>
+                </a>
+              </li>
+              <li class="nav-item">
+          <a href="timetable.php" class="nav-link <?php if($page1=="View Timetable") echo "active"; ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Timetable</p>
+                </a>
+              </li>
+            </ul>
+          </li>      
 
 		  <li class="nav-item has-treeview  <?php if($page=="Follow") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Follow") echo "active"; ?>">

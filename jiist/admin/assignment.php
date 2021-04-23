@@ -70,7 +70,7 @@ $centre_id=$_SESSION['centre_id'];
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                <tr>
+                <tr >
                   <th>Course Name</th>
                   <th>Semester</th>
                   <th>Title</th>                  
@@ -92,13 +92,19 @@ $centre_id=$_SESSION['centre_id'];
                         }
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result)) {
+                          $last_date=$row['last_date'];
+                        $ldate2=explode("T",$last_date);
+                        $ldate=$ldate2[0];
+                        $ltime=$ldate2[1];
+                        $ldate=explode("-", $ldate);
+                        $last_date=$ldate[2]."-".$ldate[1]."-".$ldate[0]." ".$ltime;
                             ?>
 
                 <tr>
                   <td><?php echo $row['course_id']; ?></td>
                   <td><?php echo $row['semester_list']; ?></td>
                   <td><?php echo $row['title']; ?></td>
-                  <td><?php echo $row['last_date']; ?></td>
+                  <td><?php echo $last_date; ?></td>
                                     
 				  <td>
 								<a class="btn btn-info fa fa-edit" href="edit-assignment.php?id=<?php echo $row['id']; ?>" title="Edit Assignment"></a>
