@@ -138,7 +138,7 @@ $result2 = mysqli_query($conn, $sql2);
 $sub_count= mysqli_num_rows($result2);
                             ?>
 
-            <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="col-lg-6 col-md-5 col-sm-6">
               <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
                 <div class="card-header card-header-warning card-header-icon">
                   <div style="width: -webkit-fill-available; margin-right: unset" class="card-icon " >
@@ -148,8 +148,8 @@ $sub_count= mysqli_num_rows($result2);
       <table border="1" class="table"  >
     <thead>
       <tr>
-         <th style="font-weight:bold;background: darkgreen;color: white;">Subject</th>
-     <th style="font-weight:bold;background: darkgreen;color: white">View</th>
+         <th style="text-align: left;font-weight:bold;background: darkgreen;color: white;">Subject</th>
+     <th style="text-align: left;font-weight:bold;background: darkgreen;color: white">View</th>
       </tr>
     </thead>
     <tbody>
