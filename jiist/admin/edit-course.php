@@ -12,13 +12,12 @@ $paper_name= "";
 
 if (isset($_POST['submit'])) {
 
-    $degree_id = trim($_POST['degree_id']);
     $paper_name = trim($_POST['paper_name']);
    
 
-        $stmt = $conn->prepare("UPDATE  jiier_paper set degree_id=?,paper_name=? where id=?");
+        $stmt = $conn->prepare("UPDATE  jiier_paper set paper_name=? where id=?");
 
-        $stmt->bind_param("sss",$degree_id,$paper_name,$id);
+        $stmt->bind_param("ss",$paper_name,$id);
         $stmt->execute();
         $id=$stmt->insert_id;
 		
