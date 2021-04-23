@@ -126,32 +126,33 @@ $course_id=$_SESSION['course_id'];
           <div class="row">
 
   <?php
-                      //$sql = "select a.*,b.semester_list from jiier_subject a, jiier_semester b, jiier_paper c where a.semester_id=b.id and b.years=c.year and a.course_id=c.id and a.course_id='$course_id'";
 					$sql = "select id,semester_list from jiier_semester order by id";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result)) {
+                          $sem_id=$row['id'];
+$sql2 = "select * from jiier_subject where  course_id=$course_id and semester_id=$sem_id";
+$result2 = mysqli_query($conn, $sql2);
+$sub_count= mysqli_num_rows($result2);
                             ?>
 
             <div class="col-lg-3 col-md-3 col-sm-3">
               <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
                 <div class="card-header card-header-warning card-header-icon">
                   <div style="width: -webkit-fill-available; margin-right: unset" class="card-icon " >
-                   <h1 style="z-index:-9999;text-align: center;color: white;" class="card-category " ><span class="caret"></span><?php echo $row['semester_list']; ?></h1 >
+                   <h1 style="margin-bottom:5px;text-align: center;color: white;" class="card-category " ><span class="caret"></span><?php echo $row['semester_list']; ?></h1 >
                    <span style="z-index: 9999">
-
+<?php if($sub_count>0){ ?>
       <table width="100%" class="table" style="margin-top: 20px;margin-left: -15px;z-index:10000 !important" >
     <thead>
       <tr>
-           <th style="background: #9c27b0;text-align: left;color: white;">Code</th>
-         <th style="background: #9c27b0;text-align: left;color: white;">Subject</th>
+           <th style="background: darkgreen;text-align: left;color: white;">Code</th>
+         <th style="background: darkgreen;text-align: left;color: white;">Subject</th>
       </tr>
     </thead>
     <tbody style="z-index: 9999">
 <?php
 
-$sem_id=$row['id'];
-$sql2 = "select * from jiier_subject where  course_id=$course_id and semester_id=$sem_id";
-$result2 = mysqli_query($conn, $sql2);
+
 while ($row2 = mysqli_fetch_assoc($result2)) {
 
 ?>      
@@ -164,6 +165,7 @@ while ($row2 = mysqli_fetch_assoc($result2)) {
 ?>        
     </tbody>
   </table>
+<?php } ?>  
 </span>
 
                   </div>
