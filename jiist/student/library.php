@@ -142,16 +142,14 @@ $sub_count= mysqli_num_rows($result2);
               <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
                 <div class="card-header card-header-warning card-header-icon">
                   <div style="width: -webkit-fill-available; margin-right: unset" class="card-icon " >
-                   <h1 style="margin-bottom:5px;z-index:-9999;text-align: center;color: white;" class="card-category " ><span class="caret"></span><?php echo $row['semester_list']; ?></h1 >
+                   <h1 style="font-weight:bold;margin-bottom:5px;z-index:-9999;text-align: center;color: white;" class="card-category " ><?php echo $row['semester_list']; ?></h1 >
                    <span style="z-index: 9999">
 <?php if($sub_count>0){ ?>
       <table border="1" class="table"  >
     <thead>
       <tr>
-         <th style="background: darkgreen;
-    color: white;">Subject</th>
-     <th style="background: darkgreen;
-    color: white;" width="300px">View</th>
+         <th style="font-weight:bold;background: darkgreen;color: white;">Subject</th>
+     <th style="font-weight:bold;background: darkgreen;color: white">View</th>
       </tr>
     </thead>
     <tbody>
@@ -162,8 +160,8 @@ $result2 = mysqli_query($conn, $sql2);
 while ($row2 = mysqli_fetch_assoc($result2)) {
 ?>  
       <tr>
-        <td style="text-align: left;" ><?php echo $row2['subject_name']; ?></td>
-                <td style="text-align: left;" ><a href="#" onclick="showbook(event,<?php echo $row2['id']; ?>)"><i class="material-icons">library_books</i></a></td>
+        <td style="font-weight:bold;text-align: left;" ><?php echo $row2['subject_name']; ?></td>
+                <td style="font-weight:bold;text-align: left;" ><a href="#" onclick="showbook(event,<?php echo $row2['id']; ?>)"><i class="material-icons">library_books</i></a></td>
 
       </tr>
 <?php
