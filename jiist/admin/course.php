@@ -71,7 +71,7 @@ $centre_id=$_SESSION['centre_id'];
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Degree Id </th>
+                  <th>Course ID</th>
                   <th>paper Name</th>
 
 				  <th width="220px" style="text-align:right">Action</th>
@@ -87,7 +87,7 @@ $centre_id=$_SESSION['centre_id'];
                             ?>
 
                 <tr>
-                  <td><?php echo $row['degree_id']; ?></td>
+                  <td><?php echo $row['id']; ?></td>
                   <td><?php echo $row['paper_name']; ?></td>
 
 				  <td>

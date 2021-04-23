@@ -33,6 +33,7 @@ $photo = "";
 if (isset($_POST['submit'])) {
 
 $full_name = trim($_POST['full_name']);
+$register_number = trim($_POST['register_number']);
 $father_name = trim($_POST['father_name']);
 $mother_name = trim($_POST['mother_name']);
 $nationality = trim($_POST['nationality']);
@@ -49,9 +50,9 @@ $course_id = trim($_POST['course_id']);
 $enrolment_year =    trim($_POST['enrolment_year']);
 $address = trim($_POST['address']);
 
-        $stmt = $conn->prepare("INSERT INTO jiier_student (centre_id,full_name,father_name,mother_name,nationality,religion,medium,blood_group,gender,dateof_birth,employed_unemployed,physically_handicapped,phone_number,email,course_id,enrolment_year,address,status,user_id,lastup_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt = $conn->prepare("INSERT INTO jiier_student (register_number,centre_id,full_name,father_name,mother_name,nationality,religion,medium,blood_group,gender,dateof_birth,employed_unemployed,physically_handicapped,phone_number,email,course_id,enrolment_year,address,status,user_id,lastup_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-        $stmt->bind_param("ssssssssssssssssssss", $centre_id,$full_name,$father_name,$mother_name,$nationality,$religion,$medium,$blood_group,$gender,$dateof_birth,$employed_unemployed,$physically_handicapped,$phone_number,$email,$course_id,$enrolment_year,$address,$status,$user_id,$lastup_date);
+        $stmt->bind_param("sssssssssssssssssssss", $register_number,$centre_id,$full_name,$father_name,$mother_name,$nationality,$religion,$medium,$blood_group,$gender,$dateof_birth,$employed_unemployed,$physically_handicapped,$phone_number,$email,$course_id,$enrolment_year,$address,$status,$user_id,$lastup_date);
         $stmt->execute() or die ($stmt->error);
         $id=$stmt->insert_id;
 		
@@ -65,13 +66,7 @@ $address = trim($_POST['address']);
             $target_path = $target_path . $file_name;
             move_uploaded_file($_FILES['photo']['tmp_name'], $target_path);
         }
-		 if($_SESSION['user_type']=="Superadmin"){
-            $sql="update jiier_student set centre_id=$centre_id where id=$id";
-            mysqli_query($conn,$sql);
-        }else if($_SESSION['user_type']=="Admin"){
-            $sql="update jiier_student set centre_id=$centre_id, user_type='Staff' where id=$id";
-            mysqli_query($conn,$sql);
-        }
+		 
         header("location: students.php");
     }
 ?>
@@ -135,6 +130,12 @@ $address = trim($_POST['address']);
               <div class="col-md-12">
                         <form method="post" action="" enctype="multipart/form-data">
                 <div class="card-body">
+
+                  <div class="form-group">
+                    <label for="register_number">Register Number *</label>
+                    <input required="required" type="text" class="form-control" name="register_number" required="required" placeholder="Register Number">
+                  </div>
+
                   <div class="form-group">
                     <label for="full_name">Full Name *</label>
                     <input type="text" class="form-control" id="full_name" name="full_name" required="required" placeholder="Full Name">
@@ -235,7 +236,7 @@ $address = trim($_POST['address']);
                   </div>
                   <div class="form-group">
                     <label for="course">Course ID</label>
-                    <input type="course" name="course_id" class="form-control" id="course_id" placeholder="Course">
+                    <input required="required" type="course" name="course_id" class="form-control" id="course_id" placeholder="Course">
                   </div>
 
 				 <div class="form-group">
@@ -249,10 +250,10 @@ $address = trim($_POST['address']);
 
                   </div>
 				   <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
+                    <label for="exampleInputFile">Photo</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="photo" id="exampleInputFile">
+                        <input type="file" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" name="photo" id="exampleInputFile">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                       </div>
                       <div class="input-group-append">

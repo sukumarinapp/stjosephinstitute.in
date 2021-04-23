@@ -7,7 +7,7 @@ include "config.php";
 $id=$_GET['id'];
 if (($_SESSION['user_type'] != "Superadmin") && ($_SESSION['user_type'] != "Admin")) header("location: index.php");
  else{
-    $sql = "delete from jiier_studentenquiry where id=$id";
+    $sql = "delete from jiier_student where id=$id";
     mysqli_query($conn, $sql);
     header("location: students.php");
 }

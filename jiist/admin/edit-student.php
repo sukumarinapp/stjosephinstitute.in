@@ -139,13 +139,14 @@ $paper_id = $row2['course_id'];
               <div class="col-md-12">
                         <form method="post" action="" enctype="multipart/form-data">
                 <div class="card-body">
-				  <div class="form-group">
+				          <div class="form-group">
                     <label for="register_number">Register Number *</label>
-                    <input value="<?php echo $row2['register_number']; ?>" type="text" class="form-control" name="register_number" required="required" placeholder="Full Name">
+                    <input required="required" value="<?php echo $row2['register_number']; ?>" type="text" class="form-control" name="register_number" required="required" placeholder="Register Number">
                   </div>
+
 				  <div class="form-group">
-                    <label for="full_name">Student Name *</label>
-                    <input value="<?php echo $row2['full_name']; ?>" type="text" class="form-control" id="full_name" name="full_name" required="required" placeholder="Full Name">
+                    <label for="full_name">Full Name *</label>
+                    <input required="required" value="<?php echo $row2['full_name']; ?>" type="text" class="form-control" id="full_name" name="full_name" required="required" placeholder="Full Name">
                   </div>
                
 			    <div class="form-group">
@@ -249,14 +250,14 @@ $sql = "select a.*,b.program_name, c.degree_name,d.course_name from jiier_paper 
 									 <label for="email" title="Program = <?php echo $row['program_name']; ?>,
 												Degree = <?php echo $row['degree_name']; ?>,
 												Degree Type = <?php echo $row['course_name']; ?>,
-												Paper = <?php echo $row['paper_name']; ?>">View Course Details</label>
+												Paper = <?php echo $row['paper_name']; ?>">Course ID</label>
 <?php } ?>
                                                             </label>                    <input value="<?php echo $row2['course_id']; ?>" type="course" name="course_id" class="form-control" id="course_id" placeholder="Course">
                   </div>
 
 				 <div class="form-group">
                     <label for="enrolment_year">Enrolment Year</label>
-                    <input value="<?php echo $row2['enrolment_year']; ?>" type="text" name="enrolment_year" class="form-control" id="enrolment_year" placeholder="Enrolment Year">
+                    <input required="required"  value="<?php echo $row2['enrolment_year']; ?>" type="text" name="enrolment_year" class="form-control" id="enrolment_year" placeholder="Enrolment Year">
                   </div>
 				  
 				  
@@ -273,16 +274,17 @@ $sql = "select a.*,b.program_name, c.degree_name,d.course_name from jiier_paper 
                   </select>
                 </div>
 				   <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
+                    <label for="exampleInputFile">Photo</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="photo" id="exampleInputFile">
+                        <input accept="image/x-png,image/gif,image/jpeg" type="file" class="custom-file-input" name="photo" id="exampleInputFile">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                       </div>
                       <div class="input-group-append">
                         <span class="input-group-text" id="">Upload</span>
                       </div>
                     </div>
+                    <img src="uploads/<?php echo $row2['photo']; ?>" width="100" height="100" />
                   </div>
 				
                 </div>
