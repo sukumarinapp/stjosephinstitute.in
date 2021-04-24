@@ -26,6 +26,7 @@ $sql2 = "select * from  jiier_users where id='$centre_id'";
 $result2 = mysqli_query($conn, $sql2);
 $row2 = mysqli_fetch_assoc($result2);
 $name_of_the_organization = $row2['name_of_the_organization'];
+$centre_code = $row2['centre_code'];
 
 $sql3 = "select * from  jiier_paper where id='$course_id'";
 $result3 = mysqli_query($conn, $sql3);
@@ -176,11 +177,11 @@ ob_start();
 				<img height="90" src="../admin/uploads/<?php echo $photo; ?>">
 			<h2><?php echo $full_name; ?></h2>
 <hr>
-			<h5>Register No : <?php echo $register_number; ?></h5>
+			<h5>Register No&nbsp;: <?php echo $register_number; ?></h5>
 			<h5>Course&nbsp;: <?php echo $paper_name; ?></h5>
 			<h5>Degree&nbsp;: <?php echo $degree_name; ?></h5>
 			<h5>Duration&nbsp;: <?php echo $enrolment_year; ?></h5>
-			<h3>Centre Code : JIIST001</h3>
+			<h5>Centre Code&nbsp;: <?php echo $centre_code; ?></h5>
 
 			<hr>
 			<p><h5><strong>www.stjosephinstitute.in</strong></h5>
