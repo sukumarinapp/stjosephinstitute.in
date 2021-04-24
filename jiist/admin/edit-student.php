@@ -242,10 +242,16 @@ $paper_id = $row2['course_id'];
                     <input value="<?php echo $row2['email']; ?>" type="text" name="email" class="form-control" id="email" placeholder="Email ID">
                   </div>
                   <div class="form-group">
-              <label>Select Course</label>
+                    <?php
+$sql3 = "select a.*,b.program_name, c.degree_name,d.course_name from jiier_paper a,jiier_program b,jiier_degree c, jiier_degree_type d where a.program_id=b.id and a.degree_id=c.id and a.degree_type_id=d.id and a.id=$paper_id";
+                                            $result3 = mysqli_query($conn, $sql3);
+                                            $row3 = mysqli_fetch_assoc($result3);
+?>
+              <label >Select Course (Program = <?php echo $row3['program_name']; ?>, Degree = <?php echo $row3['degree_name']; ?>, Degree Type = <?php echo $row3['course_name']; ?>)</label>
                         <select name="course_id" class="form-control select2bs4" required="required" >
                          <option value="">---Select---</option>
  <?php
+
   $sql = "select * from jiier_paper order by paper_name";
   $result = mysqli_query($conn, $sql);
   while ($row = mysqli_fetch_array($result)) {
