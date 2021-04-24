@@ -125,7 +125,7 @@ $course_id=$_SESSION['course_id'];
           <div class="row">
 
   
-            <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
                 <iframe width="699" height="393" src="<?php echo $video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 <div class="card-footer" style="margin-top: unset!important;">
