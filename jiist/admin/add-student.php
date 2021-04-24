@@ -235,8 +235,18 @@ $address = trim($_POST['address']);
                     <input type="email" name="email" class="form-control" id="email" placeholder="Email ID">
                   </div>
                   <div class="form-group">
-                    <label for="course">Course ID</label>
-                    <input required="required" type="course" name="course_id" class="form-control" id="course_id" placeholder="Course">
+                    <label>Select Course</label>
+                        <select name="course_id" class="form-control select2bs4" required="required" >
+                         <option value="">---Select---</option>
+ <?php
+  $sql = "select * from jiier_paper order by paper_name";
+  $result = mysqli_query($conn, $sql);
+  while ($row = mysqli_fetch_array($result)) {
+
+?>
+                                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['paper_name']; ?> <?php echo $row['id']; ?></option>
+                           <?php } ?>
+                                                </select>
                   </div>
 
 				 <div class="form-group">

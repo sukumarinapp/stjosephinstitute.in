@@ -242,17 +242,18 @@ $paper_id = $row2['course_id'];
                     <input value="<?php echo $row2['email']; ?>" type="text" name="email" class="form-control" id="email" placeholder="Email ID">
                   </div>
                   <div class="form-group">
-              <?php
-$sql = "select a.*,b.program_name, c.degree_name,d.course_name from jiier_paper a,jiier_program b,jiier_degree c, jiier_degree_type d where a.program_id=b.id and a.degree_id=c.id and a.degree_type_id=d.id and a.id=$paper_id";
-                                            $result = mysqli_query($conn, $sql);
-                                            while ($row = mysqli_fetch_assoc($result)) {
-                                                ?>
-									 <label for="email" title="Program = <?php echo $row['program_name']; ?>,
-												Degree = <?php echo $row['degree_name']; ?>,
-												Degree Type = <?php echo $row['course_name']; ?>,
-												Paper = <?php echo $row['paper_name']; ?>">Course ID</label>
-<?php } ?>
-                                                            </label>                    <input value="<?php echo $row2['course_id']; ?>" type="course" name="course_id" class="form-control" id="course_id" placeholder="Course">
+              <label>Select Course</label>
+                        <select name="course_id" class="form-control select2bs4" required="required" >
+                         <option value="">---Select---</option>
+ <?php
+  $sql = "select * from jiier_paper order by paper_name";
+  $result = mysqli_query($conn, $sql);
+  while ($row = mysqli_fetch_array($result)) {
+
+?>
+                                                    <option <?php if($row2['course_id']==$row['id']) echo " selected "; ?> value="<?php echo $row['id']; ?>"><?php echo $row['paper_name']; ?> <?php echo $row['id']; ?></option>
+                           <?php } ?>
+                                                </select>
                   </div>
 
 				 <div class="form-group">
