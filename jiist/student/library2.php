@@ -138,68 +138,42 @@ $result2 = mysqli_query($conn, $sql2);
 $sub_count= mysqli_num_rows($result2);
                             ?>
 
-            <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="col-lg-6 col-md-5 col-sm-6">
               <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
                 <div class="card-header card-header-warning card-header-icon">
                   <div style="width: -webkit-fill-available; margin-right: unset" class="card-icon " >
-                   <h1 style="font-weight:bold;margin-bottom:5px;z-index:-9999;text-align: center;color: white;<?php if($sub_count>0) echo " background-color:darkgreen !important" ?>" class="card-category " ><a style="color:white;font-weight:bold" href="#" onclick="show_subject(<?php echo $row['id']; ?>)"><?php echo $row['semester_list']; ?></a></h1 >
-                   </div>
-                </div>
-              </div>
-            </div>
-<?php } ?>
-</div>
-  <?php
-$sql2 = "select a.*,b.id from jiier_subject a,jiier_semester b where a.semester_id=b.id and course_id=$course_id order by b.id";
+                   <h1 style="font-weight:bold;margin-bottom:5px;z-index:-9999;text-align: center;color: white;" class="card-category " ><?php echo $row['semester_list']; ?></h1 >
+                   <span style="z-index: 9999">
+<?php if($sub_count>0){ ?>
+      <table border="1" class="table"  >
+    <thead>
+      <tr>
+         <th style="text-align: left;font-weight:bold;background: darkgreen;color: white;">Subject</th>
+     <th style="text-align: left;font-weight:bold;background: darkgreen;color: white">View</th>
+      </tr>
+    </thead>
+    <tbody>
+<?php
+$sem_id=$row['id'];
+$sql2 = "select * from jiier_subject where  course_id=$course_id and semester_id=$sem_id";
 $result2 = mysqli_query($conn, $sql2);
-$sub_count=mysqli_num_rows($result);
-$semester=0;
-$i=0;
 while ($row2 = mysqli_fetch_assoc($result2)) {
-$sub_count=mysqli_num_rows($result2);
+?>  
+      <tr>
+        <td style="font-weight:bold;text-align: left;" ><?php echo $row2['subject_name']; ?></td>
+                <td style="font-weight:bold;text-align: left;" ><a href="#" onclick="showbook(event,<?php echo $row2['id']; ?>)"><i class="material-icons">library_books</i></a></td>
 
-if($semester!=$row2['semester_id']){
-  $i=0;
-?>
-<?php
-if($semester!=$row2['semester_id']  && $i==0){
-?>
-</tbody>
-</table>
+      </tr>
 <?php
 }
-?>
-<table style="display: none" class="table table-bordered" id="<?php echo $row2['semester_id']; ?>" >
-<thead>
-<tr style="background-color: darkgreen;color:white;font-weight: bold"><th>Subject Code</th><th>Subject Name</th><th>View PDF</th></tr>
-</thead>
-<tbody>
-<?php
-$i++;
-}
-
-
-?>
-
-<tr style="background-color: white;color:black;font-weight: bold"><td><?php echo $row2['subject_code']; ?></td><td><?php echo $row2['subject_name']; ?></td>
-<td style="font-weight:bold;text-align: left;" ><a href="#" onclick="showbook(event,<?php echo $row2['id']; ?>)"><i class="material-icons">library_books</i></a></td></tr>
-
-<?php
-$semester=$row2['semester_id'];
-}
-?>
-
-<?php
-if($sub_count>0){
-?>
-</tbody>
-</table>
-<?php
-}
-?>              
-                </div>                  
+?>        
+    </tbody>
+  </table>
+<?php } ?>  
+</span>
+                  </div>
+                  
                 </div>
-              </div>
                 <div class="card-footer" style="margin-top: unset!important;">
                   <div class="stats">
                     
@@ -208,6 +182,7 @@ if($sub_count>0){
                 </div>
               </div>
             </div>
+<?php } ?>
 
           
           </div> 
@@ -292,10 +267,6 @@ if($sub_count>0){
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="assetss/demo/demo.js"></script>
   <script>
-    function show_subject(id){
-      $(".table").hide();
-      $("#"+id).show();
-    }
     function showbook(ev,subject_id){
       ev.preventDefault();
       window.location.href="book.php?id="+subject_id;

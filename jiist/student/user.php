@@ -150,6 +150,9 @@ if (isset($_POST['submit'])) {
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result)) {
               $course_id = $row['course_id'];
+              $sql3 = "select a.*,b.program_name, c.degree_name,d.course_name from jiier_paper a,jiier_program b,jiier_degree c, jiier_degree_type d where a.program_id=b.id and a.degree_id=c.id and a.degree_type_id=d.id and a.id=$course_id";
+                                            $result3 = mysqli_query($conn, $sql3);
+                                            $row3 = mysqli_fetch_assoc($result3);
                             ?>
                     <div class="row">
                       <div class="col-md-3">
@@ -247,6 +250,24 @@ if (isset($_POST['submit'])) {
                         <div class="form-group">
                           <label  >Course</label>
                           <input readonly="readonly" name="course_id" value="<?php echo get_course($row['course_id']); ?>" type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label  >Program</label>
+                          <input readonly="readonly" name="program" value="<?php echo $row3['program_name']; ?>" type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label  >Degree</label>
+                          <input readonly="readonly" name="course_id" value="<?php echo $row3['degree_name']; ?>" type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label  >Degree Type</label>
+                          <input readonly="readonly" name="course_id" value="<?php echo $row3['course_name']; ?>" type="text" class="form-control">
                         </div>
                       </div>
                     </div>

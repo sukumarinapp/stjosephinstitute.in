@@ -178,6 +178,7 @@ ob_start();
 <hr>
 			<h5>Register No : <?php echo $register_number; ?></h5>
 			<h5>Course&nbsp;: <?php echo $paper_name; ?></h5>
+			<h5>Degree&nbsp;: <?php echo $degree_name; ?></h5>
 			<h5>Duration&nbsp;: <?php echo $enrolment_year; ?></h5>
 			<h3>Centre Code : JIIST001</h3>
 
