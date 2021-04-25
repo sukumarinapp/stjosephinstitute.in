@@ -142,7 +142,7 @@ $degree_type_id=$row2['degree_type_id'];
 </div> 
 
                   <div class="form-group">
-                    <label for="paper_name">Paper Name</label>
+                    <label for="paper_name">Paper Name *</label>
                     <input value="<?php echo $row2['paper_name']; ?>" type="text" class="form-control" id="paper_name" name="paper_name" placeholder="Paper Name">
                   </div>
             
