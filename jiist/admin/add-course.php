@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 
 $paper_name = trim($_POST['paper_name']);
 $program_id = trim($_POST['program_id']);
-$degree_type = trim($_POST['degree_type']);
+$degree_id = trim($_POST['degree_id']);
 $degree_type_id = trim($_POST['degree_type_id']);
 
 $sql="INSERT INTO jiier_paper (paper_name,program_id,degree_id,degree_type_id) VALUES ('$paper_name',$program_id,$degree_id,$degree_type_id)";
