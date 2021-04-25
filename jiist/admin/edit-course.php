@@ -4,6 +4,10 @@ $page = "Course";
 $page1 = "View Course";
 include "timeout.php";
 include "config.php";
+$program_id=0;
+$degree_id=0;
+$degree_type_id=0;
+$paper_name = "";
 if (($_SESSION['user_type'] != "Superadmin") && ($_SESSION['user_type'] != "Admin")) header("location: index.php");
 $id=$_GET['id'];
 
@@ -11,23 +15,29 @@ $degree_id= "";
 $paper_name= "";
 
 if (isset($_POST['submit'])) {
-
-    $paper_name = trim($_POST['paper_name']);
+$paper_name = trim($_POST['paper_name']);
+$program_id = trim($_POST['program_id']);
+$degree_type = trim($_POST['degree_type']);
+$degree_type_id = trim($_POST['degree_type_id']);
    
 
-        $stmt = $conn->prepare("UPDATE  jiier_paper set paper_name=? where id=?");
+        $stmt = $conn->prepare("UPDATE  jiier_paper set paper_name=?,program_id=?,degree_type=?,degree_type_id=? where id=?");
 
-        $stmt->bind_param("ss",$paper_name,$id);
+        $stmt->bind_param("sssss",$paper_name,$program_id,$degree_type,$degree_type_id,$id);
         $stmt->execute();
         $id=$stmt->insert_id;
 		
-       	        header("location: course.php");
+       	header("location: course.php");
 
         }
 
 $sql2 = "select * from jiier_paper where id=$id";
 $result2 = mysqli_query($conn, $sql2);
 $row2 = mysqli_fetch_assoc($result2);
+$program_id=$row2['program_id'];
+$degree_id=$row2['degree_id'];
+$degree_type_id=$row2['degree_type_id'];
+
 
 ?>
 <!DOCTYPE html>
@@ -90,6 +100,47 @@ $row2 = mysqli_fetch_assoc($result2);
               <div class="col-md-12">
 			            <form method="post" action="" enctype="multipart/form-data">
                 <div class="card-body">
+
+                  <div class="form-group">
+  <label>Select Program *</label>
+  <select onchange="load_degree()" name="program_id" id="program_id" class="form-control" required="required" >
+    <option value="">---Select Program---</option>
+    <?php
+      $sql = "select * from jiier_program order by program_name";
+      $result = mysqli_query($conn, $sql);
+      while ($row = mysqli_fetch_array($result)) { ?>
+        <option <?php if($row2['program_id']==$row['id']) echo " selected "; ?> value="<?php echo $row['id']; ?>"><?php echo $row['program_name']; ?></option>
+      <?php } ?>
+  </select>
+</div>  
+
+<div class="form-group" id="degree_div" >
+  <label>Select Degree *</label>
+  <select onchange="load_degree_type()" name="degree_id" id="degree_id" class="form-control" required="required" >
+    <option value="">---Select Degree---</option>
+    <?php
+    $sql="select * from jiier_degree where program_id=$program_id";
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_array($result)){ ?>
+      <option <?php if($degree_id==$row['id']) echo " selected "; ?> value="<?php echo $row['id']; ?>"><?php echo $row['degree_name']; ?></option>
+    <?php } ?>
+  </select>
+</div> 
+
+<div class="form-group" id="degree_type_div">
+  <label>Select Degree Type *</label>
+  <select name="degree_type_id" id="degree_type_id" class="form-control" required="required" >
+    <option value="">---Select Degree Type---</option>
+    <?php
+    $sql="select * from jiier_degree_type where degree_id=$degree_id";
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_array($result)){ ?>
+      <option <?php if($degree_type_id==$row['id']) echo " selected "; ?> value="<?php echo $row['id']; ?>"><?php echo $row['course_name']; ?></option>
+    <?php } ?>
+  </select>
+  </select>
+</div> 
+
                   <div class="form-group">
                     <label for="paper_name">Paper Name</label>
                     <input value="<?php echo $row2['paper_name']; ?>" type="text" class="form-control" id="paper_name" name="paper_name" placeholder="Paper Name">
@@ -148,33 +199,59 @@ $row2 = mysqli_fetch_assoc($result2);
 <script src="plugins/select2/js/select2.full.min.js"></script>
 
 <script>
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-
- 
-    //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+  function load_degree(){
+    var program_id = $("#program_id").val();
+    $.ajax({
+      type: 'POST',
+      url: 'load_degree.php',
+      data: {
+          program_id: program_id
+      },
+      success: function (response) {
+          response=JSON.parse(response); 
+          var html="";  
+          html = html + "<label>Select Degree *</label>";
+          html = html + "<select onchange='load_degree_type()' id='degree_id' name='degree_id' class='form-control' required='required'>";
+          html = html + "<option value=''>---Select Degree---</option>";
+          for(var i = 0; i < response.length; i++) {
+            var obj = response[i];
+            html = html + "<option value='"+obj.degree_id+"'>"+obj.degree_name+"</option>";
+          } 
+          html = html + "</select>";
+          $("#degree_div").html(html);        
+      },
+      error : function(error){
+          console.log(error);
+      }
     });
+  }
 
-    $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    });
-
-  })
+    function load_degree_type(){
+      var degree_id = $("#degree_id").val();  
+      $.ajax({
+        type: 'POST',
+        url: 'load_degree_type.php',
+        data: {
+            degree_id: degree_id
+        },
+        success: function (response) {
+          response=JSON.parse(response); 
+          var html="";  
+          html = html + "<label>Select Degree Type *</label>";
+          html = html + "<select id='degree_type_id' name='degree_type_id' class='form-control' required='required'>";
+          html = html + "<option value=''>---Select Degree Type---</option>";
+          for(var i = 0; i < response.length; i++) {
+            var obj = response[i];
+            html = html + "<option value='"+obj.id+"'>"+obj.course_name+"</option>";
+          } 
+          html = html + "</select>";
+          $("#degree_type_div").html(html);           
+        },
+        error : function(error){
+            console.log(error);
+        }
+      });
+    }
 </script>
 
 

@@ -19,6 +19,9 @@ $status = 'Active';
 if (isset($_POST['submit'])) {
 
 $paper_name = trim($_POST['paper_name']);
+$program_id = trim($_POST['program_id']);
+$degree_type = trim($_POST['degree_type']);
+$degree_type_id = trim($_POST['degree_type_id']);
 
 $sql="INSERT INTO jiier_paper (paper_name,program_id,degree_id,degree_type_id) VALUES ('$paper_name',$program_id,$degree_id,$degree_type_id)";
 mysqli_query($conn,$sql) or die(mysqli_error($conn));
@@ -189,23 +192,21 @@ header("location: course.php");
   }
 
     function load_degree_type(){
-      var degree_id = $("#degree_id").val();      
+      var degree_id = $("#degree_id").val();  
       $.ajax({
         type: 'POST',
         url: 'load_degree_type.php',
         data: {
             degree_id: degree_id
         },
-        success: function (respons) {
-          respons=JSON.parse(respons);
+        success: function (response) {
+          response=JSON.parse(response); 
           var html="";  
           html = html + "<label>Select Degree Type *</label>";
           html = html + "<select id='degree_type_id' name='degree_type_id' class='form-control' required='required'>";
           html = html + "<option value=''>---Select Degree Type---</option>";
-          console.log(respons);
-          for(var i = 0; i < respons.length; i++) {
-            var obj = respons[i];
-            console.log(i);
+          for(var i = 0; i < response.length; i++) {
+            var obj = response[i];
             html = html + "<option value='"+obj.id+"'>"+obj.course_name+"</option>";
           } 
           html = html + "</select>";
