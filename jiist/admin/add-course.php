@@ -85,9 +85,35 @@ header("location: course.php");
               <div class="col-md-12">
                 <form method="post" action="" enctype="multipart/form-data">
                 <div class="card-body">
+<div class="form-group">
+  <label>Select Program *</label>
+  <select onchange="load_degree()" name="program_id" id="program_id" class="form-control" required="required" >
+    <option value="">---Select Program---</option>
+    <?php
+      $sql = "select * from jiier_program order by program_name";
+      $result = mysqli_query($conn, $sql);
+      while ($row = mysqli_fetch_array($result)) { ?>
+        <option value="<?php echo $row['id']; ?>"><?php echo $row['program_name']; ?></option>
+      <?php } ?>
+  </select>
+</div>  
+
+<div class="form-group" id="degree_div" >
+  <label>Select Degree *</label>
+  <select onchange="load_degree_type()" name="degree_id" id="degree_id" class="form-control" required="required" >
+    <option value="">---Select Degree---</option>
+  </select>
+</div> 
+
+<div class="form-group" id="degree_type_div">
+  <label>Select Degree Type *</label>
+  <select name="degree_type_id" id="degree_type_id" class="form-control" required="required" >
+    <option value="">---Select Degree Type---</option>
+  </select>
+</div> 
                   <div class="form-group">
                     <label for="paper_name">Paper Name *</label>
-                    <input type="text" class="form-control" id="paper_name" name="paper_name" required="required" placeholder="Paper Name">
+                    <input maxlength="50" type="text" class="form-control" id="paper_name" name="paper_name" required="required" placeholder="Paper Name">
                   </div>
                 </div>
                 <div class="card-footer">
@@ -132,42 +158,64 @@ header("location: course.php");
 <!-- ChartJS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
 
-<!-- PAGE SCRIPTS -->
-<script src="dist/js/pages/dashboard2.js"></script>
 <!-- Select2 -->
 <script src="plugins/select2/js/select2.full.min.js"></script>
-
 <script>
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-
- 
-    //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+  function load_degree(){
+    var program_id = $("#program_id").val();
+    $.ajax({
+      type: 'POST',
+      url: 'load_degree.php',
+      data: {
+          program_id: program_id
+      },
+      success: function (response) {
+          response=JSON.parse(response); 
+          var html="";  
+          html = html + "<label>Select Degree *</label>";
+          html = html + "<select onchange='load_degree_type()' id='degree_id' name='degree_id' class='form-control' required='required'>";
+          html = html + "<option value=''>---Select Degree---</option>";
+          for(var i = 0; i < response.length; i++) {
+            var obj = response[i];
+            html = html + "<option value='"+obj.degree_id+"'>"+obj.degree_name+"</option>";
+          } 
+          html = html + "</select>";
+          $("#degree_div").html(html);        
+      },
+      error : function(error){
+          console.log(error);
+      }
     });
+  }
 
-    $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    });
-
-  })
+    function load_degree_type(){
+      var degree_id = $("#degree_id").val();      
+      $.ajax({
+        type: 'POST',
+        url: 'load_degree_type.php',
+        data: {
+            degree_id: degree_id
+        },
+        success: function (respons) {
+          respons=JSON.parse(respons);
+          var html="";  
+          html = html + "<label>Select Degree Type *</label>";
+          html = html + "<select id='degree_type_id' name='degree_type_id' class='form-control' required='required'>";
+          html = html + "<option value=''>---Select Degree Type---</option>";
+          console.log(respons);
+          for(var i = 0; i < respons.length; i++) {
+            var obj = respons[i];
+            console.log(i);
+            html = html + "<option value='"+obj.id+"'>"+obj.course_name+"</option>";
+          } 
+          html = html + "</select>";
+          $("#degree_type_div").html(html);           
+        },
+        error : function(error){
+            console.log(error);
+        }
+      });
+    }
 </script>
-
-
-
 </body>
 </html>
