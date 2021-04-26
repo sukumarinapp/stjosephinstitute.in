@@ -37,7 +37,7 @@
     	  </li>
           <li  class="dropdown <?php if($page=="Verification") echo "active"; ?>"><a href="javascript:void(0)">Verification<i class="fa fa-angle-down"></i></a>
     		      <ul class="dropdown-menu">  
-                <li><a href="login.php">Certificate Verification</a></li>
+                <li><a href="certificate-verification.php">Certificate Verification</a></li>
               </ul>
     		  </li>
           <li class ="dropdown <?php if($page=="Contact Us") echo "active"; ?>"><a href="contact-us.php">Contact Us</a></li> 

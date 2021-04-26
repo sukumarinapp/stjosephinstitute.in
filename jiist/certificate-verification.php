@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 
 <head>
     <meta charset="utf-8">
-    <title>Certificate Verification St.Joseph Institute Of Integrated Science And Technology  </title>
+    <title>Certificate Verification JIIST</title>
     <meta name="description" content="St.Joseph Institute Of Integrated Science And Technology " />
     <meta name="Keywords" content="St.Joseph Institute Of Integrated Science And Technology " />
     <meta property="og:title" content="St.Joseph Institute Of Integrated Science And Technology " />
@@ -100,7 +100,6 @@ if (isset($_POST['submit'])) {
 
                                         </li>
                                         <li class="span4">
-                                        <h4><b> Login</b></h4> 
 										<form action="" method="post">
 
                                                 <table width="475px">
@@ -113,19 +112,12 @@ if (isset($_POST['submit'])) {
                                                             </label>
                                                             <input type="text" name="register_number" required maxlength="100"
                                                                 size="30">
-                                                       
-                                                    <label for="dateof_birth">
-                                                            <h5>Date of Birth: *
-                                                                <h5 />
-                                                        </label>
-                                                        <input type="date" name="dateof_birth" required maxlength="100"
-                                                            size="30">
                                                     </td>
                                                     </tr>
                                                     <tr>
                                                     <td valign="top">
 
-                                                            <input type="submit" name="submit" value="Login">
+                                                            <input type="submit" name="submit" value="Submit">
 
                                                         </td>
                                                     </tr>
