@@ -103,7 +103,7 @@ $centre_id=$_SESSION['centre_id'];
                   <td><?php echo $row['status']; ?></td>
 				  <td>
 								<a class="btn btn-info fa fa-edit" href="edit-student.php?id=<?php echo $row['id']; ?>" title="Edit Student"></a>
-								<a class="btn btn-info fa fa-envelope" href="send-student-mail.php?id=<?php echo $row['id']; ?>&mail=<?php echo $row['email']; ?>" title="Send Student Mail"></a>
+								<!-- <a class="btn btn-info fa fa-envelope" href="send-student-mail.php?id=<?php echo $row['id']; ?>&mail=<?php echo $row['email']; ?>" title="Send Student Mail"></a> -->
 								<a class="btn btn-info fa fa-sms fa-2x" href="send-student-sms.php?id=<?php echo $row['id']; ?>&m=<?php echo $row['phone_number']; ?>" title="Send Student SMS"></a>
 								<a class="btn btn-info fa fa-graduation-cap " href="result_grade.php?id=<?php echo $row['id']; ?>" title="Add Student Result"></a>
 								<a class="btn btn-info fa fa-trash"   href="delete-student.php?id=<?php echo $row['id']; ?>" title="Delete Student" style="font-weight:600px;"></a>

@@ -19,28 +19,18 @@ $grade	 = "";
 
 if (isset($_POST['submit'])) {
 
-  $status = trim($_POST['status']);
-
-    $grade	 = trim($_POST['grade']);
-
-        $stmt = $conn->prepare("UPDATE  jiier_student set status=?,grade=?,centre_id=?,lastup_date=?,user_id=? where id=? ");
-
-        $stmt->bind_param("ssssss", $status,$grade,$centre_id,$lastup_date,$user_id,$id);
-
-        $stmt->execute() or die ($stmt->error);
-       
-
-        header("location: students.php");
-
-    }
-
+  $grade	 = trim($_POST['grade']);
+  $result   = trim($_POST['result']);
+  $stmt = $conn->prepare("UPDATE  jiier_student set result=?,grade=? where id=? ");
+  $stmt->bind_param("sss", $result,$grade,$id);
+  $stmt->execute() or die ($stmt->error);
+  header("location: students.php");
+}
 
 $sql2 = "select * from jiier_student where id=$id";
 $result2 = mysqli_query($conn, $sql2);
 $row2 = mysqli_fetch_assoc($result2);
-
-
-
+$paper_id = $row2['course_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +38,8 @@ $row2 = mysqli_fetch_assoc($result2);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-  <title>Result & Grade JIIER</title>
+ JIIST
+  <title>Result & Grade JIIST</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -89,7 +79,7 @@ $row2 = mysqli_fetch_assoc($result2);
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Result & Grade</h3>
+            <h3 class="card-title"></h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -102,31 +92,48 @@ $row2 = mysqli_fetch_assoc($result2);
               <div class="col-md-12">
                         <form method="post" action="" enctype="multipart/form-data">
                 <div class="card-body">
-                  
+                  <div class="form-group">
+                    <label for="register_number">Register Number</label>
+                    <input readonly required="required" value="<?php echo $row2['register_number']; ?>" type="text" class="form-control" name="register_number" required="required" placeholder="Register Number">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="full_name">Full Name</label>
+                    <input readonly required="required" value="<?php echo $row2['full_name']; ?>" type="text" class="form-control" id="full_name" name="full_name" required="required" placeholder="Full Name">
+                  </div>
+
+                  <div class="form-group">
+                    <?php
+$sql3 = "select a.*,b.program_name, c.degree_name,d.course_name from jiier_paper a,jiier_program b,jiier_degree c, jiier_degree_type d where a.program_id=b.id and a.degree_id=c.id and a.degree_type_id=d.id and a.id=$paper_id";
+                                            $result3 = mysqli_query($conn, $sql3);
+                                            $row3 = mysqli_fetch_assoc($result3);
+?>
+              <label >Select Course (Program = <?php echo $row3['program_name']; ?>, Degree = <?php echo $row3['degree_name']; ?>, Degree Type = <?php echo $row3['course_name']; ?>)</label>
+ <?php
+
+  $sql = "select * from jiier_paper where id=$paper_id";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_array($result);
+
+?>
+ <input readonly required="required" value="<?php echo $row['paper_name']; ?>" type="text" class="form-control" id="paper_name" name="paper_name" required="required" >                                                   
+                  </div>
 				    <div class="form-group">
-                    <label for="status">Select Result</label>
-                   <select class="form-control select2bs4" name="status" style="width: 100%;">
-                     <option value="<?php echo $row2['status']; ?>"> <?php echo $row2['status']; ?></option>
+                    <label name="result" for="result">Select Result</label>
+                   <select required="required" class="form-control select2bs4" name="result" style="width: 100%;">
 					 <option value="Pass" >Pass</option>
-                     <option value="Fail" >Fail</option>
-					 <option value="Active">Active</option>
-                     <option value="Inactive">Inactive</option>
+           <option value="Fail" >Fail</option>
                   </select>
                   </div>
 				  
 				   <div class="form-group">
                     <label for="grade">Select Grade </label>
-                   <select class="form-control select2bs4" name="grade" style="width: 100%;">
+                   <select required="required" class="form-control select2bs4" name="grade" style="width: 100%;">
                     <option value="<?php echo $row2['grade']; ?>"><?php echo $row2['grade']; ?></option>
-					 <option value="S" > S</option>
-                	 <option value="A" > A</option>
+					           <option selected value="S" > S</option>
+                	   <option value="A" > A</option>
                      <option value="B" > B</option>
                      <option value="C" > C</option>		
-					 <option value="D" > D</option>
-                     <option value="E" > E</option>		
-					 <option value="U" > U</option>
-                   
-  
                   </select>
                   </div>
 				
