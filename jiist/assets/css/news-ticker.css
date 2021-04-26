@@ -1,0 +1,32 @@
+#newsTicker
+{
+            	 border:1px solid #40a0d1;
+            	 border-radius:5px;
+            	 height:100px !important;
+}
+
+
+
+
+.newsTickerContent
+{
+	font-size:12px;
+	color:#000000;
+	border: 0px;
+	text-align: middle;
+}
+
+.newsTickerContent .newsLink
+{
+	font-size:11px;
+	color:#f5f5f9;
+	text-decoration:none;
+	font-weight:normal; 
+}
+
+.newsTickerContent .newsLink:hover
+{
+	font-size:11px;
+	color:#AA0000;
+	font-weight:bold; 
+}

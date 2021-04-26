@@ -1,0 +1,36 @@
+.table
+{
+border-spacing:0;
+border-collapse: collapse;
+}
+
+.table
+{
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+border-left: 1px solid #ccc;
+border-top: 1px solid #ccc;
+padding: 2mm;
+}
+
+.table td
+{
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+border-left: 1px solid #ccc;
+border-top: 1px solid #ccc;
+}
+
+.table th{
+	font-weight: normal;
+}
+
+.bodyback {
+background-image: url(logo.png);
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+background-position: center;
+opacity: 0.5;
+filter: alpha(opacity=50); /* For IE8 and earlier */
+}
