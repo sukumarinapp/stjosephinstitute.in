@@ -146,7 +146,7 @@ $row2 = mysqli_fetch_assoc($result2);
                     <input value="<?php echo $row2['mobile']; ?>" type="mobile" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile">
                   </div>
 				<div class="form-group">
-                        <label>Textarea Disabled</label>
+                        <label>Address</label>
                         <textarea class="form-control" name="address" rows="3" placeholder="Enter ..."><?php echo $row2['address']; ?></textarea>
                       </div>
                   <div class="form-group">
