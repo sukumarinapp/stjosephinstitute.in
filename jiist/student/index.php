@@ -60,7 +60,7 @@ $today=date("Y-m-d")
               <div class="card">
                 <table class="table table-hover">
                     <thead class="text-warning" style="font-weight: bold !important">
-                      <tr><th align="center" colspan="5" style="font-weight:bold;background: darkgreen;color: white;">Assignment</th></tr>
+                      <tr><th align="center" colspan="5" style="font-weight:bold;background: steelblue;color: white;">Assignment</th></tr>
                       <tr style="font-weight:bold;background: darkgreen;color: white;">
                       <th>S.No</th>
                       <th>Assignment Title</th>
@@ -98,7 +98,7 @@ $sql = "select a.*,b.years,b.semester_list from jiier_assignment a,jiier_semeste
               <div class="card">
                 <table class="table table-hover">
                     <thead class="text-warning" style="font-weight: bold !important">
-                      <tr><th colspan="5" style="font-weight:bold;background: darkgreen;color: white;">Timetable</th></tr>
+                      <tr><th colspan="5" style="font-weight:bold;background: steelblue;color: white;">Timetable</th></tr>
                       <tr style="font-weight:bold;background: darkgreen;color: white;"><th>S.No</th>
                       <th>Subject Code</th><th>Subject Name</th><th>Exam Date</th><th>Session</th>
                     </tr>
