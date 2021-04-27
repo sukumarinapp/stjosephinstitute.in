@@ -13,7 +13,7 @@ if (($_SESSION['user_type'] != "Superadmin") && ($_SESSION['user_type'] != "Admi
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Users JIIER</title>
+  <title>Center JIIST</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -46,7 +46,7 @@ if (($_SESSION['user_type'] != "Superadmin") && ($_SESSION['user_type'] != "Admi
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Users</h1>
+            <h1>Center</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -68,7 +68,7 @@ if (($_SESSION['user_type'] != "Superadmin") && ($_SESSION['user_type'] != "Admi
 	  
 	   <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Users Details</h3>
+              <h3 class="card-title">Center Details</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -78,21 +78,14 @@ if (($_SESSION['user_type'] != "Superadmin") && ($_SESSION['user_type'] != "Admi
                   <th>Full Name</th>
                   <th>Email</th>
                   <th>Mobile</th>
-                  <th>User Type</th>
                   <th>Status</th>
-				  <th>Action</th>
+				          <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
 				<?php
 
-                        if($_SESSION['user_type']=="Superadmin"){
-                            $sql = "select * from jiier_users where user_type='Superadmin' order by user_type,full_name";
-                        }else if($_SESSION['user_type']=="Admin"){
-                            $sql = "select * from jiier_users where user_type='staff' order by user_type,full_name";
-					      }else if($_SESSION['user_type']=="Staff"){
-                            $sql = "select * from jiier_users where user_type='staff' order by user_type,full_name";
-                        }
+                            $sql = "select * from jiier_users where user_type='Admin' order by full_name";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result)) {
                             ?>
@@ -101,7 +94,6 @@ if (($_SESSION['user_type'] != "Superadmin") && ($_SESSION['user_type'] != "Admi
                   <td><?php echo $row['full_name']; ?></td>
                   <td><?php echo $row['email']; ?></td>
                   <td><?php echo $row['mobile']; ?></td>
-                  <td><?php echo $row['user_type']; ?></td>
                   <td><?php echo $row['status']; ?></td>
 				  <td>								
 								<a class="btn btn-info fa fa-edit" href="edit-user.php?id=<?php echo $row['id']; ?>" title="Edit "></a>

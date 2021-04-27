@@ -217,7 +217,7 @@
             </ul>
           </li>
 	    <?php if($_SESSION['user_type']=="Superadmin"){ ?>
-		  <li class="nav-item has-treeview  <?php if($page=="Centers") echo "menu-open"; ?>">
+		  <!-- <li class="nav-item has-treeview  <?php if($page=="Centers") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Centers") echo "active"; ?>">
               <i class="nav-icon fas fa-address-card"></i>
               <p>
@@ -233,7 +233,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 		<!--  <li class="nav-item has-treeview  <?php if($page=="Country") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Country") echo "active"; ?>">
               <i class="nav-icon fas fa-universal-access"></i>
@@ -257,7 +257,7 @@
               </li>
             </ul>
           </li>-->
-		   <li class="nav-item has-treeview  <?php if($page=="Manage Interview") echo "menu-open"; ?>">
+		   <!-- <li class="nav-item has-treeview  <?php if($page=="Manage Interview") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Manage Interview") echo "active"; ?>">
               <i class="nav-icon fas fa-universal-access"></i>
               <p>
@@ -280,12 +280,13 @@
               </li>
             </ul>
           </li> 
-           <?php } ?>  
+           <?php } ?>  --> 
+           <?php if($_SESSION['user_type']=="Superadmin"){ ?>
 		  <li class="nav-item has-treeview  <?php if($page=="Users") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Users") echo "active"; ?>">
               <i class="nav-icon fas fa-user-secret"></i>
               <p>
-                Manage Users
+                Manage Center
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -293,17 +294,18 @@
               <li class="nav-item">
                 <a href="add-user.php" class="nav-link <?php if($page1=="Add User") echo "active"; ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add User</p>
+                  <p>Add Center</p>
                 </a>
               </li>
               <li class="nav-item">
 			    <a href="users.php" class="nav-link <?php if($page1=="View Users") echo "active"; ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>View Users</p>
+                  <p>View Center</p>
                 </a>
               </li>
             </ul>
           </li>
+        <?php } ?>
           <li class="nav-item has-treeview  <?php if($page=="Profile") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Profile") echo "active"; ?>">
               <i class="nav-icon fas fa-user-circle"></i>

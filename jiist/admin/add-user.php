@@ -25,22 +25,18 @@ if (isset($_POST['submit'])) {
     $password = trim($_POST['password']);
     $mobile = trim($_POST['mobile']);
     $address = trim($_POST['address']);
-    $user_type = trim($_POST['user_type']);
+    $user_type = "Admin";
 
     $sql = "SELECT * FROM jiier_users WHERE trim(email)='$email'";
     $result = mysqli_query($conn, $sql) or die(mysqli_errno($conn));
     $count = mysqli_num_rows($result);
 
     if ($count >= 1) {
-        $msg = "Staff already in use";
+        $msg = "User already exists";
         $msg_color = "red";
     } else {
         $msg_color = "green";
-        if ($_SESSION['user_type'] == "Superadmin") {
-            $msg = "Staff added Successfully";
-        } else {
-            $msg = "Staff added Successfully";
-        }
+        $msg = "Centre added Successfully";
 
         $stmt = $conn->prepare("INSERT INTO jiier_users (full_name,email,password,mobile,user_type,address,status,user_id,lastup_date) VALUES (?,?,?,?,?,?,?,?,?)");
         $stmt->bind_param("sssssssss",$full_name,$email,$password,$mobile, $user_type,$address,$status,$user_id,$lastup_date);
@@ -53,18 +49,13 @@ if (isset($_POST['submit'])) {
             $file_name = $id . "." . $ext;
             $query = "update jiier_users set photo = '" . $file_name . "' where id=$id";
             mysqli_query($conn, $query) or die(mysqli_errno($conn));
-            $target_path = "uploads/";
+            $target_path = "uploads/logo/";
             $target_path = $target_path . $file_name;
             move_uploaded_file($_FILES['photo']['tmp_name'], $target_path);
         }
 
-        if ($_SESSION['user_type'] == "Superadmin") {
-            $sql = "update jiier_users set centre_id=$centre_id where id=$id";
-            mysqli_query($conn, $sql) or die(mysqli_errno($conn));
-        } else if ($_SESSION['user_type'] == "Admin") {
-            $sql = "update jiier_users set centre_id=$centre_id, user_type='Staff' where id=$id";
-            mysqli_query($conn, $sql) or die(mysqli_errno($conn));
-        }
+        $sql = "update jiier_users set centre_id=$centre_id where id=$id";
+        mysqli_query($conn, $sql) or die(mysqli_errno($conn));
         header("location: users.php");
     }
 }
@@ -76,7 +67,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Add User JIIER</title>
+    <title>Add Center JIIER</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -106,7 +97,7 @@ if (isset($_POST['submit'])) {
 
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Add User</h1>
+                        <h1>Add Center</h1>
 
                     </div>
                 </div>
@@ -120,7 +111,7 @@ if (isset($_POST['submit'])) {
                 <!-- SELECT2 EXAMPLE -->
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">Add User Details</h3>
+                        <h3 class="card-title">Add Center Details</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -134,7 +125,7 @@ if (isset($_POST['submit'])) {
 							    <form method="post" action="" enctype="multipart/form-data">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="full_name">Full Name *</label>
+                                            <label for="full_name">Center Name *</label>
                                             <input type="text" class="form-control"  required="required" name="full_name" placeholder="Full Name">
                                         </div>
                                         <div class="form-group">
@@ -146,18 +137,7 @@ if (isset($_POST['submit'])) {
                                             <input type="text" name="password" class="form-control" id="password"
                                                    placeholder="Password">
                                         </div>
-                                        <div class="form-group">
-                                            <label>User Type</label>
-                                            <select class="form-control select2bs4" name="user_type"
-                                                    style="width: 100%;">
-                                                <?php if ($_SESSION['user_type'] == "Superadmin") { ?>
-                                                    <option value="Superadmin">Staff</option>
-                                                <?php } else if ($_SESSION['user_type'] == "Admin") { ?>
-                                                    <option value="Staff">Staff</option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-
+                                        
                                         <div class="form-group">
                                             <label for="mobile">Mobile</label>
                                             <input type="mobile" name="mobile" class="form-control" id="mobile" placeholder="Mobile">
@@ -171,7 +151,7 @@ if (isset($_POST['submit'])) {
                                             <label for="exampleInputFile">File input</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="photo"
+                                                    <input accept="image/x-png,image/gif,image/jpeg"  type="file" class="custom-file-input" name="photo"
                                                            id="exampleInputFile">
                                                     <label class="custom-file-label" for="exampleInputFile">Choose
                                                         file</label>

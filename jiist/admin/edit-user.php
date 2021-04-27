@@ -28,13 +28,11 @@ if (isset($_POST['submit'])) {
     $status = trim($_POST['status']);
     $mobile = trim($_POST['mobile']);
     $address = trim($_POST['address']);
-	$user_type = trim($_POST['user_type']);
 
-        $stmt = $conn->prepare("UPDATE  jiier_users set centre_id=?,full_name=?,email=?,status=?,password=?,mobile=?,address=?,user_type=?,user_id=?,lastup_date=? where id=?");
+        $stmt = $conn->prepare("UPDATE  jiier_users set centre_id=?,full_name=?,email=?,status=?,password=?,mobile=?,address=?,user_id=?,lastup_date=? where id=?");
 
-        $stmt->bind_param("sssssssssss",$centre_id,$full_name,$email,$status,$password,$mobile,$address,$user_type,$user_id,$lastup_date,$id);
+        $stmt->bind_param("ssssssssss",$centre_id,$full_name,$email,$status,$password,$mobile,$address,$user_id,$lastup_date,$id);
         $stmt->execute();
-        $id=$stmt->insert_id;
 		
         $file_name = $_FILES['photo']['name'];
         if (trim($file_name) != "") {
@@ -42,7 +40,7 @@ if (isset($_POST['submit'])) {
             $file_name = $id . "." . $ext;
             $query = "update jiier_users set photo = '" . $file_name . "' where id=$id";
             mysqli_query($conn, $query);
-            $target_path = "uploads/";
+            $target_path = "uploads/logo/";
             $target_path = $target_path . $file_name;
             move_uploaded_file($_FILES['photo']['tmp_name'], $target_path);
         }
@@ -63,7 +61,7 @@ $row2 = mysqli_fetch_assoc($result2);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Edit User JIIER</title>
+  <title>Edit Center JIIST</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -91,7 +89,7 @@ $row2 = mysqli_fetch_assoc($result2);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit User</h1>
+            <h1>Edit Center</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -103,7 +101,7 @@ $row2 = mysqli_fetch_assoc($result2);
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Edit User Details</h3>
+            <h3 class="card-title">Edit Center Details</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -117,7 +115,7 @@ $row2 = mysqli_fetch_assoc($result2);
 			            <form method="post" action="" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="full_name">Full Name</label>
+                    <label for="full_name">Centre Name</label>
                     <input value="<?php echo $row2['full_name']; ?>" type="text" class="form-control" id="full_name" name="full_name" placeholder="Full Name">
                   </div>
                 <!--  <div class="form-group">
@@ -133,16 +131,7 @@ $row2 = mysqli_fetch_assoc($result2);
                     <label for="password">Password</label>
                     <input  value="<?php echo $row2['password']; ?>" type="text" name="password" class="form-control" id="password" placeholder="Password">
                   </div>
-				  <div class="form-group">
-                  <label>User Type</label>
-                  <select class="form-control select2bs4" name="user_type" value="<?php echo $row2['user_type']; ?>" style="width: 100%;">
-                   <?php if($_SESSION['user_type']=="Superadmin"){ ?>
-                    <option value="Superadmin">Staff</option>>
-                            <?php }else if($_SESSION['user_type']=="Admin"){ ?>
-                    <option value="Staff">Staff</option>>
-                                               <?php } ?>
-                  </select>
-                </div>
+				  
 				  <div class="form-group">
                   <label>User Status</label>
                   <select class="form-control select2bs4" name="status" style="width: 100%;">
@@ -164,14 +153,12 @@ $row2 = mysqli_fetch_assoc($result2);
                     <label for="exampleInputFile">File input</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="photo"id="exampleInputFile">
+                        <input accept="image/x-png,image/gif,image/jpeg"  type="file" class="custom-file-input" name="photo" id="exampleInputFile">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
                       </div>
                     </div>
                   </div>
+                  <img src="uploads/logo/<?php echo $row2['photo']; ?>" width="100" height="100" />
                 </div>
 			
                 <div class="card-footer">
