@@ -7,7 +7,7 @@ $program = "polytechnic";
 	<head>
 		<meta charset="utf-8">
 		
-			<title>St.Joseph Institute Of Integrated Science And Technology </title>
+			<title>JIIST</title>
 			<meta name="description" content="St.Joseph Institute Of Integrated Science And Technology " />
 			<meta name="Keywords" content="St.Joseph Institute Of Integrated Science And Technology " />
 			<meta property="og:title" content="St.Joseph Institute Of Integrated Science And Technology " />

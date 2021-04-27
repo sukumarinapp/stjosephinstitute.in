@@ -127,7 +127,11 @@ $exam_date=$exam_date[2]."-".$exam_date[1]."-".$exam_date[0];
                   </table>                      
               </div>
             </div>
-           
+           <div class="col-lg-12 col-md-12 text-center">
+            <video width="800" height="600" controls>
+  <source src="jiist.mp4" type="video/mp4">
+</video>
+           </div>
           </div>
 
 
