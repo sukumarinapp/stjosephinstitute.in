@@ -23,15 +23,16 @@ $photo = "";
 if (isset($_POST['submit'])) {
 
     $full_name = trim($_POST['full_name']);
+    $centre_code = trim($_POST['centre_code']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     $status = trim($_POST['status']);
     $mobile = trim($_POST['mobile']);
     $address = trim($_POST['address']);
 
-        $stmt = $conn->prepare("UPDATE  jiier_users set centre_id=?,full_name=?,email=?,status=?,password=?,mobile=?,address=?,user_id=?,lastup_date=? where id=?");
+        $stmt = $conn->prepare("UPDATE  jiier_users set centre_code=?,full_name=?,email=?,status=?,password=?,mobile=?,address=?,user_id=?,lastup_date=? where id=?");
 
-        $stmt->bind_param("ssssssssss",$centre_id,$full_name,$email,$status,$password,$mobile,$address,$user_id,$lastup_date,$id);
+        $stmt->bind_param("ssssssssss",$centre_code,$full_name,$email,$status,$password,$mobile,$address,$user_id,$lastup_date,$id);
         $stmt->execute();
 		
         $file_name = $_FILES['photo']['name'];
@@ -118,11 +119,10 @@ $row2 = mysqli_fetch_assoc($result2);
                     <label for="full_name">Centre Name</label>
                     <input value="<?php echo $row2['full_name']; ?>" type="text" class="form-control" id="full_name" name="full_name" placeholder="Full Name">
                   </div>
-                <!--  <div class="form-group">
-                    <label for="exampleInputEmail1">Date</label>
-                    <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Full Name">
-                  </div>-->
-
+                  <div class="form-group">
+                      <label for="centre_code">Center Code *</label>
+                      <input value="<?php echo $row2['centre_code']; ?>" maxlength="20" type="text" class="form-control"  required="required" name="centre_code" placeholder="Centre Code">
+                  </div>
                   <div class="form-group">
                     <label for="email">Email address</label>
                     <input value="<?php echo $row2['email']; ?>" type="email" name="email" class="form-control" id="email" placeholder="Enter email">

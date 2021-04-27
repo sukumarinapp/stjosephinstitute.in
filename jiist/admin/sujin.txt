@@ -1,10 +1,1 @@
-certificte verification
-
-login
-
-two different pages
-
-login change title as Login
-
-Notifications
-
+online-affiliation-center.php

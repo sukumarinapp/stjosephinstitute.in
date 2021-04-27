@@ -21,6 +21,7 @@ $photo = "";
 
 if (isset($_POST['submit'])) {
     $full_name = trim($_POST['full_name']);
+    $centre_code = trim($_POST['centre_code']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     $mobile = trim($_POST['mobile']);
@@ -38,8 +39,8 @@ if (isset($_POST['submit'])) {
         $msg_color = "green";
         $msg = "Centre added Successfully";
 
-        $stmt = $conn->prepare("INSERT INTO jiier_users (full_name,email,password,mobile,user_type,address,status,user_id,lastup_date) VALUES (?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("sssssssss",$full_name,$email,$password,$mobile, $user_type,$address,$status,$user_id,$lastup_date);
+        $stmt = $conn->prepare("INSERT INTO jiier_users (centre_code,full_name,email,password,mobile,user_type,address,status,user_id,lastup_date) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $stmt->bind_param("ssssssssss",$centre_code,$full_name,$email,$password,$mobile, $user_type,$address,$status,$user_id,$lastup_date);
         $stmt->execute() or die($stmt->error);
         $id = $stmt->insert_id;
 
@@ -126,7 +127,11 @@ if (isset($_POST['submit'])) {
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="full_name">Center Name *</label>
-                                            <input type="text" class="form-control"  required="required" name="full_name" placeholder="Full Name">
+                                            <input maxlength="50" type="text" class="form-control"  required="required" name="full_name" placeholder="Centre Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="centre_code">Center Code *</label>
+                                            <input maxlength="20" type="text" class="form-control"  required="required" name="centre_code" placeholder="Centre Code">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email address</label>
@@ -155,9 +160,6 @@ if (isset($_POST['submit'])) {
                                                            id="exampleInputFile">
                                                     <label class="custom-file-label" for="exampleInputFile">Choose
                                                         file</label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text" id="">Upload</span>
                                                 </div>
                                             </div>
                                         </div>
