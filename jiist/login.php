@@ -1,5 +1,5 @@
 <?php
-$page = "Verification";
+$page = "Users Login";
 session_start();
 include "admin/config.php";
 $error = "";

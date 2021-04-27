@@ -4,32 +4,19 @@ session_start();
 include "admin/config.php";
 $error = "";
 $register_number = "";
-$dateof_birth = "";
 if (isset($_POST['submit'])) {
     $register_number = $_POST['register_number'];
-    $dateof_birth = $_POST['dateof_birth'];
-
-    $sql = "SELECT * FROM jiier_student WHERE register_number='$register_number' and dateof_birth='$dateof_birth'";
+    $sql = "SELECT * FROM jiier_student WHERE register_number='$register_number'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
     $row = mysqli_fetch_array($result);
-
     if ($count >= 1) {
-        $_SESSION['timestamp'] = time();
-        $_SESSION['user_id'] = $row['id'];
-        $_SESSION['course_id'] = $row['course_id'];
-        $_SESSION['full_name'] = $row['full_name'];
-        $_SESSION['photo'] = $row['photo'];
-        if($row['status']<>"Inactive" )
-            header("location: student/index.php");
-            //header("location: student.php");
+        $_SESSION['student_id'] = $row['id'];
+        header("location: show.php");
     } else {
-        $error = "Your User Name or Password is invalid";
+        $error = "Please enter a valid register no";
     }
 }    
-		
-      
-                            
 ?><!DOCTYPE html>
 <html lang="en">
 

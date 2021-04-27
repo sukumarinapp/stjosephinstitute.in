@@ -138,7 +138,7 @@ $row2 = mysqli_fetch_assoc($result2);
 
                   <div class="form-group">
                     <label for="last_date">Last Date</label>
-                    <input  value="<?php echo $row2['last_date']; ?>"  type="datetime-local" class="form-control" id="last_date" name="last_date" required="required" >
+                    <input  value="<?php echo $row2['last_date']; ?>"  type="date" class="form-control" id="last_date" name="last_date" required="required" >
                   </div>
 
                   <div class="form-group">

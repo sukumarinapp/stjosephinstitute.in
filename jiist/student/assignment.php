@@ -126,11 +126,8 @@ if (isset($_POST['submit'])) {
                       while ($row = mysqli_fetch_assoc($result)) {
                         $i++;
                         $last_date=$row['last_date'];
-                        $ldate2=explode("T",$last_date);
-                        $ldate=$ldate2[0];
-                        $ltime=$ldate2[1];
-                        $ldate=explode("-", $ldate);
-                        $last_date=$ldate[2]."-".$ldate[1]."-".$ldate[0]." ".$ltime;
+                        $ldate=explode("-", $last_date);
+                        $last_date=$ldate[2]."-".$ldate[1]."-".$ldate[0];
                       ?>
                       <tr style="font-weight:bold;">
                         <td><?php echo $i; ?></td>

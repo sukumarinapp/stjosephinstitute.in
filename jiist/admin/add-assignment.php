@@ -129,7 +129,7 @@ if (isset($_POST['submit'])) {
 
                   <div class="form-group">
                     <label for="last_date">Last Date</label>
-                    <input type="datetime-local" class="form-control" id="last_date" name="last_date" required="required" >
+                    <input type="date" class="form-control" id="last_date" name="last_date" required="required" >
                   </div>
 
                   <div class="form-group">
