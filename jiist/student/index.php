@@ -91,29 +91,7 @@ $sql = "select a.*,b.years,b.semester_list from jiier_assignment a,jiier_semeste
                       <?php
                       }
                       ?>
-                      <tr style="font-weight:bold;background: darkgreen;color: white;"><th>S.No</th>
-                      <th>Type</th><th>Subject Name</th><th>Session</th><th>Exam Date</th>
-                    </tr>
-<?php
-$sql = "select a.*,b.id,c.semester_id,c.subject_code,c.subject_name from jiier_timetable a,jiier_semester b,jiier_subject c where c.semester_id=b.id and a.subject_id=c.id and a.course_id=$course_id and a.exam_date>='$today' order by b.id,c.id";
-$result = mysqli_query($conn, $sql);
-                      $result = mysqli_query($conn, $sql);
-                      $i=0;
-                      while ($row = mysqli_fetch_assoc($result)) {
-                        $i++;
-                        $exam_date = explode("-",$row['exam_date']);
-$exam_date=$exam_date[2]."-".$exam_date[1]."-".$exam_date[0];
-                      ?>
-                      <tr style="font-weight:bold;">
-                        <td><?php echo $i; ?></td>
-                        <td>Timetable</td>
-                        <td><?php echo $row['subject_name']; ?></td><td><?php echo $row['exam_session']; ?><td><?php echo $exam_date; ?></td>
-</td>
-                        
-                      </tr>
-                      <?php
-                      }
-                      ?>
+                      
 
 <tr style="font-weight:bold;background: darkgreen;color: white;">
                       <th>S.No</th>
@@ -132,7 +110,7 @@ $result = mysqli_query($conn, $sql);
                       ?>
                       <tr style="font-weight:bold;">
                         <td><?php echo $i; ?></td>
-                        <td>Video</td>
+                        <td>New Video</td>
                         <td colspan="3"><a href="tube.php?video=<?php echo $row['video']; ?>" ><img width="70" height="70" src="video.png" /></a></td>
 </td>
                         

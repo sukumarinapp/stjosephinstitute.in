@@ -10,6 +10,7 @@ $sql2 = "select * from jiier_student where id=$student_id";
 $result2 = mysqli_query($conn, $sql2);
 $row2 = mysqli_fetch_assoc($result2);
 $paper_id = $row2['course_id']; 
+$photo = $row2['photo']; 
 $result="";
 if($row2["result"]==""){
     $result="Not Published";
@@ -74,9 +75,10 @@ $row4 = mysqli_fetch_assoc($result4);
                 <h1><b>Result</b></h1>
                 <div class="row">
                 <div class="span12">
-                <table class="table">
+                <table class="table table-bordered">
                     <tr><th>Reg No</th><th><?php echo $row2['register_number']; ?></th></tr>
                     <tr><th>Name</th><th><?php echo $row2['full_name']; ?></th></tr>
+                    <tr style="text-align: right"><th>Photo</th><th colspan="2"><img src="admin/uploads/<?php echo $row2['photo']; ?>" width="100" height="100" /></th></tr>
                     <tr><th>Father Name</th><th><?php echo $row2['father_name']; ?></th></tr>
                     <tr><th>Date of Birth</th><th><?php echo $row2['dateof_birth']; ?></th></tr>
                     <tr><th>Program</th><th><?php echo $row4['program_name']; ?></th></tr>
