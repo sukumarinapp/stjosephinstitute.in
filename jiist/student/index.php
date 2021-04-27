@@ -56,14 +56,15 @@ $today=date("Y-m-d")
         <div class="container-fluid">
           
           <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-12 col-md-12">
               <div class="card">
                 <table class="table table-hover">
                     <thead class="text-warning" style="font-weight: bold !important">
-                      <tr><th align="center" colspan="5" style="font-weight:bold;background: steelblue;color: white;">Assignment</th></tr>
+                      <tr><th align="center" colspan="5" style="font-weight:bold;background: steelblue;color: white;">Notifications</th></tr>
                       <tr style="font-weight:bold;background: darkgreen;color: white;">
                       <th>S.No</th>
-                      <th>Assignment Title</th>
+                      <th>Type</th>
+                      <th>Title</th>
                       <th>Semester</th>
                       <th>Last Date</th>
                     </tr>
@@ -81,6 +82,7 @@ $sql = "select a.*,b.years,b.semester_list from jiier_assignment a,jiier_semeste
                       ?>
                       <tr style="font-weight:bold;">
                         <td><?php echo $i; ?></td>
+                        <td>Assignment</td>
                         <td><?php echo $row['title']; ?></td>
                         <td><?php echo $row['semester_list']; ?></td>
                         <td><?php echo $last_date; ?></td>
@@ -89,21 +91,9 @@ $sql = "select a.*,b.years,b.semester_list from jiier_assignment a,jiier_semeste
                       <?php
                       }
                       ?>
-                    </tbody>
-                  </table>                      
-              </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6">
-              <div class="card">
-                <table class="table table-hover">
-                    <thead class="text-warning" style="font-weight: bold !important">
-                      <tr><th colspan="5" style="font-weight:bold;background: steelblue;color: white;">Timetable</th></tr>
                       <tr style="font-weight:bold;background: darkgreen;color: white;"><th>S.No</th>
-                      <th>Subject Code</th><th>Subject Name</th><th>Exam Date</th><th>Session</th>
+                      <th>Type</th><th>Subject Name</th><th>Session</th><th>Exam Date</th>
                     </tr>
-                    </thead>
-                    <tbody>
 <?php
 $sql = "select a.*,b.id,c.semester_id,c.subject_code,c.subject_name from jiier_timetable a,jiier_semester b,jiier_subject c where c.semester_id=b.id and a.subject_id=c.id and a.course_id=$course_id and a.exam_date>='$today' order by b.id,c.id";
 $result = mysqli_query($conn, $sql);
@@ -116,13 +106,41 @@ $exam_date=$exam_date[2]."-".$exam_date[1]."-".$exam_date[0];
                       ?>
                       <tr style="font-weight:bold;">
                         <td><?php echo $i; ?></td>
-                        <td><?php echo $row['subject_code']; ?></td><td><?php echo $row['subject_name']; ?></td><td><?php echo $exam_date; ?></td>
-<td><?php echo $row['exam_session']; ?></td>
+                        <td>Timetable</td>
+                        <td><?php echo $row['subject_name']; ?></td><td><?php echo $row['exam_session']; ?><td><?php echo $exam_date; ?></td>
+</td>
                         
                       </tr>
                       <?php
                       }
                       ?>
+
+<tr style="font-weight:bold;background: darkgreen;color: white;">
+                      <th>S.No</th>
+                      <th>Type</th>
+                      <th colspan="3">Watch</th>
+                    </tr>                      
+<?php
+$date=date("Y-m-d");
+$date = date('Y-m-d', strtotime($date. ' + 365 days'));
+$sql = "select * from jiier_video where upddat <='$date'";
+$result = mysqli_query($conn, $sql);
+                      $result = mysqli_query($conn, $sql);
+                      $i=0;
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        $i++;
+                      ?>
+                      <tr style="font-weight:bold;">
+                        <td><?php echo $i; ?></td>
+                        <td>Video</td>
+                        <td colspan="3"><a href="tube.php?video=<?php echo $row['video']; ?>" ><img width="70" height="70" src="video.png" /></a></td>
+</td>
+                        
+                      </tr>
+                      <?php
+                      }
+                      ?>
+
                     </tbody>
                   </table>                      
               </div>

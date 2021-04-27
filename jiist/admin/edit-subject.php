@@ -47,8 +47,9 @@ for( $i=0 ; $i < $total ; $i++ ) {
   mysqli_query($conn,$query) or die(mysqli_error($conn));
   foreach($_POST['video'] as  $video ){
     if(trim($video)!=""){
-      $stmt = $conn->prepare("INSERT INTO jiier_video (subject_id,video) VALUES (?,?)");
-      $stmt->bind_param("ss", $subject_id,$video);
+      $upddat = date("Y-m-d");
+      $stmt = $conn->prepare("INSERT INTO jiier_video (subject_id,video,upddat) VALUES (?,?,?)");
+      $stmt->bind_param("sss", $subject_id,$video,$upddat);
       $stmt->execute() or die ($stmt->error);
     }
   }
