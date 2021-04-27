@@ -70,12 +70,10 @@ $row4 = mysqli_fetch_assoc($result4);
 
     <section class="main-content">
         <div class="row">
-            <div class="span12 text-center">
-                <h1><b>Result</b></h1>
-            </div>
-        </div>
-        <div class="row">
             <div class="span12">
+                <h1><b>Result</b></h1>
+                <div class="row">
+                <div class="span12">
                 <table class="table">
                     <tr><th>Reg No</th><th><?php echo $row2['register_number']; ?></th></tr>
                     <tr><th>Name</th><th><?php echo $row2['full_name']; ?></th></tr>
@@ -92,7 +90,27 @@ $row4 = mysqli_fetch_assoc($result4);
                 </table>
             </div>
         </div>
+    </div>
+</div>
     </section>
+<?php include("footer.php"); ?>
+
+                <script src="assets/js/common.js"></script>
+                <script src="assets/js/jquery.flexslider-min.js"></script>
+                <script type="text/javascript">
+                $(function() {
+                    $(document).ready(function() {
+                        $('.flexslider').flexslider({
+                            animation: "fade",
+                            slideshowSpeed: 4000,
+                            animationSpeed: 600,
+                            controlNav: false,
+                            directionNav: true,
+                            controlsContainer: ".flex-container" // the container that holds the flexslider
+                        });
+                    });
+                });
+                </script>
 </body>
 
 </html>
