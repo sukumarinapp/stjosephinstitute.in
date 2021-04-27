@@ -6,6 +6,7 @@ include "../admin/config.php";
 $user_id=$_SESSION['user_id'];                           
 $full_name=$_SESSION['full_name'];  
 $course_id=$_SESSION['course_id'];                         
+$status=$_SESSION['status'];                         
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +86,7 @@ $timetable_count=mysqli_num_rows($result2);
 <?php } ?>
 </div>
   <?php
+if($status=="Active"){
 $sql2 = "select a.*,b.id,c.semester_id,c.subject_code,c.subject_name from jiier_timetable a,jiier_semester b,jiier_subject c where c.semester_id=b.id and a.subject_id=c.id and a.course_id=$course_id and a.exam_date>='$today' order by b.id,c.id";
 $result2 = mysqli_query($conn, $sql2);
 $sub_count=mysqli_num_rows($result);
@@ -130,6 +132,7 @@ if($sub_count>0){
 </tbody>
 </table>
 <?php
+}
 }
 ?>              
                 </div>                  

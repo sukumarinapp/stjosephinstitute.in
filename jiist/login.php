@@ -20,6 +20,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['course_id'] = $row['course_id'];
         $_SESSION['full_name'] = $row['full_name'];
         $_SESSION['photo'] = $row['photo'];
+        $_SESSION['status'] = $row['status'];
         if($row['status']<>"Inactive" )
             header("location: student/index.php");
             //header("location: student.php");
