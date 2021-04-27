@@ -63,6 +63,11 @@ $row4 = mysqli_fetch_assoc($result4);
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<script src="js/respond.min.js"></script>
 		<![endif]-->
+    <style type="text/css">
+        .borderless td, .borderless th {
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -74,8 +79,8 @@ $row4 = mysqli_fetch_assoc($result4);
             <div class="span12">
                 <h1><b>Result</b></h1>
                 <div class="row">
-                <div class="span12">
-                <table class="table table-bordered">
+                <div class="span12" style="text-align: center">
+                <table  class="table borderless">
                     <tr><th>Reg No</th><th><?php echo $row2['register_number']; ?></th></tr>
                     <tr><th>Name</th><th><?php echo $row2['full_name']; ?></th></tr>
                     <tr style="text-align: right"><th>Photo</th><th colspan="2"><img src="admin/uploads/<?php echo $row2['photo']; ?>" width="100" height="100" /></th></tr>
