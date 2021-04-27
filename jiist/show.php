@@ -10,7 +10,12 @@ $sql2 = "select * from jiier_student where id=$student_id";
 $result2 = mysqli_query($conn, $sql2);
 $row2 = mysqli_fetch_assoc($result2);
 $paper_id = $row2['course_id']; 
-
+$result="";
+if($row2["result"]==""){
+    $result="Not Published";
+}else{
+    $result=$row2["result"];
+}
 $sql3 = "select * from jiier_paper where id=$paper_id";
 $result3 = mysqli_query($conn, $sql3);
 $row3 = mysqli_fetch_array($result3);
@@ -82,7 +87,7 @@ $row4 = mysqli_fetch_assoc($result4);
                     <tr><th>Course</th><th><?php echo $paper_name; ?></th></tr>
                     <tr><th>Batch</th><th><?php echo $row2['enrolment_year']; ?></th></tr>
                     <tr><th>Sex</th><th><?php echo $row2['gender']; ?></th></tr>
-                    <tr><th>Result</th><th><?php echo $row2['result']; ?></th></tr>
+                    <tr><th>Result</th><th><?php echo $result; ?></th></tr>
                     <tr><th>Institution</th><th>JIIST</th></tr>
                 </table>
             </div>
