@@ -43,7 +43,7 @@
           <li class ="dropdown <?php if($page=="Contact Us") echo "active"; ?>"><a href="contact-us.php">Contact Us</a></li> 
           <li  class="dropdown <?php if($page=="Users Login") echo "active"; ?>"><a href="javascript:void(0)">Users Login<i class="fa fa-angle-down"></i></a>
     		      <ul class="dropdown-menu">  
-                <li><a href="centers-login.php">Centers Login</a></li>
+                <li><a href="admin">Centers Login</a></li>
                 <li><a href="login.php">Studens Login</a></li>
               </ul>
     	  </li>
