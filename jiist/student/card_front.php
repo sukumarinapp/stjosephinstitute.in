@@ -172,7 +172,7 @@ ob_start();
    <div class="id-card-holder" id="html-content-holder2">
 		<div class="id-card">
 
-				<img height="50" width="200" src="img/id2.png">
+				<img height="50" width="200" src="img/id.png">
 				</br>
 				<img height="90" src="../admin/uploads/<?php echo $photo; ?>">
 			<h2><?php echo $full_name; ?></h2>
