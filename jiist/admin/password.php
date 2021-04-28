@@ -1,8 +1,10 @@
 <?php
 session_start();
+$page = "Profile";
+$page1 = "Change Password";
 include "timeout.php";
 include "config.php";
-$page="password";
+$page="Profile";
 $user_id = $_SESSION['user_id'];
 $msg="";
 $color="green";
@@ -13,7 +15,7 @@ if (isset($_POST['submit'])) {
   $confirm_password = trim($_POST['confirm_password']);
 
   $flag=false;
-  $sql = "SELECT * FROM galaxy_users WHERE id=$user_id and password='$old_password'";
+  $sql = "SELECT * FROM jiier_users WHERE id=$user_id and password='$old_password'";
   $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
   while($row = mysqli_fetch_array($result)){
     $flag=true;
@@ -27,7 +29,7 @@ if (isset($_POST['submit'])) {
       $msg = "Passwords does not match";
       $color = "red";
     }else{
-      $stmt = $conn->prepare("update galaxy_users set password=? where id=?");
+      $stmt = $conn->prepare("update jiier_users set password=? where id=?");
       $stmt->bind_param("ss", $new_password, $user_id);
       $stmt->execute();
       $stmt->close();
@@ -37,36 +39,47 @@ if (isset($_POST['submit'])) {
   }
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en" class="no-js">
-
-<meta http-equi v="content-type" content="text/html;charset=UTF-8"/>
+<html lang="en">
 <head>
-
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>GTP</title>
+  <title>Change Password</title>
 
-    <?php include "header.php"; ?>
-
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <!-- Navbar -->
+   <?php include("header.php"); ?>
 
-<body>
+  <?php include("menu.php"); ?>
 
-<div id="wrapper">
-    <?php include "settings.php"; ?>
-    <div id="page-wrapper" class="fixed-navbar ">
-        <div class="container-fluid bg-gray">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+ 
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Change Password</h1>
+          </div>
+        </div>
+          <div class="row">
+    <div class="col-md-6 text-center">
       <div class="login-panel panel panel-default">
         <div class="panel-heading text-center">
-          <b>Change Password</b>
           <br><span style="color:<?php echo $color; ?>"><?php echo $msg; ?></span>
         </div>
         <form method="post" action="">
@@ -94,9 +107,45 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
   </div>
-</div>
-</div>
-</div>
-<?php include "footer.php"; ?>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+</div>   
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+ <?php include("footer.php"); ?>
+
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script src="dist/js/demo.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<!-- PAGE SCRIPTS -->
+<script src="dist/js/pages/dashboard2.js"></script>
 </body>
 </html>

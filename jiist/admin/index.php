@@ -14,6 +14,7 @@ if (isset($_POST['submit'])) {
     if ($count >= 1) {
         $_SESSION['timestamp'] = time();
         $_SESSION['user_id'] = $row['id'];
+        $_SESSION['email'] = $row['email'];
         $_SESSION['centre_id'] = $row['centre_id'];
         $_SESSION['full_name'] = $row['full_name'];
         $_SESSION['user_type'] = $row['user_type'];

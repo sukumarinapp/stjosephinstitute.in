@@ -154,7 +154,7 @@
             </ul>
           </li>      
 
-		  <li class="nav-item has-treeview  <?php if($page=="Follow") echo "menu-open"; ?>">
+		  <!-- <li class="nav-item has-treeview  <?php if($page=="Follow") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Follow") echo "active"; ?>">
               <i class="nav-icon fas fa-arrow-up"></i>
               <p>
@@ -190,7 +190,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 		   <li class="nav-item has-treeview  <?php if($page=="SMS") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="SMS") echo "active"; ?>">
               <i class="nav-icon fas fa-sms fa-2x"></i>
@@ -316,12 +316,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="my-profile.php" class="nav-link <?php if($page1=="My Profile") echo "active"; ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>My Profile</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="password.php" class="nav-link <?php if($page1=="Change Password") echo "active"; ?>">
                   <i class="far fa-circle nav-icon"></i>
@@ -329,7 +324,7 @@
                 </a>
               </li>
 			  <li class="nav-item">
-                <a href="https://remotedesktop.google.com/support/" target="_blank" class="nav-link <?php if($page1=="Change Password") echo "active"; ?>">
+                <a href="https://remotedesktop.google.com/support/" target="_blank" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Screen Share</p>
                 </a>
