@@ -249,7 +249,7 @@ $address = trim($_POST['address']);
 													   <label for="dateof_birth">
                                                                 <h5>Date Of Birth : *<h5 />
                                                             </label>
-                                                            <input type="date" name="dateof_birth" id="dateof_birth" required maxlength="100" size="30"  placeholder="MM/DD/YYYY"   style="width:300px;">
+                                                            <input onkeydown="return false" type="date" name="dateof_birth" id="dateof_birth" required maxlength="100" size="30"  placeholder="MM/DD/YYYY"   style="width:300px;">
 													
 													   <label for="employed_unemployed">
                                                             <h5>Employed/Un-Employed : <h5 />
