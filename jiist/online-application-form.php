@@ -75,7 +75,7 @@ if(isset($_POST['submit'])){
 	if (!$mail->Send()) {
 		echo "Mailer Error: " . $mail->ErrorInfo;
 	} else {
-		echo "Message has been sent";
+		#echo "Message has been sent";
 	}
 $full_name = trim($_POST['full_name']);
 $father_name = trim($_POST['father_name']);
@@ -90,7 +90,7 @@ $employed_unemployed = trim($_POST['employed_unemployed']);
 $physically_handicapped = trim($_POST['physically_handicapped']);
 $phone_number = trim($_POST['phone_number']);
 $email = trim($_POST['email']);
-$course_id = trim($_POST['course_id']);
+$course_id = trim($_GET['id']);
 $enrolment_year =    trim($_POST['enrolment_year']);
 $address = trim($_POST['address']);
 
@@ -99,22 +99,19 @@ $address = trim($_POST['address']);
     $count = mysqli_num_rows($result);
 
     if ($count >= 1) {
-        $msg = "You have already Appled in your Phone Number";
+        $msg = "This phone number is already registered";
         $msg_color = "red";
     } else {
         $msg_color = "green";
-        if ($_SESSION['user_type'] == "Superadmin") {
             $msg = "Student added Successfully";
-        } else {
-            $msg = "Student added Successfully";
-        }
+            $msg_color = "green";
 		
         $stmt = $conn->prepare("INSERT INTO jiier_student (centre_id,full_name,father_name,mother_name,nationality,religion,medium,blood_group,gender,dateof_birth,employed_unemployed,physically_handicapped,phone_number,email,course_id,enrolment_year,address,status,lastup_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
         $stmt->bind_param("sssssssssssssssssss", $centre_id,$full_name,$father_name,$mother_name,$nationality,$religion,$medium,$blood_group,$gender,$dateof_birth,$employed_unemployed,$physically_handicapped,$phone_number,$email,$course_id,$enrolment_year,$address,$status,$lastup_date);
         $stmt->execute() or die ($stmt->error);
 		
-	        header("location: index.php");
+        //header("location: index.php");
 }
 }
 ?>
@@ -163,6 +160,7 @@ $address = trim($_POST['address']);
 
     <section class="header_text">
         <h1><b>Online Application Form</b></h1>
+        <h2 style="color:<?php echo $msg_color; ?>;font-weight:bold"><?php echo $msg; ?></h2>
     </section>
     <section class="main-content">
         <div class="row">
@@ -212,7 +210,7 @@ $address = trim($_POST['address']);
                                                                 <h5>Blood Group : <h5 />
                                                             </label>
                                                              <select class="form-control"  name="blood_group" id="blood_group"  style="width:310px;">
-		<option>Select</option>
+		<option value="">Select</option>
     <option value="A +">A +</option>
     <option value="A -">A -</option>
     <option value="B +">B +</option>
@@ -227,7 +225,7 @@ $address = trim($_POST['address']);
                                                             <h5>Gender : <h5 />
                                                         </label> 
 														<select class="form-control" name="gender" id="gender" style="width:310px;">
-	<option>Select</option>
+	<optionc value="">Select</option>
     <option value="Male">Male</option>
     <option value="Female">Female</option>
     <option value="Others">Others</option>
@@ -269,29 +267,25 @@ $address = trim($_POST['address']);
 														       <option value="No">No</option>
                                                                     </select> 
 													 <label for="phone_number">
-                                                            <h5>Phone Number :<h5 />
+                                                            <h5>Phone Number : *<h5 />
                                                         </label>
-                                                        <input type="tel" name="phone_number"  maxlength="100"  size="30" style="width:300px;">
+                                                        <input required="required" type="tel" name="phone_number"  maxlength="100"  size="30" style="width:300px;">
 														<label for="phone_number">
                                                             <h5>Email ID :<h5 />
                                                         </label>
                                                         <input type="email" name="email"  maxlength="100"  size="30" style="width:300px;">
                                                   
-														   <label for="course">
+														   
 														    <?php
-$sql = "select a.*,b.program_name, c.degree_name,d.degree_type_name from jiier_paper a,jiier_program b,jiier_degree c, jiier_degree_type d where a.program_id=b.id and a.degree_id=c.id and a.degree_type_id=d.id and a.id=$paper_id";
+$sql = "select a.*,b.program_name, c.degree_name,d.course_name from jiier_paper a,jiier_program b,jiier_degree c, jiier_degree_type d where a.program_id=b.id and a.degree_id=c.id and a.degree_type_id=d.id and a.id=$paper_id";
                                             $result = mysqli_query($conn, $sql);
                                             while ($row = mysqli_fetch_assoc($result)) {
+                                                $paper_name=$row['paper_name'];
                                                 ?>
-																								<text title="
-Program = <?php echo $row['program_name']; ?>, 
-Degree = <?php echo $row['degree_name']; ?>, 
-Degree Type = <?php echo $row['degree_type_name']; ?>, 
-Paper = <?php echo $row['paper_name']; ?>"><h5>View Course Details<h5 /></text>
-
-                                                            </label>
+																								
+<label for="course"><h5>Course Program = <?php echo $row['program_name']; ?><br>Degree = <?php echo $row['degree_name']; ?><br>Degree Type = <?php echo $row['course_name']; ?></h5></label>
 											   																 <?php } ?>
-												 <input value="<?php echo $paper_id; ?>"type="tel" name="course_id" size="30" style="width:300px;">
+												 <input readonly value="<?php echo $paper_name; ?>" type="text" name="course_id" size="30" style="width:300px;">
 													   <label for="enrolment_year">
                                                             <h5>Enrolment Year : 
                                                                 <h5 />
@@ -305,9 +299,9 @@ Paper = <?php echo $row['paper_name']; ?>"><h5>View Course Details<h5 /></text>
                                                         <textarea rows="4" cols="50" type="text" name="address"  size="30"  style="width:300px;"></textarea>
                                                    
                                                       <label for="files_upload">
-                                                            <h5>Files upload :<h5 />
+                                                            <h5>Resume :<h5 />
                                                         </label>
-														<input type="file" name="resume[]" multiple="multiple" size="30" style="width:300px;">
+														<input accept="application/msword,application/pdf,image/*" type="file" name="resume[]" multiple="multiple" size="30" style="width:300px;">
                                                     </td>
                                                     </tr>
                                                     <tr>
