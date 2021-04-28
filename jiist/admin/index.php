@@ -6,7 +6,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM jiier_users WHERE email='$email' and password='$password'";
+    $sql = "SELECT * FROM jiier_users WHERE email='$email' and password='$password' and status='Active'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
     $row = mysqli_fetch_array($result);

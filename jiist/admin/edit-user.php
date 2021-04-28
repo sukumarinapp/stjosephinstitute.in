@@ -124,12 +124,12 @@ $row2 = mysqli_fetch_assoc($result2);
                       <input value="<?php echo $row2['centre_code']; ?>" maxlength="20" type="text" class="form-control"  required="required" name="centre_code" placeholder="Centre Code">
                   </div>
                   <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input value="<?php echo $row2['email']; ?>" type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+                    <label for="email">Email address *</label>
+                    <input required="required" value="<?php echo $row2['email']; ?>" type="email" name="email" class="form-control" id="email" placeholder="Enter email">
                   </div>
                   <div class="form-group">
-                    <label for="password">Password</label>
-                    <input  value="<?php echo $row2['password']; ?>" type="text" name="password" class="form-control" id="password" placeholder="Password">
+                    <label for="password">Password *</label>
+                    <input required="required" value="<?php echo $row2['password']; ?>" type="text" name="password" class="form-control" id="password" placeholder="Password">
                   </div>
 				  
 				  <div class="form-group">

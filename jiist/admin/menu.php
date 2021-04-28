@@ -213,9 +213,10 @@
                   <p>Admin SMS</p>
                 </a>
               </li>
-			  <?php } ?>  
+			 
             </ul>
           </li>
+           <?php } ?>  
 	    <?php if($_SESSION['user_type']=="Superadmin"){ ?>
 		  <!-- <li class="nav-item has-treeview  <?php if($page=="Centers") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Centers") echo "active"; ?>">
