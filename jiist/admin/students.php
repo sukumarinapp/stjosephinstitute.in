@@ -82,15 +82,7 @@ $centre_id=$_SESSION['centre_id'];
 				
 							
 							<?php
-                         if($_SESSION['user_type']=="Superadmin"){
-                          $sql = "select * from jiier_student where centre_id=$centre_id";
-                      }
-                        else if($_SESSION['user_type']=="Admin"){
-                            $sql = "select * from jiier_student where centre_id=$centre_id";
-                        }
-						else if($_SESSION['user_type']=="Staff where centre_id=$centre_id"){
-                            $sql = "select * from jiier_student ";
-                        }
+                        $sql = "select * from jiier_student where centre_id=$centre_id";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result)) {
                             ?>

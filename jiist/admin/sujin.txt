@@ -4,3 +4,9 @@ Virtual Laboratory
 
 	add and watch video
 
+
+	on dashboard replace new video with lab video
+
+
+add hall ticket
+
