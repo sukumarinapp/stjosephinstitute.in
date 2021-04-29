@@ -61,13 +61,7 @@ $today=date("Y-m-d")
                 <table class="table table-hover">
                     <thead class="text-warning" style="font-weight: bold !important">
                       <tr><th align="center" colspan="5" style="font-weight:bold;background: steelblue;color: white;">Notifications</th></tr>
-                      <tr style="font-weight:bold;background: darkgreen;color: white;">
-                      <th>S.No</th>
-                      <th>Type</th>
-                      <th>Title</th>
-                      <th>Semester</th>
-                      <th>Last Date</th>
-                    </tr>
+                      
                     </thead>
                     <tbody>
 <?php
@@ -80,6 +74,15 @@ $sql = "select a.*,b.years,b.semester_list from jiier_assignment a,jiier_semeste
                         $ldate=explode("-", $last_date);
                         $last_date=$ldate[2]."-".$ldate[1]."-".$ldate[0];
                       ?>
+<?php if($i==1){ ?>
+<tr style="font-weight:bold;background: darkgreen;color: white;">
+                      <th>S.No</th>
+                      <th>Type</th>
+                      <th>Title</th>
+                      <th>Semester</th>
+                      <th>Last Date</th>
+                    </tr>  
+<?php } ?>                       
                       <tr style="font-weight:bold;">
                         <td><?php echo $i; ?></td>
                         <td>Assignment</td>
@@ -93,11 +96,7 @@ $sql = "select a.*,b.years,b.semester_list from jiier_assignment a,jiier_semeste
                       ?>
                       
 
-<tr style="font-weight:bold;background: darkgreen;color: white;">
-                      <th>S.No</th>
-                      <th>Type</th>
-                      <th colspan="3">Watch</th>
-                    </tr>                      
+                     
 <?php
 $date=date("Y-m-d");
 $date = date('Y-m-d', strtotime($date. ' + 365 days'));
@@ -108,6 +107,14 @@ $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result)) {
                         $i++;
                       ?>
+<?php if($i==1){ ?>
+<tr style="font-weight:bold;background: darkgreen;color: white;">
+                      <th>S.No</th>
+                      <th>Type</th>
+                      <th colspan="3">Watch</th>
+                    </tr>   
+<?php } ?>                      
+
                       <tr style="font-weight:bold;">
                         <td><?php echo $i; ?></td>
                         <td>New Video</td>
@@ -120,12 +127,7 @@ $result = mysqli_query($conn, $sql);
                       ?>
 
 
-<tr style="font-weight:bold;background: darkgreen;color: white;">
-                      <th>S.No</th>
-                      <th>Type</th>
-                      <th>Title</th>
-                      <th colspan="3">Watch</th>
-                    </tr>                      
+                   
 <?php
 $sql = "select * from jiier_lab";
 $result = mysqli_query($conn, $sql);
@@ -134,6 +136,14 @@ $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result)) {
                         $i++;
                       ?>
+<?php if($i==1){ ?>
+<tr style="font-weight:bold;background: darkgreen;color: white;">
+                      <th>S.No</th>
+                      <th>Type</th>
+                      <th>Title</th>
+                      <th colspan="3">Watch</th>
+                    </tr>   
+<?php } ?>                      
                       <tr style="font-weight:bold;">
                         <td><?php echo $i; ?></td>
                         <td>Virtual Lab</td>
@@ -146,11 +156,7 @@ $result = mysqli_query($conn, $sql);
                       }
                       ?>     
 
-<tr style="font-weight:bold;background: darkgreen;color: white;">
-                      <th>S.No</th>
-                      <th>Type</th>
-                      <th colspan="3">Hall Ticket</th>
-                    </tr>                      
+                      
 <?php
 $sql = "select * from jiier_ticket where student_id=$user_id";
 $result = mysqli_query($conn, $sql);
@@ -159,6 +165,13 @@ $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result)) {
                         $i++;
                       ?>
+<?php if($i==1){ ?>
+<tr style="font-weight:bold;background: darkgreen;color: white;">
+  <th>S.No</th>
+  <th>Type</th>
+  <th colspan="3">Hall Ticket</th>
+</tr>
+<?php } ?>
                       <tr style="font-weight:bold;">
                         <td><?php echo $i; ?></td>
                         <td>Hall Ticket</td>
