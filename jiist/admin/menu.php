@@ -152,7 +152,16 @@
                 </a>
               </li>
             </ul>
-          </li>      
+          </li>  
+
+          <li class="nav-item">
+            <a href="lab.php" class="nav-link <?php if($page=="Lab") echo "active"; ?>">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Virtual Laboratory
+              </p>
+            </a>
+          </li>    
           
 		  <!-- <li class="nav-item has-treeview  <?php if($page=="Follow") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Follow") echo "active"; ?>">

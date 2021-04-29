@@ -143,19 +143,12 @@ while($row3 = mysqli_fetch_assoc($result3)){
     <button type="submit" name="submit" class="btn btn-primary text-center">Submit</button>
   </div>
               </div>
-              </div>
-            </div>
-          </div>
-
-
-
               </form>
-              <div class="card-body">
 <div class="row">
   <div class="col-md-12">
     <table class="table table-bordered table-striped">
       <thead>
-      <tr><th>Title</th><th>View</th><th>Delete</th></tr>
+      <tr><th>Title</th><th>Video</th><th>Delete</th></tr>
       </thead>
       <tbody>
 <?php
@@ -163,7 +156,7 @@ $sql3 = "select * from jiier_lab";
 $result3 = mysqli_query($conn, $sql3);
 while($row3 = mysqli_fetch_assoc($result3)){
 ?>
-      <tr><td><?php echo $row3['title']; ?></td><td><a target="_blank" href="lab/<?php echo $row3['video']; ?>">View</a></td><td><a href="delete-lab.php?id=<?php echo $row3['id']; ?>">Delete</a></td></tr>
+      <tr><td><?php echo $row3['title']; ?></td><td><?php echo $row3['video']; ?></td><td><a href="delete-lab.php?id=<?php echo $row3['id']; ?>">Delete</a></td></tr>
       
 <?php
 }
@@ -172,6 +165,14 @@ while($row3 = mysqli_fetch_assoc($result3)){
     </table>
   </div>
 </div>  
+              </div>
+            </div>
+          </div>
+
+
+
+              <div class="card-body">
+
 </div> 
             </div>
 
@@ -232,51 +233,6 @@ while($row3 = mysqli_fetch_assoc($result3)){
     $("#videoDiv").append(html);
   }
 </script>
-<script>
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-
- 
-    //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-    });
-
-    $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    });
-
-  })
-</script>
-
-<!--
-<?php
-                                            //$sql = "select * from jiier_paper where id=$id";
-$sql = "select a.*,b.program_name, c.degree_name,d.degree_type_name from jiier_paper a,jiier_program b,jiier_degree c, jiier_degree_type d where a.program_id=b.id and a.degree_id=c.id and a.degree_type_id=d.id and a.id=$id";
-                                            $result = mysqli_query($conn, $sql);
-                                            while ($row = mysqli_fetch_assoc($result)) {
-											$degree_type_id = $row['100'];
-                                                ?>	
-												<textarea rows="4" cols="50" type="text" name="course"  size="30"  style="width:300px;">Program = <?php echo $row['program_name']; ?>,
-												Degree = <?php echo $row['degree_name']; ?>,
-												Degree Type = <?php echo $row['degree_type_name']; ?>,
-												Paper = <?php echo $row['paper_name']; ?>
-												</textarea>
-															 <?php } ?>
-															 -->
 
 </body>
 </html>

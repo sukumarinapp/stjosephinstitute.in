@@ -1,8 +1,9 @@
-<?php
+a<?php
 session_start();
 $page = "Virtual Laborartory";
 include "../admin/timeout.php";
 include "../admin/config.php";
+$video=$_GET['video'];                           
 $full_name=$_SESSION['full_name'];  
 $course_id=$_SESSION['course_id'];                         
 ?>
@@ -14,7 +15,7 @@ $course_id=$_SESSION['course_id'];
   <link rel="icon" type="image/png" href="assetss/img/jiist-fav.jpg">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Virtual Laborartory
+    ST.Joseph Institute
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -57,32 +58,16 @@ $course_id=$_SESSION['course_id'];
         <div class="container-fluid">
           <div class="row">
 
-  <?php
-					$sql = "select * from jiier_lab";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
-
-            <div class="col-lg-2 col-md-3 col-sm-6">
-              <div class="card card-stats" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 35%)!important">
-                <div class="card-header card-header-warning card-header-icon">
-                  <div style="width: -webkit-fill-available; margin-right: unset;" class="card-icon " >
-                   <h1 style="text-align: center;color: white;" class="card-category " ><span class="caret"></span><a href="ytube.php?video=<?php echo $row['video']; ?>" ><img width="70" height="70" src="video.png" /></a></h1 >
-
-      
-
-                  </div>
-                  
-                </div>
-                <div class="card-footer" style="margin-top: unset!important;">
+  
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <iframe width="699" height="393" src="<?php echo $video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+<div class="card-footer" style="margin-top: unset!important;">
                   <div class="stats">
                     
                     <a href="http://www.stjosephinstitute.in/"></a>
                   </div>
                 </div>
-              </div>
-            </div>
-<?php } ?>
 
 
 

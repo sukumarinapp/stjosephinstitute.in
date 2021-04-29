@@ -119,6 +119,57 @@ $result = mysqli_query($conn, $sql);
                       }
                       ?>
 
+
+<tr style="font-weight:bold;background: darkgreen;color: white;">
+                      <th>S.No</th>
+                      <th>Type</th>
+                      <th>Title</th>
+                      <th colspan="3">Watch</th>
+                    </tr>                      
+<?php
+$sql = "select * from jiier_lab";
+$result = mysqli_query($conn, $sql);
+                      $result = mysqli_query($conn, $sql);
+                      $i=0;
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        $i++;
+                      ?>
+                      <tr style="font-weight:bold;">
+                        <td><?php echo $i; ?></td>
+                        <td>Virtual Lab</td>
+                        <td><?php echo $row['title']; ?></td>
+                        <td colspan="2"><a href="ytube.php?video=<?php echo $row['video']; ?>" ><img width="70" height="70" src="video.png" /></a></td>
+</td>
+                        
+                      </tr>
+                      <?php
+                      }
+                      ?>     
+
+<tr style="font-weight:bold;background: darkgreen;color: white;">
+                      <th>S.No</th>
+                      <th>Type</th>
+                      <th colspan="3">Hall Ticket</th>
+                    </tr>                      
+<?php
+$sql = "select * from jiier_ticket where student_id=$user_id";
+$result = mysqli_query($conn, $sql);
+                      $result = mysqli_query($conn, $sql);
+                      $i=0;
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        $i++;
+                      ?>
+                      <tr style="font-weight:bold;">
+                        <td><?php echo $i; ?></td>
+                        <td>Hall Ticket</td>
+                        <td colspan="3"><a target="_blank" href="../admin/ticket/<?php echo $row['ticket']; ?>" >View</a></td>
+</td>
+                        
+                      </tr>
+                      <?php
+                      }
+                      ?>                                            
+
                     </tbody>
                   </table>                      
               </div>

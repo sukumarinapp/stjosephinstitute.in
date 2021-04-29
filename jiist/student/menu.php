@@ -36,6 +36,12 @@
               <p>Virtual Class</p>
             </a>
             </li><hr class="hrr">
+           <li class="nav-item <?php if($page=="Virtual Laborartory") echo "active"; ?>  ">
+            <a class="nav-link" href="lab.php">
+              <i class="material-icons">developer_board</i>
+              <p>Virtual Laborartory</p>
+            </a>
+            </li><hr class="hrr">
            <li class="nav-item <?php if($page=="Assignment") echo "active"; ?>  ">
             <a class="nav-link" href="assignment.php">
               <i class="material-icons">assignment</i>
