@@ -224,7 +224,7 @@ $result = mysqli_query($conn, $sql);
             <script>
               document.write(new Date().getFullYear())
             </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://galaxytechnologypark.com/" target="_blank">Galaxy Technology Park</a> for a better web.
+            <a href="https://stjosephinstitute.in" target="_blank">ST Joseph Institute</a> for a better web.
           </div>
         </div>
       </footer>
