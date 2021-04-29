@@ -153,7 +153,7 @@
               </li>
             </ul>
           </li>      
-
+          
 		  <!-- <li class="nav-item has-treeview  <?php if($page=="Follow") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Follow") echo "active"; ?>">
               <i class="nav-icon fas fa-arrow-up"></i>

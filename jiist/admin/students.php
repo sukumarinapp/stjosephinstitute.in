@@ -101,6 +101,8 @@ $centre_id=$_SESSION['centre_id'];
 								<a class="btn btn-info fa fa-trash"   href="delete-student.php?id=<?php echo $row['id']; ?>" title="Delete Student" style="font-weight:600px;"></a>
 
                 <a class="btn btn-info fa fa-eye"   href="vassignproj.php?id=<?php echo $row['id']; ?>" title="View Assignment & Project" style="font-weight:600px;"></a>
+
+                <a class="btn btn-info fa fa-check"   href="ticket.php?id=<?php echo $row['id']; ?>" title="Hall Ticket" style="font-weight:600px;"></a>
                                </td>
                 </tr>
 						<?php } ?>
