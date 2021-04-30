@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
   $no_of_questions_per_student = trim($_POST['no_of_questions_per_student']);
 
   $stmt = $conn->prepare("UPDATE jiier_timetable set course_id=?,subject_id=?,exam_date=?,exam_session=?,marks_per_question=?,total_hours_in_seconds=?,no_of_questions_per_student=? where id=?");
-  $stmt->bind_param("ssssssss",$course_id,$subject_id,$exam_date,$exam_session$marks_per_question,$total_hours_in_seconds,$no_of_questions_per_student,$id);
+  $stmt->bind_param("ssssssss",$course_id,$subject_id,$exam_date,$exam_session,$marks_per_question,$total_hours_in_seconds,$no_of_questions_per_student,$id);
   $stmt->execute() or die ($stmt->error);
 
   header("location: timetable.php");
@@ -127,7 +127,7 @@ $row2 = mysqli_fetch_assoc($result2);
                     <?php
                     $datetime = new DateTime($row2['exam_date']);
                     ?>
-                    <input value="<?php echo $datetime->format('Y-m-d\TH:i'); ?>" type="datetime-local" class="form-control" id="exam_date" name="exam_date" required="required" placeholder="Exam Date">
+                    <input onkeydown="return false" value="<?php echo $datetime->format('Y-m-d\TH:i'); ?>" type="datetime-local" class="form-control" id="exam_date" name="exam_date" required="required" placeholder="Exam Date">
                   </div>
 
                   <div class="form-group">
@@ -141,7 +141,7 @@ $row2 = mysqli_fetch_assoc($result2);
                   </div>
 
                   <div class="form-group">
-                    <label for="exam_date">Number of Questions</label>
+                    <label for="exam_date">No of Questions</label>
                     <input value="<?php echo $row2['no_of_questions_per_student']; ?>" onkeypress="return isNumber(event)" type="text" class="form-control" id="no_of_questions_per_student" name="no_of_questions_per_student" maxlength="2" required="required" placeholder="Number of Questions per Student">
                   </div>
 

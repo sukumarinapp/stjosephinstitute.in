@@ -63,10 +63,6 @@ $centre_id=$_SESSION['centre_id'];
 	  
 	  
 	   <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Timetable Details</h3>
-            </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>

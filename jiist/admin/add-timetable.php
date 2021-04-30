@@ -121,7 +121,7 @@ if (isset($_POST['submit'])) {
 
                   <div class="form-group">
                     <label for="exam_date">Exam Date</label>
-                    <input type="datetime-local" class="form-control" id="exam_date" name="exam_date" required="required" placeholder="Exam Date">
+                    <input onkeydown="return false" type="datetime-local" class="form-control" id="exam_date" name="exam_date" required="required" placeholder="Exam Date">
                   </div>
 
                   <div class="form-group">
