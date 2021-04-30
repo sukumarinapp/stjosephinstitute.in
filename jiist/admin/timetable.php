@@ -73,9 +73,12 @@ $centre_id=$_SESSION['centre_id'];
                 <tr>
                   <th>Course</th>
                   <th>Subject</th>
-                  <th>Date</th>                  
+                  <th>Date & Time</th>                  
+                  <th>Marks Per Question</th>                  
+                  <th>Exam Duration (in Minutes)</th>                  
+                  <th>No of Questions</th>
                   <th>Session</th>
-                  <th>Action</th>
+                  <th style="width: 100px">Action</th>
                 </thead>
                 <tbody>
 				
@@ -85,16 +88,25 @@ $centre_id=$_SESSION['centre_id'];
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result)) {
                           $exam_date=$row['exam_date'];
-                          $edate2=explode("T",$exam_date);
+                          $edate2=explode(" ",$exam_date);
                           $edate=$edate2[0];
+                          $etime=$edate2[1];
                           $edate=explode("-", $edate);
-                          $exam_date=$edate[2]."-".$edate[1]."-".$edate[0];
+                          $exam_date=$edate[2]."-".$edate[1]."-".$edate[0]." ".$etime;
+                          $course_id=$row['course_id'];
+                          $sql2 = "select paper_name from jiier_paper where id=$course_id";
+                          $result2 = mysqli_query($conn, $sql2);
+                          $row2 = mysqli_fetch_assoc($result2);
+                          $paper_name=$row2['paper_name'];
                             ?>
 
                 <tr>
-                  <td><?php echo $row['course_id']; ?></td>
+                  <td><?php echo $paper_name; ?></td>
                   <td><?php echo $row['subject_name']; ?></td>
                   <td><?php echo $exam_date; ?></td>
+                  <td><?php echo $row['marks_per_question']; ?></td>
+                  <td><?php echo $row['total_hours_in_seconds']; ?></td>
+                  <td><?php echo $row['no_of_questions_per_student']; ?></td>
                   <td><?php echo $row['exam_session']; ?></td>
                                     
 				  <td>

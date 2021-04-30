@@ -18,8 +18,12 @@ if (isset($_POST['submit'])) {
   $subject_id = trim($_POST['subject_id']);
   $exam_date = trim($_POST['exam_date']);
   $exam_session = trim($_POST['exam_session']);
-  $stmt = $conn->prepare("INSERT INTO jiier_timetable (course_id,subject_id,exam_date,exam_session) VALUES (?,?,?,?)");
-  $stmt->bind_param("ssss", $course_id,$subject_id,$exam_date,$exam_session);
+  $marks_per_question = trim($_POST['marks_per_question']);
+  $total_hours_in_seconds = trim($_POST['total_hours_in_seconds']);
+  $no_of_questions_per_student = trim($_POST['no_of_questions_per_student']);
+
+  $stmt = $conn->prepare("INSERT INTO jiier_timetable (course_id,subject_id,exam_date,exam_session,marks_per_question,total_hours_in_seconds,no_of_questions_per_student) VALUES (?,?,?,?,?,?,?)");
+  $stmt->bind_param("sssssss", $course_id,$subject_id,$exam_date,$exam_session,$marks_per_question,$total_hours_in_seconds,$no_of_questions_per_student);
   $stmt->execute() or die ($stmt->error);
   header("location: timetable.php");
 }
@@ -117,7 +121,22 @@ if (isset($_POST['submit'])) {
 
                   <div class="form-group">
                     <label for="exam_date">Exam Date</label>
-                    <input type="date" class="form-control" id="exam_date" name="exam_date" required="required" placeholder="Exam Date">
+                    <input type="datetime-local" class="form-control" id="exam_date" name="exam_date" required="required" placeholder="Exam Date">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exam_date">Marks Per Question</label>
+                    <input onkeypress="return isNumber(event)" type="text" class="form-control" id="marks_per_question" name="marks_per_question" maxlength="2" required="required" placeholder="Marks Per Question">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exam_date">Exam Duration (in Minutes)</label>
+                    <input onkeypress="return isNumber(event)" type="text" class="form-control" id="total_hours_in_seconds" name="total_hours_in_seconds" maxlength="3" required="required" placeholder="Exam Hours (in Minutes)">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exam_date">No of Questions</label>
+                    <input onkeypress="return isNumber(event)" type="text" class="form-control" id="no_of_questions_per_student" name="no_of_questions_per_student" maxlength="2" required="required" placeholder="Number of Questions per Student">
                   </div>
 
                   <div class="form-group">
@@ -178,6 +197,16 @@ if (isset($_POST['submit'])) {
 <script src="plugins/select2/js/select2.full.min.js"></script>
 
 <script>
+
+  function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+  }
+
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
