@@ -103,6 +103,8 @@ $centre_id=$_SESSION['centre_id'];
 				  <td>
 								<a class="btn btn-info fa fa-edit" href="edit-subject.php?id=<?php echo $row['id']; ?>" title="Edit Student"></a>
 				
+        <a class="btn btn-info fa fa-eye" href="questions.php?id=<?php echo $row['id']; ?>" title="Questions"></a>
+
 								<a class="btn btn-info fa fa-trash"   href="delete-subject.php?id=<?php echo $row['id']; ?>" title="Delete Student" style="font-weight:600px;"></a>
                                </td>
                 </tr>
