@@ -75,7 +75,7 @@ $centre_id=$_SESSION['centre_id'];
                   <th>Semester</th>
                   <th>Subject Code</th>                  
                   <th>Subject Name</th>
-                  <th>Action</th>
+                  <th style="width:150px">Action</th>
                 </thead>
                 <tbody>
 				
