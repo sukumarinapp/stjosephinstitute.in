@@ -1,21 +1,26 @@
 <?php
 session_start();
-$page = "Subject";
-$page1 = "View Subject";
+$page = "Project";
+$page1 = "View Project";
 include "timeout.php";
 include "config.php";
 if (($_SESSION['user_type'] != "Superadmin") && ($_SESSION['user_type'] != "Admin")) header("location: index.php");
-$id = $_GET['id'];
+
+$id=$_GET['id'];
+$subid=$_GET['subid'];
 
 if (isset($_POST['submit'])) {
+
     $question = trim($_POST['question']);
     $option_a = trim($_POST['option_a']);
     $option_b = trim($_POST['option_b']);
     $option_c = trim($_POST['option_c']);
     $option_d = trim($_POST['option_d']);
     $correct_option = trim($_POST['correct_option']);
-    $sql = "INSERT INTO jiier_questions(subject_id, question, option_a, option_b, option_c, option_d, correct_option) VALUES('".$id."', '".$question."', '".$option_a."', '".$option_b."', '".$option_c."', '".$option_d."', '".$correct_option."')";
+
+    $sql = "UPDATE jiier_questions SET question = '".$question."', option_a = '".$option_a."', option_b = '".$option_b."', option_c = '".$option_c."', option_d = '".$option_d."', correct_option = '".$correct_option."' WHERE id = '".$id."'";
     mysqli_query($conn, $sql) or die(mysqli_error($conn));
+    header("location: questions.php?id=".$subid);
 }
 
 ?>
@@ -26,7 +31,7 @@ if (isset($_POST['submit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>JIIST</title>
+  <title>Edit Project</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -34,15 +39,10 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  
-  
-  
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-  <!-- Theme style -->
-    
+    <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -59,26 +59,25 @@ if (isset($_POST['submit'])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Questions</h1>
+            <h1>Edit Question</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
+<?php
+$sql = "select * from jiier_questions WHERE id = '".$id."'";
 
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <!-- SELECT2 EXAMPLE -->
-      <div class="row" >
-        <div class="col-md-12">
-          <button id="addquestion" type="button" class="btn btn-info pull-right" style="margin-bottom:10px;" >Add Question</button>
-        </div>
-      </div>
-
-      <div class="row">
+        
+         <div class="row">
         <div class="col-md-12">
 
-          <div class="login-panel panel panel-default" id="showquestion" style="display: none;">
+          <div class="login-panel panel panel-default">
 
                             <form method="post" action="">
 
@@ -98,7 +97,7 @@ if (isset($_POST['submit'])) {
 
                                                        name="question" id="question" class="form-control"
 
-                                                       placeholder="Question"></textarea>
+                                                       placeholder="Question"><?php echo $row['question']; ?></textarea>
 
                                             </div>
 
@@ -112,10 +111,10 @@ if (isset($_POST['submit'])) {
                                                 <label for="option_a"
 
                                                        class="control-label required">
-                                                    <input type="radio" checked id="option_a" name="correct_option" value="option_a">
+                                                    <input type="radio" <?php if($row['correct_option'] == 'option_a') { echo 'checked'; } ?> id="option_a" name="correct_option" value="option_a">
                                                      Option A</label>
 
-                                                <textarea required="required" type="text" name="option_a" id="option_a" class="form-control"></textarea>
+                                                <textarea required="required" type="text" name="option_a" id="option_a" class="form-control"><?php echo $row['option_a']; ?></textarea>
 
                                             </div>
 
@@ -129,10 +128,10 @@ if (isset($_POST['submit'])) {
                                                 <label for="option_b"
 
                                                        class="control-label required">
-                                                    <input type="radio" id="option_b" name="correct_option" value="option_b">
+                                                    <input type="radio" <?php if($row['correct_option'] == 'option_b') { echo 'checked'; } ?> id="option_b" name="correct_option" value="option_b">
                                                      Option B</label>
 
-                                                <textarea required="required" type="text" name="option_b" id="option_b" class="form-control"></textarea>
+                                                <textarea required="required" type="text" name="option_b" id="option_b" class="form-control"><?php echo $row['option_b']; ?></textarea>
 
                                             </div>
 
@@ -146,10 +145,10 @@ if (isset($_POST['submit'])) {
                                                 <label for="option_c"
 
                                                        class="control-label required">
-                                                    <input type="radio" id="option_c" name="correct_option" value="option_c">
+                                                    <input type="radio" <?php if($row['correct_option'] == 'option_c') { echo 'checked'; } ?> id="option_c" name="correct_option" value="option_c">
                                                      Option C</label>
 
-                                                <textarea required="required" type="text" name="option_c" id="option_c" class="form-control"></textarea>
+                                                <textarea required="required" type="text" name="option_c" id="option_c" class="form-control"><?php echo $row['option_c']; ?></textarea>
 
                                             </div>
 
@@ -164,10 +163,10 @@ if (isset($_POST['submit'])) {
                                                 <label for="option_d"
 
                                                        class="control-label required">
-                                                    <input type="radio" id="option_d" name="correct_option" value="option_d">
+                                                    <input type="radio" <?php if($row['correct_option'] == 'option_d') { echo 'checked'; } ?> id="option_d" name="correct_option" value="option_d">
                                                      Option D</label>
 
-                                                <textarea required="required" type="text" name="option_d" id="option_d" class="form-control"></textarea>
+                                                <textarea required="required" type="text" name="option_d" id="option_d" class="form-control"><?php echo $row['option_d']; ?></textarea>
 
                                             </div>
 
@@ -199,63 +198,12 @@ if (isset($_POST['submit'])) {
 
         </div>
       </div>
-	  
-	  
-	  
-	   <div class="card">
-            <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>S No</th>
-                  <th>Question</th>
-                  <th>Correct Option</th>
-                  <th width="100px">Action</th>
-                </thead>
-                <tbody>
-				
-							
-							<?php
-                        $sql = "select * from jiier_questions where subject_id=$id order by id desc";
-                        $result = mysqli_query($conn, $sql);
-                        $i=0;
-                        while ($row = mysqli_fetch_assoc($result)) {
-                          $i++;
-                            ?>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
 
-                <tr>
-                  <td><?php echo $i; ?></td>
-
-              <td><?php echo $row['question']; ?></td>
-              <td><?php echo $row['correct_option']; ?></td>
-              <td>
-                <a title="Edit Question" class="btn btn-info fa fa-edit" href="edit-question.php?id=<?php echo $row['id']; ?>&subid=<?php echo $id; ?>"></a>
-                <a title="Delete Question" class="btn btn-info fa fa-trash" href="delete_question.php?id=<?php echo $row['id']; ?>&subid=<?php echo $id; ?>"></a>
-              </td>
-                </tr>
-						<?php } ?>
-                </tbody>
-               <!-- <tfoot>
-                <tr>
-                  <th>Full Name</th>
-                  <th>Email</th>
-                  <th>Mobile</th>
-                  <th>User Type</th>
-                  <th>Status</th>
-                </tr>
-                </tfoot>-->
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-	<style>
-
-	.btn {
-  
-    font-weight: 600;
-}
-</style>	
-		
+  <!-- /.control-sidebar -->
  <?php include("footer.php"); ?>
 
 </div>
@@ -283,34 +231,60 @@ if (isset($_POST['submit'])) {
 <!-- ChartJS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
 
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
-
+<!-- PAGE SCRIPTS -->
+<script src="dist/js/pages/dashboard2.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
 
 <script>
   $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+ 
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
     });
 
-    $('#addquestion').on('click', function() {
-      $('#showquestion').toggle('slow');
-    })
-  });
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+
+  })
 </script>
+
+
+<script>
+$(document).ready(function() {
+$('#category-dropdown').on('change', function() {
+var category_id = this.value;
+$.ajax({
+url: "fetch-semester.php",
+type: "POST",
+data: {
+category_id: category_id
+},
+cache: false,
+success: function(result){
+$("#sub-category-dropdown").html(result);
+}
+});
+});
+});
+</script>
+
 </body>
 </html>
