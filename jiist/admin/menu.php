@@ -153,7 +153,7 @@
               </li>
             </ul>
           </li>  
-
+   
           <li class="nav-item">
             <a href="lab.php" class="nav-link <?php if($page=="Lab") echo "active"; ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
