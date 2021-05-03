@@ -60,7 +60,7 @@ $course_id=$_SESSION['course_id'];
 <table id="example1" class="table table-bordered table-striped">
 <thead>
 <tr style="background-color: #2a6b90;color:white">
-<th>S.No</th>
+<th width="50px">S.No</th>
 <th>Subject</th>
 <th width="150px">Exam</th>
 </tr>
