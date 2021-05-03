@@ -73,7 +73,7 @@ $centre_id=$_SESSION['centre_id'];
                   <th>Marks Per Question</th>                  
                   <th>Exam Duration (in Minutes)</th>                  
                   <th>No of Questions</th>
-                  <th>Session</th>
+                  <!-- <th>Session</th> -->
                   <th style="width: 100px">Action</th>
                 </thead>
                 <tbody>
@@ -101,9 +101,9 @@ $centre_id=$_SESSION['centre_id'];
                   <td><?php echo $row['subject_name']; ?></td>
                   <td><?php echo $exam_date; ?></td>
                   <td><?php echo $row['marks_per_question']; ?></td>
-                  <td><?php echo $row['total_hours_in_seconds']; ?></td>
+                  <td><?php echo $row['total_hours_in_minutes']; ?></td>
                   <td><?php echo $row['no_of_questions_per_student']; ?></td>
-                  <td><?php echo $row['exam_session']; ?></td>
+                  <!-- <td><?php echo $row['exam_session']; ?></td> -->
                                     
 				  <td>
 								<a class="btn btn-info fa fa-edit" href="edit-timetable.php?id=<?php echo $row['id']; ?>" title="Edit Timetable"></a>

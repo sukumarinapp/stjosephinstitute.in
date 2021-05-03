@@ -18,13 +18,13 @@ if (isset($_POST['submit'])) {
   $course_id = trim($_POST['course_id']);
   $subject_id = trim($_POST['subject_id']);
   $exam_date = trim($_POST['exam_date']);
-  $exam_session = trim($_POST['exam_session']);
+  //$exam_session = trim($_POST['exam_session']);
   $marks_per_question = trim($_POST['marks_per_question']);
-  $total_hours_in_seconds = trim($_POST['total_hours_in_seconds']);
+  $total_hours_in_minutes = trim($_POST['total_hours_in_minutes']);
   $no_of_questions_per_student = trim($_POST['no_of_questions_per_student']);
 
-  $stmt = $conn->prepare("UPDATE jiier_timetable set course_id=?,subject_id=?,exam_date=?,exam_session=?,marks_per_question=?,total_hours_in_seconds=?,no_of_questions_per_student=? where id=?");
-  $stmt->bind_param("ssssssss",$course_id,$subject_id,$exam_date,$exam_session,$marks_per_question,$total_hours_in_seconds,$no_of_questions_per_student,$id);
+  $stmt = $conn->prepare("UPDATE jiier_timetable set course_id=?,subject_id=?,exam_date=?,exam_session=?,marks_per_question=?,total_hours_in_minutes=?,no_of_questions_per_student=? where id=?");
+  $stmt->bind_param("ssssssss",$course_id,$subject_id,$exam_date,$exam_session,$marks_per_question,$total_hours_in_minutes,$no_of_questions_per_student,$id);
   $stmt->execute() or die ($stmt->error);
 
   header("location: timetable.php");
@@ -137,7 +137,7 @@ $row2 = mysqli_fetch_assoc($result2);
 
                   <div class="form-group">
                     <label for="exam_date">Exam Duration (in Minutes)</label>
-                    <input value="<?php echo $row2['total_hours_in_seconds']; ?>" onkeypress="return isNumber(event)" type="text" class="form-control" id="total_hours_in_seconds" name="total_hours_in_seconds" maxlength="3" required="required" placeholder="Exam Hours (in Minutes)">
+                    <input value="<?php echo $row2['total_hours_in_minutes']; ?>" onkeypress="return isNumber(event)" type="text" class="form-control" id="total_hours_in_minutes" name="total_hours_in_minutes" maxlength="3" required="required" placeholder="Exam Hours (in Minutes)">
                   </div>
 
                   <div class="form-group">
@@ -145,13 +145,13 @@ $row2 = mysqli_fetch_assoc($result2);
                     <input value="<?php echo $row2['no_of_questions_per_student']; ?>" onkeypress="return isNumber(event)" type="text" class="form-control" id="no_of_questions_per_student" name="no_of_questions_per_student" maxlength="2" required="required" placeholder="Number of Questions per Student">
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="exam_session">Session</label>
                     <select class="form-control" id="exam_session" name="exam_session" required="required">
                       <option <?php if($row2['exam_session']=="Forenoon") echo " selected "; ?> value="Forenoon">Forenoon</option>
                       <option <?php if($row2['exam_session']=="Afternoon") echo " selected "; ?> value="Afternoon">Afternoon</option>
                     </select>
-                  </div>
+                  </div> -->
 
                 </div>
 			
