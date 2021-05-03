@@ -73,6 +73,7 @@ if($current_time>=$begin_time && $current_time<=$end_time){
 </div>
 <div class="card-body table-responsive">
 
+
 </div>
 </div>
 </div> 
