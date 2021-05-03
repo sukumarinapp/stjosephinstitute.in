@@ -1,7 +1,9 @@
 <?php
+#ini_set('display_errors', 1);
+#ini_set('display_startup_errors', 1);
+#error_reporting(E_ALL);
 session_start();
 $page = "Online Exam";
-include "../admin/timeout.php";
 include "../admin/config.php";
 $full_name=$_SESSION['full_name'];  
 $course_id=$_SESSION['course_id'];                         
@@ -62,7 +64,6 @@ $course_id=$_SESSION['course_id'];
 <tr style="background-color: #2a6b90;color:white">
 <th>S.No</th>
 <th>Subject</th>
-<th>Results</th>
 <th width="150px">Exam</th>
 </tr>
 </thead>
@@ -76,12 +77,19 @@ $i++;
 $startTime = $row['exam_date'];
 $duration = $row['total_hours_in_minutes'];
 $endTime = date('Y-m-d H:i:s',strtotime($duration.' minutes',strtotime($startTime)));
+$current_time = strtotime(date('Y-m-d H:i:s'));;
+$begin_time = strtotime($startTime);
+$end_time = strtotime($endTime);
 ?>
 <tr>
   <td><?php echo $i; ?></td>
   <td><?php echo $row['subject_name']; ?></td>
-  <td></td>
-  <td></td>
+  <?php if($current_time>=$begin_time && $current_time<=$end_time){ ?>
+  <td><a class="btn btn-success" href="exam_time.php?id=<?php echo $row['id']; ?>" title="Start Exam">Start Exam</a></td>
+  <?php }else{ ?>
+  <td>&nbsp;</td>  
+  <?php } ?>
+</td>
 </tr>
 <?php
 }
