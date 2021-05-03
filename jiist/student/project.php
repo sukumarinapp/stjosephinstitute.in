@@ -1,7 +1,7 @@
 <?php
 session_start();
 $page = "Project";
-include "../admin/timeout.php";
+include "timeout.php";
 include "../admin/config.php";
 $user_id=$_SESSION['user_id'];                           
 $course_id=$_SESSION['course_id'];                           

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $page = "Virtual Class";
-include "../admin/timeout.php";
+include "timeout.php";
 include "../admin/config.php";
 $video=$_GET['video'];                           
 $full_name=$_SESSION['full_name'];  

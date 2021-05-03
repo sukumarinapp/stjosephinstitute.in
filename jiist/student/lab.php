@@ -1,7 +1,7 @@
 <?php
 session_start();
 $page = "Virtual Laborartory";
-include "../admin/timeout.php";
+include "timeout.php";
 include "../admin/config.php";
 $full_name=$_SESSION['full_name'];  
 $course_id=$_SESSION['course_id'];                         

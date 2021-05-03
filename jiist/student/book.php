@@ -1,7 +1,7 @@
 <?php
 session_start();
 $page = "Virtual Library";
-include "../admin/timeout.php";
+include "timeout.php";
 include "../admin/config.php";
 $subject_id=$_GET['id'];                           
 $full_name=$_SESSION['full_name'];  

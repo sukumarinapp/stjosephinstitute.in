@@ -12,7 +12,7 @@ if (time()-$_SESSION['timestamp']>$idle_time){
 
   session_unset();
 
-  header("location: index.php");
+  header("location: ../login.php");
 
 }else{
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $page = "Subject";
-include "../admin/timeout.php";
+include "timeout.php";
 include "../admin/config.php";
 $user_id=$_SESSION['user_id'];                           
 $full_name=$_SESSION['full_name'];  

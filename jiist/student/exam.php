@@ -3,8 +3,23 @@ session_start();
 $page = "Online Exam";
 include "timeout.php";
 include "../admin/config.php";
+$id=$_GET['id'];
 $full_name=$_SESSION['full_name'];  
-$course_id=$_SESSION['course_id'];                         
+$course_id=$_SESSION['course_id'];  
+
+$sql = "SELECT * FROM jiier_timetable where id = '".$id."'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$startTime = $row['exam_date'];
+$duration = $row['total_hours_in_minutes'];
+$endTime = date('Y-m-d H:i:s',strtotime($duration.' minutes',strtotime($startTime)));
+$current_time = strtotime(date('Y-m-d H:i:s'));;
+$begin_time = strtotime($startTime);
+$end_time = strtotime($endTime);
+if($current_time>=$begin_time && $current_time<=$end_time){ 
+}else{
+  header("location: onlineexam.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,43 +72,7 @@ $course_id=$_SESSION['course_id'];
 <h4 style="font-weight: bold" class="card-title">Online Exam</h4>
 </div>
 <div class="card-body table-responsive">
-<table id="example1" class="table table-bordered table-striped">
-<thead>
-<tr style="background-color: #2a6b90;color:white">
-<th>S.No</th>
-<th>Subject</th>
-<th width="150px">Exam</th>
-</tr>
-</thead>
-<tbody>
-<?php
-$sql = "SELECT a.*,b.subject_name FROM jiier_timetable a,jiier_subject b where a.subject_id=b.id and a.course_id = '".$course_id."' ";
-$result = mysqli_query($conn, $sql);
-$i=0;
-while($row = mysqli_fetch_assoc($result)){
-$i++;
-$startTime = $row['exam_date'];
-$duration = $row['total_hours_in_minutes'];
-$endTime = date('Y-m-d H:i:s',strtotime($duration.' minutes',strtotime($startTime)));
-$current_time = strtotime(date('Y-m-d H:i:s'));;
-$begin_time = strtotime($startTime);
-$end_time = strtotime($endTime);
-?>
-<tr>
-  <td><?php echo $i; ?></td>
-  <td><?php echo $row['subject_name']; ?></td>
-  <?php if($current_time>=$begin_time && $current_time<=$end_time){ ?>
-  <td><a class="btn btn-success" href="exam.php?id=<?php echo $row['id']; ?>" title="Start Exam">Start Exam</a></td>
-  <?php }else{ ?>
-  <td>&nbsp;</td>  
-  <?php } ?>
-</td>
-</tr>
-<?php
-}
-?>
-</tbody>
-</table>
+
 </div>
 </div>
 </div> 
