@@ -286,6 +286,44 @@ document.write(new Date().getFullYear())
     });
   });
 
+  $("input").on( "click", function() {
+    let isCorrect = false;
+    if($(this).prop('checked', true))
+    {
+      let myanswer = $(this).val();
+      let actanswer = $(this).attr('data-correct');
+      let page = $(this).attr('id');
+      let pageid = page.split('-');
+      let qid = pageid[2];
+      console.log(myanswer);
+
+      if(myanswer == actanswer)
+      {
+        isCorrect = true;
+      }
+
+
+    $.ajax({
+      type: "POST",
+      url: "update_answers.php",
+      data: {exam_id: <?php echo $id; ?>, student_id: <?php echo $user_id; ?>, qid: qid, correct_answer: actanswer, myanswer: myanswer, iscorrect: isCorrect},
+      success: function(data){ 
+        console.log(data);
+       },
+    });
+
+      if(all.indexOf(pageid[0]) === -1 && isCorrect)
+      {
+        all.push(pageid[0]);
+      } else if(all.indexOf(pageid[0]) !== -1 && !isCorrect)
+      {
+        all.splice(all.indexOf(pageid[0]), 1);
+      }
+
+    }
+  });
+
+
   function finish(all)
   {
   }
