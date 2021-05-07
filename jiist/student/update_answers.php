@@ -21,7 +21,6 @@ if(isset($_POST['exam_id']) && isset($_POST['student_id']) && isset($_POST['qid'
     if($num == 0)
     {
         $sql1 = "INSERT INTO jiier_answers(exam_id, student_id, qid, original_answer, myanswer, isCorrect) VALUES('".$exam_id."', '".$student_id."', '".$qid."', '".$correct_answer."', '".$myanswer."', '".$iscorrect."')";
-        echo $sql1;
         mysqli_query($conn, $sql1) or die(mysqli_query($conn));
     } else {
         $sql1 = "UPDATE jiier_answers SET original_answer = '".$correct_answer."', myanswer = '".$myanswer."', isCorrect = '".$iscorrect."'  WHERE exam_id = '".$exam_id."' AND student_id = '".$student_id."' AND qid = '".$qid."'  ";

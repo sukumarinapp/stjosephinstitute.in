@@ -82,10 +82,12 @@ $centre_id=$_SESSION['centre_id'];
 							<?php
                         $sql = "select a.subject_name,b.* from jiier_subject a,jiier_timetable b where a.id=b.subject_id";                      
                         $result = mysqli_query($conn, $sql);
+                        $today = date("Y-m-d");
                         while ($row = mysqli_fetch_assoc($result)) {
                           $exam_date=$row['exam_date'];
                           $edate2=explode(" ",$exam_date);
                           $edate=$edate2[0];
+                          if($edate >= $today){
                           $etime=$edate2[1];
                           $edate=explode("-", $edate);
                           $exam_date=$edate[2]."-".$edate[1]."-".$edate[0]." ".$etime;
@@ -111,7 +113,7 @@ $centre_id=$_SESSION['centre_id'];
 								<a class="btn btn-info fa fa-trash"   href="delete-timetable.php?id=<?php echo $row['id']; ?>" title="Delete Timetable" style="font-weight:600px;"></a>
                                </td>
                 </tr>
-						<?php } ?>
+						<?php }} ?>
                 </tbody>
                <!-- <tfoot>
                 <tr>

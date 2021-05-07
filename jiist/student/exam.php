@@ -267,6 +267,20 @@ document.write(new Date().getFullYear())
 
     let all = [];
 
+    var endTime = "<?php echo strtotime($endTime); ?>"; 
+    var repeater;
+    function doWork() {
+      var currentTime = Date.now()/1000;
+      console.log("<?php echo $endTime; ?>");
+      console.log("Current Time: "+currentTime);
+      if(currentTime > endTime){
+        alert("Exam Completed");
+        finish(all);
+      }
+      repeater = setTimeout(doWork, 5000);
+    }
+    doWork();
+
     $('.gotoprev').on('click', function(){
       let pageid = $('.qpad:visible').attr('id');
       let arr = pageid.split('-');
