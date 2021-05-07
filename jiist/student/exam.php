@@ -6,6 +6,7 @@ include "../admin/config.php";
 $id=$_GET['id'];
 $full_name=$_SESSION['full_name'];  
 $course_id=$_SESSION['course_id'];  
+$user_id=$_SESSION['user_id'];  
 
 $sql = "SELECT * FROM jiier_timetable where id = '".$id."'";
 $result = mysqli_query($conn, $sql);
@@ -111,6 +112,10 @@ if($current_time>=$begin_time && $current_time<=$end_time){
 </div>
 <div class="card-body table-responsive">
 <?php
+$sql5 = "select * from jiier_results where exam_id=$id and student_id=$user_id";
+$result5 = mysqli_query($conn, $sql5);
+if(mysqli_num_rows($result5)==0){
+
 $sql = "select * from jiier_questions where subject_id=$subject_id ORDER BY RAND() LIMIT $no_of_questions";
 $result = mysqli_query($conn, $sql);
 $totalq= mysqli_num_rows($result);
@@ -162,6 +167,7 @@ $i++;
   </div>
 </div>
 <?php
+}
 }
 ?>
 <div class="clearfix"></div>
@@ -241,11 +247,7 @@ document.write(new Date().getFullYear())
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <!-- Library for adding dinamically elements -->
 <script src="assetss/js/plugins/arrive.min.js"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!-- Chartist JS -->
-<script src="assetss/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
+
 <script src="assetss/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="assetss/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
@@ -258,11 +260,12 @@ document.write(new Date().getFullYear())
     let incorrect = 0;
 
     $('.qpad').each(function(index){
-      if(index != 0)
-      {
+      if(index != 0){
         $(this).hide();
       }
     });
+
+    let all = [];
 
     $('.gotoprev').on('click', function(){
       let pageid = $('.qpad:visible').attr('id');
@@ -278,55 +281,51 @@ document.write(new Date().getFullYear())
       let pageid = $('.qpad:visible').attr('id');
       let arr = pageid.split('-');
       if(typeof $('#question-'+arr[1]).next().attr('id') == 'undefined'){
-        //finish(all);
+        finish(all);
       }else{
         $('#question-'+arr[1]).hide();
         $('#question-'+arr[1]).next().show();
       }
     });
-  });
 
-  $("input").on( "click", function() {
-    let isCorrect = false;
-    if($(this).prop('checked', true))
-    {
-      let myanswer = $(this).val();
-      let actanswer = $(this).attr('data-correct');
-      let page = $(this).attr('id');
-      let pageid = page.split('-');
-      let qid = pageid[2];
-      console.log(myanswer);
-
-      if(myanswer == actanswer)
+    $("input").on( "click", function() {
+      let isCorrect = false;
+      if($(this).prop('checked', true))
       {
-        isCorrect = true;
+        let myanswer = $(this).val();
+        let actanswer = $(this).attr('data-correct');
+        let page = $(this).attr('id');
+        let pageid = page.split('-');
+        let qid = pageid[2];
+        console.log(myanswer);
+        if(myanswer == actanswer){
+          isCorrect = true;
+        }
+        $.ajax({
+          type: "POST",
+          url: "update_answers.php",
+          data: {exam_id: <?php echo $id; ?>, student_id: <?php echo $user_id; ?>, qid: qid, correct_answer: actanswer, myanswer: myanswer, iscorrect: isCorrect},
+          success: function(data){ 
+            console.log(data);
+           },
+        });
+        if(all.indexOf(pageid[0]) === -1 && isCorrect){
+            all.push(pageid[0]);
+        }else if(all.indexOf(pageid[0]) !== -1 && !isCorrect){
+          all.splice(all.indexOf(pageid[0]), 1);
+        }
       }
-
-
-    $.ajax({
-      type: "POST",
-      url: "update_answers.php",
-      data: {exam_id: <?php echo $id; ?>, student_id: <?php echo $user_id; ?>, qid: qid, correct_answer: actanswer, myanswer: myanswer, iscorrect: isCorrect},
-      success: function(data){ 
-        console.log(data);
-       },
     });
+ });
 
-      if(all.indexOf(pageid[0]) === -1 && isCorrect)
-      {
-        all.push(pageid[0]);
-      } else if(all.indexOf(pageid[0]) !== -1 && !isCorrect)
-      {
-        all.splice(all.indexOf(pageid[0]), 1);
-      }
-
-    }
-  });
-
-
-  function finish(all)
-  {
+  function finish(all){
+    let total = <?php echo $totalq; ?>;
+    let incorrect = parseInt(total) - parseInt(all.length);
+    console.log(total);
+    console.log(all.length);  
+    window.location.replace("finishexam.php?exam_id=<?php echo $id; ?>&total="+total+"&correct="+all.length);
   }
+
 </script>
 </body>
 </html>

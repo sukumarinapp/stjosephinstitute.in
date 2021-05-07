@@ -3,21 +3,17 @@ session_start();
 $page = "Onine Exam";
 $page1 = "Online Exam";
 include "timeout.php";
-include "config.php";
+include "../admin/config.php";
 if (($_SESSION['user_type'] != "admin") && ($_SESSION['user_type'] != "Student")) header("location: index.php");
 $user_id=$_SESSION['user_id'];
-$s = "";
-if(isset($_GET['id']) AND isset($_GET['total']) AND isset($_GET['correct']))
+if(isset($_GET['exam_id']) AND isset($_GET['total']) AND isset($_GET['correct']))
 {
-  $course_id = $_GET['id'];
+  $exam_id = $_GET['exam_id'];
   $total = $_GET['total'];
   $correct = $_GET['correct'];
   $incorrect = $_GET['total'] - $_GET['correct'];
-  $sq = "SELECT * FROM exams WHERE id = '".$course_id."' LIMIT 1";
-  $re = mysqli_query($conn, $sq);
-  $r = mysqli_fetch_assoc($re);
-  $exam_id = $r['id'];
-  $sql = "INSERT INTO results(exam_id, student_id, total, correct, incorrect) VALUES('".$exam_id."', '".$user_id."', '".$total."', '".$correct."', '".$incorrect."')";
+  $sql = "INSERT INTO jiier_results (exam_id, student_id, total, correct, incorrect) VALUES('".$exam_id."', '".$user_id."', '".$total."', '".$correct."', '".$incorrect."')";
+  echo $sql;
   $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 }
 ?>

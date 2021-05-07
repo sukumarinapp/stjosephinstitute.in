@@ -5,6 +5,7 @@ include "timeout.php";
 include "../admin/config.php";
 $full_name=$_SESSION['full_name'];  
 $course_id=$_SESSION['course_id'];                         
+$user_id=$_SESSION['user_id'];                         
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,6 +68,16 @@ $course_id=$_SESSION['course_id'];
 </thead>
 <tbody>
 <?php
+
+function check_result($exam_id,$student_id){
+  global $conn;
+  $flag=true;
+  $sql5 = "select * from jiier_results where exam_id=$exam_id and student_id=$student_id";
+  $result5 = mysqli_query($conn, $sql5);
+  if(mysqli_num_rows($result5)==0) $flag=false;
+  return $flag;
+}
+
 $sql = "SELECT a.*,b.subject_name FROM jiier_timetable a,jiier_subject b where a.subject_id=b.id and a.course_id = '".$course_id."' ";
 $result = mysqli_query($conn, $sql);
 $i=0;
@@ -86,7 +97,7 @@ if($exam_date == $today){
 <tr>
   <td><?php echo $i; ?></td>
   <td><?php echo $row['subject_name']; ?></td>
-  <?php if($current_time>=$begin_time && $current_time<=$end_time){ ?>
+  <?php if($current_time>=$begin_time && $current_time<=$end_time && check_result($row['id'],$user_id)==false){ ?>
   <td><a class="btn btn-success" href="exam.php?id=<?php echo $row['id']; ?>" title="Start Exam">Start Exam</a></td>
   <?php }else{ ?>
   <td>&nbsp;</td>  
