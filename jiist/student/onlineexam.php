@@ -63,6 +63,7 @@ $user_id=$_SESSION['user_id'];
 <tr style="background-color: #2a6b90;color:white">
 <th width="50px">S.No</th>
 <th>Subject</th>
+<th width="150px">Result</th>
 <th width="150px">Exam</th>
 </tr>
 </thead>
@@ -97,10 +98,15 @@ if($exam_date == $today){
 <tr>
   <td><?php echo $i; ?></td>
   <td><?php echo $row['subject_name']; ?></td>
+  <?php if(check_result($row['id'],$user_id)==true){ ?>
+    <td><a class="btn btn-success" href="result.php?id=<?php echo $row['id']; ?>" title="Result">Result</a></td>
+  <?php }else{ ?>
+    <td>&nbsp;</td>  
+  <?php } ?>
   <?php if($current_time>=$begin_time && $current_time<=$end_time && check_result($row['id'],$user_id)==false){ ?>
   <td><a class="btn btn-success" href="exam.php?id=<?php echo $row['id']; ?>" title="Start Exam">Start Exam</a></td>
   <?php }else{ ?>
-  <td>&nbsp;</td>  
+    <td>&nbsp;</td>  
   <?php } ?>
 </td>
 </tr>

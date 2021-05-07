@@ -5,7 +5,9 @@ include "timeout.php";
 include "../admin/config.php";
 $full_name=$_SESSION['full_name'];  
 $course_id=$_SESSION['course_id'];                         
-$user_id=$_SESSION['user_id'];                         
+$user_id=$_SESSION['user_id'];   
+$exam_id=$_GET['id'];   
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +58,39 @@ $user_id=$_SESSION['user_id'];
 <div class="card">
 <div class="card-header card-header-warning">
 <h4 style="font-weight: bold" class="card-title">Exam Result</h4>
+</div>
+<?php
+$sql = "SELECT * FROM jiier_results where exam_id = $exam_id and student_id = $user_id";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+?>
+<div class="card-body" >
+<div class="row">
+  <div class="col-lg-4 col-xs-4">
+    <div class="sml-box bg-aqua">
+      <div class="inner">
+        <h3><?php echo $row['total']; ?></h3>
+        <p>Total Questions</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-xs-4">
+    <div class="sml-box bg-aqua">
+      <div class="inner">
+        <h3><?php echo $row['correct']; ?></h3>
+        <p>Total Correct</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-xs-4">
+    <div class="box bg-aqua">
+      <div class="inner">
+        <h3><?php echo $row['incorrect']; ?></h3>
+        <p>Total Incorrect</p>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 </div>
