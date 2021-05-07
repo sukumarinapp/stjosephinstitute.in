@@ -70,14 +70,18 @@ $course_id=$_SESSION['course_id'];
 $sql = "SELECT a.*,b.subject_name FROM jiier_timetable a,jiier_subject b where a.subject_id=b.id and a.course_id = '".$course_id."' ";
 $result = mysqli_query($conn, $sql);
 $i=0;
+$today = date("Y-m-d");
 while($row = mysqli_fetch_assoc($result)){
-$i++;
+$exam_date = explode(" ",$row['exam_date']);
+$exam_date = $exam_date[0];
 $startTime = $row['exam_date'];
 $duration = $row['total_hours_in_minutes'];
 $endTime = date('Y-m-d H:i:s',strtotime($duration.' minutes',strtotime($startTime)));
 $current_time = strtotime(date('Y-m-d H:i:s'));;
 $begin_time = strtotime($startTime);
 $end_time = strtotime($endTime);
+if($exam_date == $today){
+  $i++;
 ?>
 <tr>
   <td><?php echo $i; ?></td>
@@ -90,6 +94,7 @@ $end_time = strtotime($endTime);
 </td>
 </tr>
 <?php
+}
 }
 ?>
 </tbody>
