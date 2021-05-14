@@ -6,12 +6,12 @@ $id=isset($_GET['id'])?$_GET['id']:$user_id;
 if(file_exists("id/".$id."_front.png")){
 	unlink("id/".$id."_front.png");	
 }
-$cmd1 = "wkhtmltoimage --width 250 http://stjosephinstitute.in/jiist/student/card_front.php?id=".$id." id/".$id."_front.png 2>&1";
+$cmd1 = "wkhtmltoimage --width 250 http://stjosephinstitute.in/student/card_front.php?id=".$id." id/".$id."_front.png 2>&1";
 $output = shell_exec($cmd1);
 if(file_exists("id/".$id."_back.png")){
 	unlink("id/".$id."_back.png");
 }
-$cmd2 = "wkhtmltoimage --width 250 http://stjosephinstitute.in/jiist/student/card_back.php?id=".$id." id/".$id."_back.png 2>&1";
+$cmd2 = "wkhtmltoimage --width 250 http://stjosephinstitute.in/student/card_back.php?id=".$id." id/".$id."_back.png 2>&1";
 $output = shell_exec($cmd2);
 
 $front = $id."_front.png";
