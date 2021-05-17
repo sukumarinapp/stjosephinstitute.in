@@ -31,14 +31,16 @@ if(isset($_POST['submit'])){
 	
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
-	$mail->SMTPDebug = 0;
-	$mail->SMTPAuth = true;
+	$mail->Mailer = "smtp";
+	$mail->SMTPDebug  = 0;  
+	$mail->SMTPAuth   = TRUE;
 	$mail->SMTPSecure = "ssl";
-	$mail->Host = "smtpout.secureserver.net";
-	$mail->Port = 465;
-	$mail->Username = "info@jiier.org";
-	$mail->Password = "password123$";
-	$mail->SetFrom("info@jiier.org");
+	$mail->Port       = 465;
+	$mail->Host       = "smtp.gmail.com";
+	$mail->Username   = "universekannan@gmail.com";
+	$mail->Password   = "Galaxy)098$1";
+
+	$mail->SetFrom("universekannan@gmail.com");
 	$mail->Subject = "Online Affiliation Request";
 	$mail->MsgHTML($tag);
 	
@@ -49,9 +51,9 @@ if(isset($_POST['submit'])){
 
 	$mail->AddAddress("stjosephinstitute01@gmail.com");
 	if (!$mail->Send()) {
-		echo "Mailer Error: " . $mail->ErrorInfo;
+		//echo "Mailer Error: " . $mail->ErrorInfo;
 	} else {
-		echo "Message has been sent";
+		$msg = "Message has been sent";
 	}
 
 $full_name = trim($_POST['name_of_the_organization']);
@@ -156,7 +158,7 @@ $msg="Request for affiliation has beed sent";
 														  <label for="year_of_establishment">
 															<h5>Year of establishment : *<h5 />
 														</label>
-														<input type="text" name="year_of_establishment" required maxlength="100"  size="30" style="width:300px;">
+														<input type="text" name="year_of_establishment" required maxlength="10"  size="30" style="width:300px;">
 												   
 															
 													   
