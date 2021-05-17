@@ -63,7 +63,7 @@ $msg_color = "";
     $notification_count=0;
   	$centre_id=$_SESSION['centre_id'];
     $notification_sql = "select * from jiier_student";
-	
+	  
       $notification_result = mysqli_query($conn, $notification_sql);
         while ($notification_row = mysqli_fetch_assoc($notification_result)) {
       
@@ -73,7 +73,7 @@ $msg_color = "";
 	?>
                 <h3><?php echo $notification_count; ?></h3>
 
-                <p>Student</p>
+                <p>Total Student</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>

@@ -55,7 +55,8 @@ if (isset($_POST['submit'])) {
             move_uploaded_file($_FILES['photo']['tmp_name'], $target_path);
         }
 
-        $sql = "update jiier_users set centre_id=$centre_id where id=$id";
+        $sql = "update jiier_users set centre_id=$id where id=$id";
+
         mysqli_query($conn, $sql) or die(mysqli_errno($conn));
         header("location: users.php");
     }
@@ -135,21 +136,21 @@ if (isset($_POST['submit'])) {
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email address</label>
-                                            <input type="email" name="email" class="form-control" placeholder="Email address">
+                                            <input required="required" type="email" name="email" class="form-control" placeholder="Email address">
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Password</label>
-                                            <input type="text" name="password" class="form-control" id="password"
+                                            <input required="required" type="text" name="password" class="form-control" id="password"
                                                    placeholder="Password">
                                         </div>
                                         
                                         <div class="form-group">
                                             <label for="mobile">Mobile</label>
-                                            <input type="mobile" name="mobile" class="form-control" id="mobile" placeholder="Mobile">
+                                            <input required="required" type="mobile" name="mobile" class="form-control" id="mobile" placeholder="Mobile">
                                         </div>
                                         <div class="form-group">
                                             <label>Address</label>
-                                            <textarea class="form-control" name="address" rows="3" placeholder="Enter ..."></textarea>
+                                            <textarea required="required" class="form-control" name="address" rows="3" placeholder="Enter ..."></textarea>
                                         </div>
 
                                         <div class="form-group">

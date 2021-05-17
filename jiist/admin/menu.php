@@ -1,6 +1,6 @@
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
+    <a href="#" class="brand-link">
    <!--   <img src="uploads/logo/sjei-logo.jpg" alt="JIIST Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">-->
       <span class="brand-text font-weight-light">JIIST</span>
@@ -44,7 +44,7 @@
               </li>
             </ul>
           </li>
-
+          <?php if($_SESSION['user_type']=="Superadmin"){ ?>
          <li class="nav-item has-treeview  <?php if($page=="Course") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Course") echo "active"; ?>">
               <i class="nav-icon fas fa-users"></i>
@@ -291,6 +291,7 @@
             </ul>
           </li> 
            <?php } ?>  --> 
+           <?php } ?>
            <?php if($_SESSION['user_type']=="Superadmin"){ ?>
 		  <li class="nav-item has-treeview  <?php if($page=="Users") echo "menu-open"; ?>">
             <a href="" class="nav-link <?php if($page=="Users") echo "active"; ?>">

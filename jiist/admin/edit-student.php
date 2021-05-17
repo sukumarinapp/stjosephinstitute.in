@@ -53,8 +53,8 @@ $enrolment_year =    trim($_POST['enrolment_year']);
 $address = trim($_POST['address']);
 $status = trim($_POST['status']);
 
-        $stmt = $conn->prepare("UPDATE jiier_student set centre_id=?,register_number=?,full_name=?,father_name=?,mother_name=?,nationality=?,religion=?,medium=?,blood_group=?,gender=?,dateof_birth=?,employed_unemployed=?,physically_handicapped=?,phone_number=?,email=?,course_id=?,enrolment_year=?,address=?,status=?,user_id=?,lastup_date=? where id=?");
-        $stmt->bind_param("ssssssssssssssssssssss",$centre_id,$register_number,$full_name,$father_name,$mother_name,$nationality,$religion,$medium,$blood_group,$gender,$dateof_birth,$employed_unemployed,$physically_handicapped,$phone_number,$email,$course_id,$enrolment_year,$address,$status,$user_id,$lastup_date,$id);
+        $stmt = $conn->prepare("UPDATE jiier_student set centre_id=?,register_number=?,full_name=?,father_name=?,mother_name=?,nationality=?,religion=?,medium=?,blood_group=?,gender=?,dateof_birth=?,employed_unemployed=?,physically_handicapped=?,phone_number=?,email=?,course_id=?,enrolment_year=?,address=?,status=?,user_id=? where id=?");
+        $stmt->bind_param("sssssssssssssssssssss",$centre_id,$register_number,$full_name,$father_name,$mother_name,$nationality,$religion,$medium,$blood_group,$gender,$dateof_birth,$employed_unemployed,$physically_handicapped,$phone_number,$email,$course_id,$enrolment_year,$address,$status,$user_id,$id);
         $stmt->execute() or die ($stmt->error);
 		
 		  $file_name = $_FILES['photo']['name'];

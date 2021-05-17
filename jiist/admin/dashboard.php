@@ -7,6 +7,7 @@ include "config.php";
 if (($_SESSION['user_type'] != "Superadmin") && ($_SESSION['user_type'] != "Admin")) header("location: index.php");
 $msg = "";
 $msg_color = "";
+$centre_id=$_SESSION['centre_id'];
 	$lastup_date=date('y/m/d');
 ?>
 <!DOCTYPE html>
@@ -63,7 +64,9 @@ $msg_color = "";
     $notification_count=0;
   	$centre_id=$_SESSION['centre_id'];
     $notification_sql = "select * from jiier_student";
-	
+	  if($_SESSION['user_type']!="Superadmin"){
+      $notification_sql = $notification_sql . " where centre_id=$centre_id";
+    }
       $notification_result = mysqli_query($conn, $notification_sql);
         while ($notification_row = mysqli_fetch_assoc($notification_result)) {
       
@@ -73,15 +76,16 @@ $msg_color = "";
 	?>
                 <h3><?php echo $notification_count; ?></h3>
 
-                <p>Student</p>
+                <p>Total Students</p>
               </div>
-              <div class="icon">
+              <!-- <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="students.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="students.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
             </div>
           </div>
           <!-- ./col -->
+          <?php if($_SESSION['user_type']=="Superadmin"){ ?>
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
@@ -102,13 +106,14 @@ $msg_color = "";
 
                 <p>Centers</p>
               </div>
-              <div class="icon">
+              <!-- <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="view-centers.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="view-centers.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
             </div>
           </div>
-          <!-- ./col -->
+          <?php  } ?>
+
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
@@ -117,7 +122,9 @@ $msg_color = "";
     $notification_count=0;
   	$centre_id=$_SESSION['centre_id'];
     $notification_sql = "select * from jiier_student where lastup_date=$lastup_date";
-
+    if($_SESSION['user_type']!="Superadmin"){
+      $notification_sql = $notification_sql . " and centre_id=$centre_id";
+    }
       $notification_result = mysqli_query($conn, $notification_sql);
         while ($notification_row = mysqli_fetch_assoc($notification_result)) {
       
@@ -127,15 +134,16 @@ $msg_color = "";
 	?>
                 <h3><?php echo $notification_count; ?></h3>
 
-                <p>Follow</p>
+                <p>Today's Enrollment</p>
               </div>
-              <div class="icon">
+              <!-- <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="view-follow.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="view-follow.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
             </div>
           </div>
           <!-- ./col -->
+          <?php if($_SESSION['user_type']=="Superadmin"){ ?>
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
@@ -156,13 +164,13 @@ $msg_color = "";
 
                 <p>Total SMS</p>
               </div>
-              <div class="icon">
+              <!-- <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
             </div>
           </div>
-          <!-- ./col -->
+        <?php } ?>
         </div>
         <!-- /.row -->
 
