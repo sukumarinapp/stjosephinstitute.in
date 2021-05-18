@@ -39,9 +39,6 @@ $photo = "";
 
 if (isset($_POST['submit'])) {
 
-$name_of_the_organization = trim($_POST['name_of_the_organization']);
-$register_number = trim($_POST['register_number']);
-$type_of_organization = trim($_POST['type_of_organization']);
 $address = trim($_POST['address']);
 $location = trim($_POST['location']);
 $district = trim($_POST['district']);
@@ -54,17 +51,14 @@ $no_of_staff_available = trim($_POST['no_of_staff_available']);
 $remark_if_any = trim($_POST['remark_if_any']);
 $pan_no_of_organization = trim($_POST['pan_no_of_organization']);
 $mobile_number = trim($_POST['mobile_number']);
-$email = trim($_POST['email']); 
 $website = trim($_POST['website']);
 $institute_profile_promoter_profile = trim($_POST['institute_profile_promoter_profile']);
-$status = trim($_POST['status']);
    
-	    $stmt = $conn->prepare("UPDATE jiier_users set centre_id=?,name_of_the_organization=?,register_number=?,type_of_organization=?,address=?,location=?,district=?,year_of_establishment=?,year_of_experience=?,center_total_area=?,no_of_class_rooms=?,no_of_laboratories=?,no_of_staff_available=?,remark_if_any=?,pan_no_of_organization=?,mobile_number=?,email=?,website=?,institute_profile_promoter_profile=?,status=? where id=?");
+	    $stmt = $conn->prepare("UPDATE jiier_users set type_of_organization=?,address=?,location=?,district=?,year_of_establishment=?,year_of_experience=?,center_total_area=?,no_of_class_rooms=?,no_of_laboratories=?,no_of_staff_available=?,remark_if_any=?,pan_no_of_organization=?,mobile_number=?,website=?,institute_profile_promoter_profile=? where id=?");
 
-        $stmt->bind_param("sssssssssssssssssssss", $centre_id,$name_of_the_organization,$register_number,$type_of_organization,$address,$location,$district,$year_of_establishment,$year_of_experience,$center_total_area,$no_of_class_rooms,$No_of_laboratories,$no_of_staff_available,$remark_if_any,$pan_no_of_organization,$mobile_number,$email,$website,$institute_profile_promoter_profile,$status,$id);
+        $stmt->bind_param("ssssssssssssssss", $type_of_organization,$address,$location,$district,$year_of_establishment,$year_of_experience,$center_total_area,$no_of_class_rooms,$No_of_laboratories,$no_of_staff_available,$remark_if_any,$pan_no_of_organization,$mobile_number,$website,$institute_profile_promoter_profile,$id);
         $stmt->execute() or die ($stmt->error);
 
-		        header("location: view-centers.php");
     }
 $sql = "select * from jiier_users where id=$id";
 $result = mysqli_query($conn, $sql);
@@ -105,7 +99,6 @@ $row = mysqli_fetch_assoc($result);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Center</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -130,14 +123,8 @@ $row = mysqli_fetch_assoc($result);
               <div class="col-md-12">
 			            <form method="post" action="" enctype="multipart/form-data">
                 <div class="card-body">
-				  <div class="form-group">
-                    <label for="register_number">Center Code *</label>
-                    <input value="<?php echo $row['register_number']; ?>" type="text" class="form-control" id="register_number" name="register_number" required="required" placeholder="Center Code">
-                  </div>
-                  <div class="form-group">
-                    <label for="name_of_the_organization">Name of the Organization</label>
-                    <input value="<?php echo $row['name_of_the_organization']; ?>" type="text" class="form-control" id="name_of_the_organization" name="name_of_the_organization" placeholder="Name of the Organization">
-                  </div>
+				 
+                  
 				  <div class="form-group">
                     <label for="type_of_organization">Type of Organization</label>
                     <input value="<?php echo $row['type_of_organization']; ?>" type="text" class="form-control" id="type_of_organization" name="type_of_organization" placeholder="Type of Organization">
@@ -179,10 +166,7 @@ $row = mysqli_fetch_assoc($result);
                     <label for="mobile_number">Mobile Number</label>
                     <input  value="<?php echo $row['mobile_number']; ?>" type="text" name="mobile_number" class="form-control" id="mobile_number" placeholder="Mobile Number">
                   </div>
-				  <div class="form-group">
-                    <label for="email">Email ID</label>
-                    <input  value="<?php echo $row['email']; ?>" type="email" name="email" class="form-control" id="email" placeholder="Email Id">
-                  </div>
+				  
 				  <div class="form-group">
                     <label for="website">Website</label>
                     <input  value="<?php echo $row['website']; ?>" type="text" name="website" class="form-control" id="website" placeholder="Website">
@@ -191,15 +175,7 @@ $row = mysqli_fetch_assoc($result);
                     <label for="institute_profile_promoter_profile">Institute profile promoter Profile</label>
                     <input  value="<?php echo $row['institute_profile_promoter_profile']; ?>" type="text" name="institute_profile_promoter_profile" class="form-control" id="institute_profile_promoter_profile" placeholder="Institute profile promoter Profile">
                   </div>
-				  <div class="form-group">
-                  <label>User Status</label>
-                  <select class="form-control select2bs4" name="status" style="width: 100%;">
-                    <option value="<?php echo $row['status']; ?>"><?php echo $row['status']; ?></option>
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                  </select>
-                </div>
-				
+				 
 				<div class="form-group">
                         <label>Registered Address</label>
                         <textarea class="form-control" name="address" rows="3" placeholder="Address ..."><?php echo $row['address']; ?></textarea>

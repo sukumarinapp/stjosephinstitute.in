@@ -180,7 +180,11 @@ $centre_id=$_SESSION['centre_id'];
         <div class="row">
           <!-- Left col -->
          
-
+ <div class="col-lg-12 col-md-12 text-center">
+            <video width="800" height="600" controls>
+  <source src="../student/jiist.mp4" type="video/mp4">
+</video>
+           </div>
 			  
             <!-- /.card -->
           </div>

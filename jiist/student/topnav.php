@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;"></a>
-            <button type="button"  class="btn btn-primary btn-link btn-sm">
-                              </button>
+          <div class="row">
+            <div class="col-md-12 text-center" >
+            <h3 style="margin-left: 25px;font-weight: bold" >Welcome to Online Virtual Classroom</h3>
           </div>
+        </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>

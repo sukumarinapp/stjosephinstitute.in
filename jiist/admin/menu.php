@@ -326,7 +326,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              
+              <?php if($_SESSION['user_type']=="Admin"){ ?>
+                <li class="nav-item">
+                <a href="profile.php" class="nav-link <?php if($page1=="Profile") echo "active"; ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Profile</p>
+                </a>
+              </li>
+              <?php } ?>  
               <li class="nav-item">
                 <a href="password.php" class="nav-link <?php if($page1=="Change Password") echo "active"; ?>">
                   <i class="far fa-circle nav-icon"></i>
